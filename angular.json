@@ -93,19 +93,10 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "polyfills": [],
-            "tsConfig": "projects/showcase/tsconfig.spec.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/showcase/public"
-              }
-            ],
-            "styles": ["projects/showcase/src/styles.css"],
-            "scripts": []
+            "lintFilePatterns": ["projects/showcase/src/**/*.ts", "projects/showcase/src/**/*.html"]
           }
         }
       }
@@ -131,14 +122,10 @@
           },
           "defaultConfiguration": "production"
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": "projects/angular-email/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "lintFilePatterns": ["projects/angular-email/src/**/*.ts", "projects/angular-email/src/**/*.html"]
           }
         }
       }

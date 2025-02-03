@@ -5,9 +5,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build angular-email --watch --configuration development",
-    "lint": "ng lint"
+    "build": "ng build angular-email",
+    "watch": "ng build angular-email --watch",
+    "render:test": "tsx projects/showcase/src/app/test-render.ts && prettier -w projects/showcase/src/app/test.html",
+    "lint": "ng lint --fix"
   },
   "private": true,
   "dependencies": {

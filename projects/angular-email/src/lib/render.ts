@@ -32,7 +32,7 @@ export const render = async ({ component, selector, options }: Render) => {
   $('[data-html]').each(function () {
     const content = $(this).attr('data-html');
     if (content) {
-      $(this).replaceWith(content);
+      $(this).replaceWith(`${content}\n`);
     }
   });
   const html = $.html().replaceAll('&lt;', '<').replaceAll('&gt;', '>');
