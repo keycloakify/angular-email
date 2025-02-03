@@ -1,0 +1,18 @@
+{
+  "name": "angular-email",
+  "version": "0.0.1",
+  "type": "module",
+  "peerDependencies": {
+    "@angular/common": "^19.1.0",
+    "@angular/core": "^19.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "html-to-text": "^9.0.5",
+    "pretty": "^2.0.0",
+    "cheerio": "^1.0.0",
+    "@angular/build": "^19.1.0",
+    "@angular/platform-server": "^19.1.0"
+  },
+  "sideEffects": false
+}

@@ -1,0 +1,4 @@
+node_modules/
+/dist/
+/dist_keycloak/
+/public/keycloak-dev-resources/

@@ -3,6 +3,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "angular-email": [
+        "./dist/angular-email"
+      ],
+      "angular-email/*": [
+        "./dist/angular-email/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
