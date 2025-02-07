@@ -1,63 +1,86 @@
-# AngularEmail
+# Angular Email
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.0.
+Angular Email is a library that enables email template development using Angular, inspired by [jsx-email](https://github.com/rezqio/jsx-email). It provides a way to create email components using Angular's templating system.
 
-## Code scaffolding
+## Installation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+To install Angular Email, use npm or yarn:
 
-```bash
-ng generate component component-name
+```sh
+npm install @keycloakify/angular-email
+# or
+yarn add @keycloakify/angular-email
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Usage
 
-```bash
-ng generate --help
+### Creating an Email Component
+
+see this [example](https://github.com/keycloakify/angular-email/blob/main/projects/showcase/src/app/app.component.ts)
+
+### Rendering the Email
+
+To render the email as HTML or plaintext, use Angular's rendering engine:
+
+```typescript
+...
+import { render } from '@keycloakify/angular-email';
+
+const emailHtml = render({
+  component: AppComponent,
+  selector: 'app-root',
+  options: {
+    pretty: true,
+  },
+}).then((emailHtml) => {
+  console.log(emailHtml);
+});
 ```
 
-## Building
+### With Keycloakify Emails
 
-To build the library, run:
+```ts
+// vite.config.ts
 
-```bash
-ng build angular-email
+...
+import { buildEmailTheme } from 'keycloakify-emails';
+import { angularEsbuildPlugin } from '@keycloakify/angular-email/esbuild';
+
+export default defineConfig(({ mode }) => ({
+  ...
+  plugins: [
+    angular(),
+    keycloakify({
+      ...
+      postBuild: async (buildContext) => {
+        await buildEmailTheme({
+          templatesSrcDirPath: join(import.meta.dirname, '/emails/templates'),
+          filterTemplate: (filePath: string) => !filePath.endsWith('.html'),
+          themeNames: buildContext.themeNames,
+          keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
+          locales: ['en'],
+          cwd: import.meta.dirname,
+          esbuild: {
+            packages: 'bundle',
+            external: ['cheerio'],
+            plugins: [angularEsbuildPlugin(import.meta.dirname)],
+          },
+        });
+      },
+    }),
+  ],
+}));
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Contributing
 
-### Publishing the Library
+Contributions are welcome! Feel free to open an issue or submit a pull request on [GitHub](https://github.com/keycloakify/angular-email).
 
-Once the project is built, you can publish your library by following these steps:
+## License
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/angular-email
-   ```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+## Acknowledgments
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Inspired by [jsx-email](https://github.com/rezqio/jsx-email)
+- Developed by [Luca Peruzzo](https://github.com/luca-peruzzo)
