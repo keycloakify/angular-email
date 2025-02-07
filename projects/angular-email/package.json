@@ -1,8 +1,24 @@
 {
-  "name": "angular-email",
+  "name": "@keycloakify/angular-email",
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
+  "description": "Angular Email Builder",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/keycloakify/angular-email.git"
+  },
+  "author": {
+    "email": "peruzzoluca98@gmail.com",
+    "name": "Luca Peruzzo",
+    "url": "https://github.com/luca-peruzzo"
+  },
+  "keywords": [
+    "email",
+    "angular",
+    "keycloakify"
+  ],
+  "homepage": "https://www.keycloakify.dev",
   "peerDependencies": {
     "@angular/common": "^19.1.0",
     "@angular/core": "^19.1.0"
@@ -15,5 +31,8 @@
     "@angular/build": "^19.1.0",
     "@angular/platform-server": "^19.1.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }

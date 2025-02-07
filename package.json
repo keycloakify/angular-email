@@ -8,9 +8,10 @@
     "build": "ng build angular-email",
     "watch": "ng build angular-email --watch",
     "render:test": "tsx projects/showcase/src/app/test-render.ts && prettier -w projects/showcase/src/app/test.html",
+    "_format": "prettier '**/*.{ts,html,json,md}'",
+    "format": "yarn _format --write",
     "lint": "ng lint --fix"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^19.1.0",
     "@angular/common": "^19.1.0",
