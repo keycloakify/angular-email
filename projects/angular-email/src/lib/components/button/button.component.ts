@@ -3,76 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 
 @Component({
   selector: 'ng-email-button',
-  template: `
-    @let withBackground = $withBackground();
-    @let align = $align();
-    @let href = $href();
-    @let height = $height();
-    @let width = $width();
-    @let borderRadius = $borderRadius();
-
-    <table
-      [width]="'100%'"
-      [border]="0"
-      [cellPadding]="0"
-      [cellSpacing]="0"
-      style="border-collapse: collapse;"
-      role="presentation"
-    >
-      <tr>
-        <td [align]="align">
-          @if (withBackground) {
-            <table
-              [align]="align"
-              [width]="width"
-              [border]="0"
-              [cellPadding]="0"
-              [cellSpacing]="0"
-              role="presentation"
-              [style]="{
-                border: $borderSize() + 'px solid ' + ($borderColor() ?? 'inherit'),
-                borderRadius,
-              }"
-            >
-              <tr>
-                <td
-                  [attr.bgcolor]="$backgroundColor()"
-                  [width]="width"
-                  [height]="height"
-                  [style]="{
-                    borderRadius,
-                    height,
-                    width,
-                    maxWidth: width,
-                    textAlign: 'center',
-                  }"
-                >
-                  <a
-                    [href]="href"
-                    [style]="$withBackgroundStyle()"
-                  >
-                    <ng-container [ngTemplateOutlet]="content"></ng-container>
-                  </a>
-                </td>
-              </tr>
-            </table>
-          } @else {
-            <noscript [attr.data-html]="$noBgInnerHtmlPre()"></noscript>
-            <ng-container [ngTemplateOutlet]="content"></ng-container>
-            <noscript [attr.data-html]="$noBgInnerHtmlPost()"></noscript>
-            <a
-              [href]="href"
-              [style]="$withoutBackgroundStyle()"
-            >
-              <ng-container [ngTemplateOutlet]="content"></ng-container>
-            </a>
-          }
-        </td>
-      </tr>
-    </table>
-
-    <ng-template #content><ng-content></ng-content></ng-template>
-  `,
+  templateUrl: 'button.component.html',
   imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

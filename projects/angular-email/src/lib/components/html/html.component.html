@@ -1,0 +1,13 @@
+@let enableVML = $enableVML();
+@let lang = $lang();
+@let dir = $dir();
+
+<html
+  id="__angular-email"
+  [lang]="lang"
+  [dir]="dir"
+  [attr.xmlns:o]="enableVML ? 'urn:schemas-microsoft-com:office:office' : undefined"
+  [attr.xmlns:v]="enableVML ? 'urn:schemas-microsoft-com:vml' : undefined"
+>
+  <ng-content />
+</html>

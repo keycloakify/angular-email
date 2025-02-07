@@ -1,0 +1,23 @@
+@let enableFormatDetection = $enableFormatDetection();
+
+<head>
+  <meta
+    http-equiv="content-type"
+    content="text/html; charset=UTF-8"
+  />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=yes"
+  />
+  <meta name="x-apple-disable-message-reformatting" />
+  @if (!enableFormatDetection) {
+    <meta
+      name="format-detection"
+      content="telephone=no, date=no, address=no, email=no, url=no"
+    />
+  }
+  <ng-content></ng-content>
+  <ng-email-conditional [mso]="true">
+    <noscript [attr.data-html]="xml"></noscript>
+  </ng-email-conditional>
+</head>

@@ -1,41 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { styleToString, withMargin } from '../utils';
+import { styleToString, withMargin } from '../../utils';
 
 @Component({
   selector: 'ng-email-heading',
-  template: `
-    @let heading = $as();
-    @let style = $style();
-    @if (heading === 'h1') {
-      <h1 [style]="style">
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
-      </h1>
-    } @else if (heading === 'h2') {
-      <h2 [style]="style">
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
-      </h2>
-    } @else if (heading === 'h3') {
-      <h3 [style]="style">
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
-      </h3>
-    } @else if (heading === 'h4') {
-      <h4 [style]="style">
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
-      </h4>
-    } @else if (heading === 'h5') {
-      <h5 [style]="style">
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
-      </h5>
-    } @else if (heading === 'h6') {
-      <h6 [style]="style">
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
-      </h6>
-    } @else {
-      <ng-container [ngTemplateOutlet]="content"></ng-container>
-    }
-    <ng-template #content><ng-content></ng-content></ng-template>
-  `,
+  templateUrl: 'heading.component.html',
   imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

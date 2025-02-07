@@ -1,27 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { styleToString } from '../utils';
+import { styleToString } from '../../utils';
 
 @Component({
   selector: 'ng-email-section',
-  template: `
-    <table
-      [align]="'center'"
-      [border]="0"
-      [cellPadding]="0"
-      [cellSpacing]="0"
-      width="100%"
-      role="presentation"
-      [style]="$style()"
-    >
-      <tbody>
-        <tr>
-          <td>
-            <ng-content />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  `,
+  templateUrl: 'section.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
 })

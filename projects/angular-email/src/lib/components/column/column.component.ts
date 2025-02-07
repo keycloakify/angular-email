@@ -2,16 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'ng-email-column',
-  template: `
-    <td
-      [attr.background]="$bgImage()"
-      [attr.bgcolor]="$bgColor()"
-      [style]="$columnStyle()"
-      role="presentation"
-    >
-      <ng-content />
-    </td>
-  `,
+  templateUrl: 'column.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
 })

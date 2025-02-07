@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export type ColorSchemeMode =
   | 'dark'
@@ -32,19 +32,8 @@ export type ColorSchemeMode =
 
 @Component({
   selector: 'ng-email-color-scheme',
-  template: `
-    @let mode = $mode();
-
-    <meta
-      name="color-scheme"
-      [content]="mode"
-    />
-    <meta
-      name="supported-color-schemes"
-      [content]="mode"
-    />
-    <noscript [attr.data-html]="$style()"></noscript>
-  `,
+  templateUrl: 'color-scheme.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorSchemeComponent {
   $mode = input<ColorSchemeMode>('normal', { alias: 'mode' });

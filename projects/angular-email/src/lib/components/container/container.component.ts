@@ -3,34 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input } from '@an
 
 @Component({
   selector: 'ng-email-container',
-  template: `
-    @let containerWidth = $containerWidth();
-    @let alignment = $alignment();
-
-    <div [style]="{ tableLayout: 'fixed', width: '100%' }">
-      <div [style]="{ margin: '0 auto', maxWidth: containerWidth }">
-        <noscript [attr.data-html]="$innerHtmlPre()"></noscript>
-        <table
-          [align]="alignment"
-          [width]="'100%'"
-          role="presentation"
-          [cellSpacing]="0"
-          [cellPadding]="0"
-          [border]="0"
-          [style]="$style()"
-        >
-          <tbody>
-            <tr [style]="$trStyle()">
-              <td [align]="alignment">
-                <ng-content></ng-content>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <noscript [attr.data-html]="$innerHtmlPost()"></noscript>
-      </div>
-    </div>
-  `,
+  templateUrl: 'container.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
 })

@@ -2,11 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'ng-email-body',
-  template: `
-    <body>
-      <ng-content />
-    </body>
-  `,
+  templateUrl: 'body.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyComponent {}

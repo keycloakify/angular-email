@@ -2,14 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 
 @Component({
   selector: 'ng-email-preview',
-  template: `
-    <div
-      id="__angular-email-preview"
-      style="display: none; overflow: hidden; line-height: 1px; opacity: 0; max-height: 0; max-width: 0;"
-    >
-      {{ $preview() }}
-    </div>
-  `,
+  templateUrl: 'preview.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreviewComponent {

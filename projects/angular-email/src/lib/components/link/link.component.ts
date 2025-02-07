@@ -1,29 +1,26 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 @Component({
-  selector: 'ng-email-text',
-  template: `
-    <p [style]="$style()">
-      <ng-content></ng-content>
-    </p>
-  `,
+  selector: 'ng-email-link',
+  templateUrl: 'link.component.html',
   imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextComponent {
+export class LinkComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $textStyle = input<Record<string, any> | null | undefined>(null, { alias: 'textStyle' });
+  $linkStyle = input<Record<string, any> | null | undefined>(null, { alias: 'linkStyle' });
   $disableDefaultStyle = input<boolean>(false, { alias: 'disableDefaultStyle' });
+  $href = input('', { alias: 'href' });
+  $target = input('_blank', { alias: 'target' });
   $style = computed(() => {
     return {
       ...(this.$disableDefaultStyle()
         ? {}
         : {
-            fontSize: '14px',
-            lineHeight: '24px',
-            margin: '16px 0',
+            color: '#067df7',
+            textDecoration: 'none',
           }),
-      ...(this.$textStyle() ?? {}),
+      ...(this.$linkStyle() ?? {}),
     };
   });
 }

@@ -1,0 +1,12 @@
+@let mso = $mso();
+
+@if (!mso) {
+  <noscript [attr.data-html]="noMsoInnerHtmlPre"></noscript>
+  <ng-container [ngTemplateOutlet]="content"></ng-container>
+  <noscript [attr.data-html]="noMsoInnerHtmlPost"></noscript>
+} @else {
+  <noscript [attr.data-html]="$msoInnerHtmlPre()"></noscript>
+  <ng-container [ngTemplateOutlet]="content"></ng-container>
+  <noscript [attr.data-html]="msoInnerHtmlPost"></noscript>
+}
+<ng-template #content><ng-content></ng-content></ng-template>

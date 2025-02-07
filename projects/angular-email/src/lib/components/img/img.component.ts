@@ -1,33 +1,30 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 @Component({
-  selector: 'ng-email-link',
-  template: `
-    <a
-      [style]="$style()"
-      [href]="$href()"
-      [target]="$target()"
-      ><ng-content></ng-content
-    ></a>
-  `,
+  selector: 'ng-email-img',
+  templateUrl: 'img.component.html',
   imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkComponent {
+export class ImgComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $linkStyle = input<Record<string, any> | null | undefined>(null, { alias: 'linkStyle' });
+  $imgStyle = input<Record<string, any> | null | undefined>(null, { alias: 'imgStyle' });
   $disableDefaultStyle = input<boolean>(false, { alias: 'disableDefaultStyle' });
-  $href = input('', { alias: 'href' });
-  $target = input('_blank', { alias: 'target' });
+  $alt = input('', { alias: 'alt' });
+  $src = input('', { alias: 'src' });
+  $width = input('0', { alias: 'width' });
+  $height = input('0', { alias: 'height' });
   $style = computed(() => {
     return {
       ...(this.$disableDefaultStyle()
         ? {}
         : {
-            color: '#067df7',
+            display: 'block',
+            outline: 'none',
+            border: 'none',
             textDecoration: 'none',
           }),
-      ...(this.$linkStyle() ?? {}),
+      ...(this.$imgStyle() ?? {}),
     };
   });
 }

@@ -3,20 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, CUSTOM_ELEMENTS_SCHEMA, e
 
 @Component({
   selector: 'ng-email-conditional',
-  template: `
-    @let mso = $mso();
-
-    @if (!mso) {
-      <noscript [attr.data-html]="noMsoInnerHtmlPre"></noscript>
-      <ng-container [ngTemplateOutlet]="content"></ng-container>
-      <noscript [attr.data-html]="noMsoInnerHtmlPost"></noscript>
-    } @else {
-      <noscript [attr.data-html]="$msoInnerHtmlPre()"></noscript>
-      <ng-container [ngTemplateOutlet]="content"></ng-container>
-      <noscript [attr.data-html]="msoInnerHtmlPost"></noscript>
-    }
-    <ng-template #content><ng-content></ng-content></ng-template>
-  `,
+  templateUrl: 'conditional.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
