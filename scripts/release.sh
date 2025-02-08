@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # Increments the project version (e.g. from 2.3.0 to 2.4.0)
 # It handles stuff like
 # * CHANGELOG
@@ -15,18 +14,16 @@
 # minor=y
 # patch=z
 
-while getopts ":v:r:t" arg; do
+while getopts ":v:r:" arg; do
   case $arg in
   v) versionType=$OPTARG ;;
   r) releaseType=$OPTARG ;;
-  t) tag=1 ;;
   *)
     printf "\n"
-    printf "%s -v [none|patch|minor|major] -r [rel|rc] -d -t" "$0"
+    printf "%s -v [none|patch|minor|major] -r [rc|rel] -d" "$0"
     printf "\n"
     printf "\n\t -v version type, default: none"
     printf "\n\t -r release type, default: rel"
-    printf "\n\t -t define if should tag and commit, default: false"
     printf "\n\n"
     exit 0
     ;;
@@ -42,7 +39,7 @@ if [ "$versionType" != "none" ] && [ "$versionType" != "patch" ] && [ "$versionT
   exit 1
 fi
 
-# Release type = pre|rc|fix|rel
+# Release type = rc|rel
 if [ -z "$releaseType" ] || [ "$releaseType" = "rel" ]; then
   releaseType=""
 fi
@@ -59,50 +56,53 @@ if [ "$branch" != "main" ]; then
   exit 1
 fi
 
-if [ "$branch" = "main" ] && [ "$releaseType" != "" ] && [ "$releaseType" != "rc" ]  ; then
-  echo "Release type not supported on main branch"
-  exit 1
-fi
-
 # Version bump only if needed
 if [ "$versionType" != "none" ]; then
   if [ "$releaseType" = "" ]; then
-    cd projects/angular-email
     # Increment version without creating a tag and a commit (we will create them later)
     npm --no-git-tag-version version "$versionType" || exit 1
-    cd ../..
+    cd 'projects/angular-email'
     npm --no-git-tag-version version "$versionType" || exit 1
+    cd '../..'
   else
-    cd projects/angular-email
     # Increment version without creating a tag and a commit (we will create them later)
     npm --no-git-tag-version version "pre$versionType" --preid="$releaseType" || exit 1
-    cd ../..
+    cd 'projects/angular-email'
     npm --no-git-tag-version version "pre$versionType" --preid="$releaseType" || exit 1
+    cd '../..'
   fi
 fi
 
+# Always bump version for release candidates
+if [ "$versionType" = "none" ] && [ "$releaseType" != "" ]; then
+  # Increment version without creating a tag and a commit (we will create them later)
+  npm --no-git-tag-version version pre --preid="$releaseType" || exit 1
+  cd 'projects/angular-email'
+  npm --no-git-tag-version version pre --preid="$releaseType" || exit 1
+  cd '../..'
+fi
+
 # Using the package.json version
-version="$(jq -r '.version' "$(dirname "$0")/../projects/angular-email/package.json")"
+version="$(jq -r '.version' "$(dirname "$0")/../package.json")"
 
 # changelog from tags only on release
-if [ "$versionType" != "none" ] && [ -z "$tag" ]; then
-  git add projects/angular-email/package.json package.json package-lock.json
+if [ "$versionType" != "none" ] && [ "$releaseType" != "rc" ]; then
+  rm CHANGELOG.md
+  npm run changelog
+  git add package.json package-lock.json projects/angular-email/package.json CHANGELOG.md
   git commit -m "chore(version): 💯 bump version to $version"
 fi
 
-# Avoid tagging prerelease
-if [ -n "$tag" ]; then
-
-  git add package.json
-  git commit -m "chore(release): 📦 release $version"
-
-  # Create an annotated tag
-  git tag -a "$version" -m "🏷️ Release $version"
+# release candidate version commit
+if [ "$releaseType" = "rc" ]; then
+  rm CHANGELOG.md
+  npm run changelog
+  git add package.json package-lock.json projects/angular-email/package.json CHANGELOG.md
+  git commit -m "chore(version): 🔜 release candidate version $version"
 fi
 
-if [ -n "$tag" ] || [ "$versionType" != "none" ]; then
+if [ "$versionType" != "none" ] || [ "$releaseType" = "rc" ]; then
   # Gotta push them all
-  echo 'push'
-  # git push --follow-tags
+  git push
 fi
 
