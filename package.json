@@ -8,6 +8,7 @@
     "build": "ng build angular-email",
     "watch": "ng build angular-email --watch",
     "render:test": "tsx projects/showcase/src/app/test-render.ts && prettier -w projects/showcase/src/app/test.html",
+    "release": "sh scripts/release.sh",
     "_format": "prettier '**/*.{ts,html,json,md}'",
     "format": "yarn _format --write",
     "lint": "ng lint --fix"
