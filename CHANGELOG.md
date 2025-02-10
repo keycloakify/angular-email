@@ -1,3 +1,12 @@
+## [0.0.1-rc.5](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.4...v0.0.1-rc.5) (2025-02-10)
+
+
+### Bug Fixes
+
+* preserve "$" char ([2ee28f5](https://github.com/keycloakify/angular-email/commit/2ee28f5c5228e6f17322f3f46d65e3a1d280467c))
+
+
+
 ## [0.0.1-rc.4](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.3...v0.0.1-rc.4) (2025-02-10)
 
 
