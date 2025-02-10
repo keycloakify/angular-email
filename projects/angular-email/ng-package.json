@@ -1,7 +1,14 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/angular-email",
-  "allowedNonPeerDependencies": ["html-to-text", "pretty", "cheerio", "@angular/build", "@angular/platform-server"],
+  "allowedNonPeerDependencies": [
+    "html-to-text",
+    "cheerio",
+    "@angular/build",
+    "@angular/platform-server",
+    "@maizzle/framework",
+    "tailwindcss-preset-email"
+  ],
   "lib": {
     "entryFile": "src/index.ts"
   },

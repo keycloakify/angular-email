@@ -26,10 +26,11 @@
   "dependencies": {
     "tslib": "^2.3.0",
     "html-to-text": "^9.0.5",
-    "pretty": "^2.0.0",
     "cheerio": "^1.0.0",
     "@angular/build": "^19.1.0",
-    "@angular/platform-server": "^19.1.0"
+    "@angular/platform-server": "^19.1.0",
+    "@maizzle/framework": "^5.0.0",
+    "tailwindcss-preset-email": "^1.4.0"
   },
   "sideEffects": false,
   "publishConfig": {

@@ -8,7 +8,8 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 })
 export class BackgroundComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $backgroundStyle = input<Record<string, any> | null | undefined>(null, { alias: 'backgroundStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
 
   $width = input<number>(0, { alias: 'width' });
   $height = input<number>(0, { alias: 'height' });
@@ -16,5 +17,5 @@ export class BackgroundComponent {
   $bgRepeat = input<'repeat' | 'no-repeat'>('no-repeat', { alias: 'bgRepeat' });
   $bgColor = input<string>(undefined, { alias: 'bgColor' });
 
-  $style = computed(() => ({ backgroundRepeat: this.$bgRepeat(), ...(this.$backgroundStyle() ?? {}) }));
+  $bgStyle = computed(() => ({ backgroundRepeat: this.$bgRepeat(), ...(this.$style() ?? {}) }));
 }

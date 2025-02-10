@@ -2,8 +2,17 @@ import '@angular/compiler';
 
 import { render } from 'angular-email';
 import { writeFileSync } from 'node:fs';
-import { AppComponent } from './app.component';
+import { resolve } from 'node:path';
+import { TailwindComponent } from './tailwind.component';
 
-render({ component: AppComponent, selector: 'app-root', options: { pretty: true } }).then((html) => {
-  writeFileSync('projects/showcase/src/app/test.html', html);
+render({
+  component: TailwindComponent,
+  selector: 'app-root',
+  options: {
+    pretty: true,
+    cssFilePaths: [resolve(import.meta.dirname, '../styles.css')],
+    tailwindConfig: resolve(import.meta.dirname, '../tailwind.config.js'),
+  },
+}).then((html) => {
+  writeFileSync(resolve(import.meta.dirname, 'test.html'), html);
 });

@@ -9,11 +9,12 @@ import { styleToString } from '../../utils';
 })
 export class SectionComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $sectionStyle = input<Record<string, any> | null | undefined>(null, { alias: 'sectionStyle' });
-  $style = computed(() => {
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
+  $sectionStyle = computed(() => {
     return styleToString({
       width: '100%',
-      ...(this.$sectionStyle() ?? {}),
+      ...(this.$style() ?? {}),
     });
   });
 }

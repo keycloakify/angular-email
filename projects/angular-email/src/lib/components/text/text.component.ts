@@ -8,9 +8,10 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 })
 export class TextComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $textStyle = input<Record<string, any> | null | undefined>(null, { alias: 'textStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
   $disableDefaultStyle = input<boolean>(false, { alias: 'disableDefaultStyle' });
-  $style = computed(() => {
+  $textStyle = computed(() => {
     return {
       ...(this.$disableDefaultStyle()
         ? {}
@@ -19,7 +20,7 @@ export class TextComponent {
             lineHeight: '24px',
             margin: '16px 0',
           }),
-      ...(this.$textStyle() ?? {}),
+      ...(this.$style() ?? {}),
     };
   });
 }

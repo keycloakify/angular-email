@@ -12,14 +12,15 @@ export class ContainerComponent {
   document = inject(DOCUMENT);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $containerStyle = input<Record<string, any> | null | undefined>(null, { alias: 'containerStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
   $alignment = input('center', { alias: 'alignment' });
   $disableDefaultStyle = input(false, { alias: 'disableDefaultStyle' });
   $containerWidth = input(600, { alias: 'containerWidth' });
 
-  $style = computed(() => ({
+  $containerStyle = computed(() => ({
     ...(this.$disableDefaultStyle() ? {} : { maxWidth: `${this.$containerWidth()}px` }),
-    ...this.$containerStyle(),
+    ...this.$style(),
   }));
 
   $trStyle = computed(() => ({
