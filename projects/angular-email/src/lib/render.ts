@@ -124,7 +124,11 @@ const applyHtmlTransformations = (html: string, cssFilePaths?: string[]) => {
   const $ = cheerio.load(html, { xml: { lowerCaseAttributeNames: false, lowerCaseTags: false } });
   replacePlaceholders($);
   applyStyles($, cssFilePaths ?? []);
-  return $.html().replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;nbsp;', '&nbsp;');
+  return $.html()
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&amp;nbsp;', '&nbsp;')
+    .replaceAll('&#x24;', '$');
 };
 
 /**
