@@ -12,7 +12,7 @@ export class PreviewComponent {
   $text = computed(() => {
     const preview = this.$preview();
     if (preview.length >= this.maxLength) return null;
-    const whiteSpaceCodes = '\xa0\u200C\u200B\u200D\u200E\u200F\uFEFF';
+    const whiteSpaceCodes = '\u00A0\u200C\u200B\u200D\u200E\u200F\uFEFF';
     return whiteSpaceCodes.repeat(this.maxLength - preview.length);
   });
 }

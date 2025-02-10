@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { provideExperimentalZonelessChangeDetection, Type } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideServerRendering, renderApplication } from '@angular/platform-server';
@@ -12,6 +13,7 @@ type Render = {
   component: Type<unknown>;
   /** Component selector */
   selector: string;
+  props?: Record<string, any>;
   options?: {
     plainText?: boolean;
     pretty?: boolean;
@@ -30,8 +32,8 @@ type Render = {
  *
  * @returns {Promise<string>} The rendered HTML or plain text.
  */
-export const render = async ({ component, selector, options }: Render) => {
-  const normalizedHtml = await renderNgComponent(component, selector);
+export const render = async ({ component, selector, props, options }: Render) => {
+  const normalizedHtml = await renderNgComponent(component, selector, props);
   const html = applyHtmlTransformations(normalizedHtml, options?.cssFilePaths);
   if (options?.plainText) {
     return renderAsPlainText(html);
@@ -70,11 +72,21 @@ const renderAsPlainText = (markup: string) => {
  * @param selector - The CSS selector for the component.
  * @returns A promise that resolves to the rendered HTML string.
  */
-const renderNgComponent = async (component: Type<unknown>, selector: string) => {
-  const bootstrap = () =>
-    bootstrapApplication(component, {
+const renderNgComponent = async (component: Type<unknown>, selector: string, props?: Record<string, any>) => {
+  const bootstrap = async () => {
+    const appRef = await bootstrapApplication(component, {
       providers: [provideExperimentalZonelessChangeDetection(), provideServerRendering()],
     });
+    appRef.components.forEach((componentRef) => {
+      Object.entries(props ?? {}).forEach(([key, value]) => {
+        if (key in componentRef.instance) {
+          componentRef.instance[key] = value;
+        }
+      });
+      componentRef.changeDetectorRef.detectChanges();
+    });
+    return appRef;
+  };
   const ngHtml = await renderApplication(bootstrap, {
     document: `<${selector}></${selector}>`,
   });
@@ -112,7 +124,7 @@ const applyHtmlTransformations = (html: string, cssFilePaths?: string[]) => {
   const $ = cheerio.load(html, { xml: { lowerCaseAttributeNames: false, lowerCaseTags: false } });
   replacePlaceholders($);
   applyStyles($, cssFilePaths ?? []);
-  return $.html().replaceAll('&lt;', '<').replaceAll('&gt;', '>');
+  return $.html().replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;nbsp;', '&nbsp;');
 };
 
 /**

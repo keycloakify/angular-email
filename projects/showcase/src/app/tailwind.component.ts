@@ -13,7 +13,7 @@ import {
   PreviewComponent,
   SectionComponent,
   TextComponent,
-} from 'angular-email';
+} from '@keycloakify/angular-email';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +37,7 @@ import {
       <ng-email-head>
         <ng-email-color-scheme></ng-email-color-scheme>
       </ng-email-head>
-      <ng-email-preview [preview]="previewText" />
+      <ng-email-preview [preview]="preview" />
       <ng-email-body>
         <ng-email-section styleClass="bg-white">
           <ng-email-container styleClass="mx-auto pt-5 pb-12 w-[580px]">
@@ -120,6 +120,8 @@ import {
   styles: [],
 })
 export class TailwindComponent {
+  preview = '';
+
   authorName = 'Alex';
   baseUrl = 'http://localhost:4200';
   authorImage = `https://svelte-email-rjaapma15-konzeptfabrik.vercel.app/airbnb-review-user.jpeg`;
@@ -127,5 +129,4 @@ export class TailwindComponent {
   in great condition, very polite, and respectful of all house rules.
   He’s welcome back anytime and would easily recommend him to any
   host!”`;
-  previewText = `Read ${this.authorName}'s review`;
 }

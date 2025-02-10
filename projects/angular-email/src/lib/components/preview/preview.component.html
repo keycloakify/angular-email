@@ -6,6 +6,6 @@
 >
   {{ $preview() }}
   @if (text) {
-    <div>{{ text }}</div>
+    <span [attr.data-html]="text"></span>
   }
 </div>

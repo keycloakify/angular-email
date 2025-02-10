@@ -13,7 +13,7 @@ import {
   PreviewComponent,
   SectionComponent,
   TextComponent,
-} from 'angular-email';
+} from '@keycloakify/angular-email';
 
 @Component({
   selector: 'app-root',

@@ -4,10 +4,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "angular-email": [
+      "@keycloakify/angular-email": [
         "./dist/angular-email"
       ],
-      "angular-email/*": [
+      "@keycloakify/angular-email/*": [
         "./dist/angular-email/*"
       ]
     },
