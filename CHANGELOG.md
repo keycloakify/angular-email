@@ -1,3 +1,12 @@
+## [0.0.1-rc.3](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.2...v0.0.1-rc.3) (2025-02-10)
+
+
+### Features
+
+* update build system for tailwind usage ([ddc0a1b](https://github.com/keycloakify/angular-email/commit/ddc0a1b3c6c2e8439b0f22fe1c0e582dc6cad5b4))
+
+
+
 ## [0.0.1-rc.2](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.1...v0.0.1-rc.2) (2025-02-08)
 
 
