@@ -1,3 +1,12 @@
+## [0.0.1-rc.6](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.5...v0.0.1-rc.6) (2025-02-10)
+
+
+### Bug Fixes
+
+* setInput works in real env ([912d9e8](https://github.com/keycloakify/angular-email/commit/912d9e883994cfc814ddaa9ed98e97319d9ada4f))
+
+
+
 ## [0.0.1-rc.5](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.4...v0.0.1-rc.5) (2025-02-10)
 
 
