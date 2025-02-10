@@ -5,6 +5,8 @@
 @let width = $width();
 @let borderRadius = $borderRadius();
 
+<ng-template #child><ng-content></ng-content></ng-template>
+
 <table
   [width]="'100%'"
   [border]="0"
@@ -43,26 +45,24 @@
             >
               <a
                 [href]="href"
+                [class]="$styleClass()"
                 [style]="$withBackgroundStyle()"
               >
-                <ng-container [ngTemplateOutlet]="content"></ng-container>
+                <ng-container [ngTemplateOutlet]="child"></ng-container>
               </a>
             </td>
           </tr>
         </table>
       } @else {
-        <noscript [attr.data-html]="$noBgInnerHtmlPre()"></noscript>
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
-        <noscript [attr.data-html]="$noBgInnerHtmlPost()"></noscript>
+        <noscript [attr.data-html]="$noBgInnerHtml()"></noscript>
         <a
           [href]="href"
+          [class]="$styleClass()"
           [style]="$withoutBackgroundStyle()"
         >
-          <ng-container [ngTemplateOutlet]="content"></ng-container>
+          <ng-container [ngTemplateOutlet]="child"></ng-container>
         </a>
       }
     </td>
   </tr>
 </table>
-
-<ng-template #content><ng-content></ng-content></ng-template>

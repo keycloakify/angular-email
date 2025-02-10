@@ -28,6 +28,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
@@ -38,4 +44,10 @@
     "**/node_modules/**": true,
     "**/node_modules/*/**": true
   },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    ".*Class",
+    ".*Styles"
+  ]
 }

@@ -16,7 +16,8 @@
       [height]="height && width ? height : undefined"
       [attr.bgcolor]="$bgColor()"
       [attr.background]="$src()"
-      [style]="$style()"
+      [style]="$bgStyle()"
+      [class]="$styleClass()"
     >
       <ng-content />
     </td>

@@ -9,9 +9,11 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 })
 export class ButtonComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $buttonStyle = input<Record<string, any> | null | undefined>(null, { alias: 'buttonStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | null>(null, { alias: 'styleClass' });
 
   $href = input<string>(undefined, { alias: 'href' });
+  $textContent = input.required<string>({ alias: 'textContent' });
   $width = input<number>(undefined, { alias: 'width' });
   $height = input<number>(undefined, { alias: 'height' });
   $borderRadius = input(0, { alias: 'borderRadius' });
@@ -60,7 +62,7 @@ export class ButtonComponent {
     ...(this.$backgroundColor() ? { backgroundColor: this.$backgroundColor() } : {}),
     // text styles
     ...(this.$textColor() ? { color: this.$textColor() } : {}),
-    ...(this.$buttonStyle() ?? {}),
+    ...(this.$style() ?? {}),
     ...(this.$withBackground() ? {} : { msoHide: 'all' }),
   }));
 
@@ -68,22 +70,31 @@ export class ButtonComponent {
     ...this.$baseStyle(),
     // background styles
     ...this.$propStyles(),
-    ...(this.$buttonStyle() ?? {}),
+    ...(this.$style() ?? {}),
     ...(this.$withBackground() ? {} : { msoHide: 'all' }),
   }));
 
-  $noBgInnerHtmlPre = computed(
-    () => `<!--[if mso]>
-            <v:roundrect href="${this.$href()}" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:${this.$height()}px;v-text-anchor:middle;width:${this.$width()}px;" arcsize="${this.$arcsize()}%" ${
-              this.$borderColor() ? `strokecolor=${this.$borderColor()}` : ''
-            } ${this.$borderSize() ? `strokeweight="${this.$borderSize()}px"` : `stroke="false"`} ${
-              this.$backgroundColor() ? `fillcolor=${this.$backgroundColor()}` : `fill="false"`
+  $noBgInnerHtml = computed(() => {
+    const href = this.$href();
+    const borderColor = this.$borderColor();
+    const borderSize = this.$borderSize();
+    const height = this.$height();
+    const width = this.$width();
+    const arcsize = this.$arcsize();
+    const backgroundColor = this.$backgroundColor();
+    const fontSize = this.$fontSize();
+    const textColor = this.$textColor();
+    const textContent = this.$textContent();
+    return `<!--[if mso]>
+            <v:roundrect href="${href}" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="${height !== undefined ? `height:${height}px` : ''};v-text-anchor:middle;${width !== undefined ? `height:${width}px` : ''};" arcsize="${arcsize}%" ${
+              borderColor ? `strokecolor=${borderColor}` : ''
+            } ${borderSize ? `strokeweight="${borderSize}px"` : `stroke="false"`} ${
+              backgroundColor ? `fillcolor=${backgroundColor}` : `fill="false"`
             }>
             <w:anchorlock/>
-            <center style="font-size:${this.$fontSize()}px;${this.$textColor() ? `color:${this.$textColor()};` : ''}">`,
-  );
-  $noBgInnerHtmlPost = computed(
-    () => `</center></v:roundrect>
-            <![endif]-->`,
-  );
+            <center style="font-size:${fontSize}px;${textColor ? `color:${textColor};` : ''}">
+            ${textContent}
+            </center></v:roundrect>
+            <![endif]-->`;
+  });
 }

@@ -9,4 +9,7 @@ export class HtmlComponent {
   $lang = input('en', { alias: 'lang' });
   $dir = input('ltr', { alias: 'dir' });
   $enableVML = input(true, { alias: 'enableVML' });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
 }

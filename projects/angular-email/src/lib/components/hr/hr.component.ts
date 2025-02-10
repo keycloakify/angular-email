@@ -8,9 +8,10 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 })
 export class HrComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $hrStyle = input<Record<string, any> | null | undefined>(null, { alias: 'hrStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
   $disableDefaultStyle = input<boolean>(false, { alias: 'disableDefaultStyle' });
-  $style = computed(() => {
+  $hrStyle = computed(() => {
     return {
       ...(this.$disableDefaultStyle()
         ? {}
@@ -19,7 +20,7 @@ export class HrComponent {
             border: 'none',
             borderTop: '1px solid #eaeaea',
           }),
-      ...(this.$hrStyle() ?? {}),
+      ...(this.$style() ?? {}),
     };
   });
 }

@@ -8,7 +8,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class ColumnComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $columnStyle = input<Record<string, any> | null | undefined>(null, { alias: 'columnStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
   $bgImage = input<string>(undefined, { alias: 'bgImage' });
   $bgColor = input<string>(undefined, { alias: 'bgColor' });
 }

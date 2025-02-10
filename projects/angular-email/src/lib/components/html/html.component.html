@@ -8,6 +8,8 @@
   [dir]="dir"
   [attr.xmlns:o]="enableVML ? 'urn:schemas-microsoft-com:office:office' : undefined"
   [attr.xmlns:v]="enableVML ? 'urn:schemas-microsoft-com:vml' : undefined"
+  [style]="$style()"
+  [class]="$styleClass()"
 >
   <ng-content />
 </html>

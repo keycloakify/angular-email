@@ -8,11 +8,12 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 })
 export class LinkComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $linkStyle = input<Record<string, any> | null | undefined>(null, { alias: 'linkStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
   $disableDefaultStyle = input<boolean>(false, { alias: 'disableDefaultStyle' });
   $href = input('', { alias: 'href' });
   $target = input('_blank', { alias: 'target' });
-  $style = computed(() => {
+  $linkStyle = computed(() => {
     return {
       ...(this.$disableDefaultStyle()
         ? {}
@@ -20,7 +21,7 @@ export class LinkComponent {
             color: '#067df7',
             textDecoration: 'none',
           }),
-      ...(this.$linkStyle() ?? {}),
+      ...(this.$style() ?? {}),
     };
   });
 }

@@ -39,8 +39,8 @@ import {
       </ng-email-head>
       <ng-email-preview [preview]="previewText" />
       <ng-email-body>
-        <ng-email-section [style]="main">
-          <ng-email-container [style]="container">
+        <ng-email-section styleClass="bg-white">
+          <ng-email-container styleClass="mx-auto pt-5 pb-12 w-[580px]">
             <ng-email-img
               [src]="'https://svelte-email-rjaapma15-konzeptfabrik.vercel.app/airbnb-logo.png'"
               width="96"
@@ -53,41 +53,44 @@ import {
                 width="96"
                 height="96"
                 [alt]="authorName"
-                [style]="userImage"
+                styleClass="mx-auto mb-4 rounded-full"
               />
             </ng-email-section>
-            <ng-email-heading [style]="heading">Here's what {{ authorName }} wrote</ng-email-heading>
-            <ng-email-text [style]="review">{{ reviewText }}</ng-email-text>
-            <ng-email-text [style]="paragraph">
+            <ng-email-heading styleClass="text-3xl leading-9 font-bold text-gray-600"
+              >Here's what {{ authorName }} wrote</ng-email-heading
+            >
+            <ng-email-text styleClass="text-lg leading-6 text-gray-600 rounded p-6 bg-gray-100">{{
+              reviewText
+            }}</ng-email-text>
+            <ng-email-text styleClass="text-lg leading-6 text-gray-600">
               Now that the review period is over, we’ve posted
               {{ authorName }}’s review to your Airbnb profile.
             </ng-email-text>
-            <ng-email-text [style]="paragraph">
+            <ng-email-text styleClass="text-lg leading-6 text-gray-600">
               While it’s too late to write a review of your own, you can send your feedback to {{ authorName }}
               using your Airbnb message thread.
             </ng-email-text>
-            <ng-email-section [style]="{ padding: '16px 0 20px' }">
+            <ng-email-section styleClass="pt-4 pb-5">
               <ng-email-button
-                [style]="button"
-                styleClass="mt-1"
+                styleClass="rounded w-full py-5 block text-center text-non no-underline text-lg text-white bg-pink-600"
                 href="https://airbnb.com/"
                 [textContent]="'Send My Feedback'"
                 >Send My Feedback</ng-email-button
               >
             </ng-email-section>
-            <ng-email-hr [style]="hr" />
-            <ng-email-text [style]="question">Common questions</ng-email-text>
+            <ng-email-hr styleClass="border-gray-300 my-5" />
+            <ng-email-text styleClass="text-lg leading-6 text-gray-600 font-bold">Common questions</ng-email-text>
             <ng-email-text>
               <ng-email-link
                 href="https://airbnb.com/help/article/13"
-                [style]="link"
+                styleClass="text-lg leading-6 text-pink-600 block"
                 >How do reviews work?</ng-email-link
               >
             </ng-email-text>
             <ng-email-text>
               <ng-email-link
                 href="https://airbnb.com/help/article/1257"
-                [style]="link"
+                styleClass="text-lg leading-6 text-pink-600 block"
               >
                 How do star ratings work?
               </ng-email-link>
@@ -95,16 +98,18 @@ import {
             <ng-email-text>
               <ng-email-link
                 href="https://airbnb.com/help/article/995"
-                [style]="link"
+                styleClass="text-lg leading-6 text-pink-600 block"
               >
                 Can I leave a review after 14 days?
               </ng-email-link>
             </ng-email-text>
-            <ng-email-hr [style]="hr" />
-            <ng-email-text [style]="footer">Airbnb, Inc., 888 Brannan St, San Francisco, CA 94103</ng-email-text>
+            <ng-email-hr styleClass="border-gray-300 my-5" />
+            <ng-email-text styleClass="text-gray-400 text-sm mb-3"
+              >Airbnb, Inc., 888 Brannan St, San Francisco, CA 94103</ng-email-text
+            >
             <ng-email-link
               href="https://airbnb.com"
-              [style]="reportLink"
+              styleClass="underline text-gray-500 text-sm"
               >Report unsafe behavior</ng-email-link
             >
           </ng-email-container>
@@ -114,7 +119,7 @@ import {
   `,
   styles: [],
 })
-export class AppComponent {
+export class TailwindComponent {
   authorName = 'Alex';
   baseUrl = 'http://localhost:4200';
   authorImage = `https://svelte-email-rjaapma15-konzeptfabrik.vercel.app/airbnb-review-user.jpeg`;
@@ -123,87 +128,4 @@ export class AppComponent {
   He’s welcome back anytime and would easily recommend him to any
   host!”`;
   previewText = `Read ${this.authorName}'s review`;
-  fontFamily =
-    '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif';
-
-  main = {
-    backgroundColor: '#ffffff',
-  };
-
-  container = {
-    margin: '0 auto',
-    padding: '20px 0 48px',
-    width: '580px',
-  };
-
-  userImage = {
-    margin: '0 auto',
-    marginBottom: '16px',
-    borderRadius: '50%',
-  };
-
-  heading = {
-    fontFamily: this.fontFamily,
-    fontSize: '32px',
-    lineHeight: '1.3',
-    fontWeight: '700',
-    color: '#484848',
-  };
-
-  paragraph = {
-    fontFamily: this.fontFamily,
-    fontSize: '18px',
-    lineHeight: '1.4',
-    color: '#484848',
-  };
-
-  question = {
-    ...this.paragraph,
-    fontWeight: '700',
-  };
-
-  review = {
-    ...this.paragraph,
-    padding: '24px',
-    backgroundColor: '#f2f3f3',
-    borderRadius: '4px',
-  };
-
-  button = {
-    fontFamily: this.fontFamily,
-    backgroundColor: '#ff5a5f',
-    borderRadius: '3px',
-    color: '#fff',
-    fontSize: '18px',
-    textDecoration: 'none',
-    textAlign: 'center' as const,
-    display: 'block',
-    width: '100%',
-    padding: '19px 0',
-  };
-
-  link = {
-    ...this.paragraph,
-    color: '#ff5a5f',
-    display: 'block',
-  };
-
-  reportLink = {
-    fontFamily: this.fontFamily,
-    fontSize: '14px',
-    color: '#9ca299',
-    textDecoration: 'underline',
-  };
-
-  hr = {
-    borderColor: '#cccccc',
-    margin: '20px 0',
-  };
-
-  footer = {
-    fontFamily: this.fontFamily,
-    color: '#9ca299',
-    fontSize: '14px',
-    marginBottom: '10px',
-  };
 }

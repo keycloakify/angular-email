@@ -10,7 +10,8 @@ import { styleToString, withMargin } from '../../utils';
 })
 export class HeadingComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $headingStyle = input<Record<string, any> | null | undefined>(null, { alias: 'headingStyle' });
+  $style = input<Record<string, any> | null | undefined>(null, { alias: 'style' });
+  $styleClass = input<string | undefined>(undefined, { alias: 'styleClass' });
   $as = input<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>('h1', { alias: 'as' });
   $m = input<string>(undefined, { alias: 'm' });
   $mx = input<string>(undefined, { alias: 'mx' });
@@ -19,7 +20,7 @@ export class HeadingComponent {
   $mr = input<string>(undefined, { alias: 'mr' });
   $mb = input<string>(undefined, { alias: 'mb' });
   $ml = input<string>(undefined, { alias: 'ml' });
-  $style = computed(() => {
+  $headingStyle = computed(() => {
     return styleToString({
       ...withMargin({
         m: this.$m(),
@@ -30,7 +31,7 @@ export class HeadingComponent {
         mb: this.$mb(),
         ml: this.$ml(),
       }),
-      ...(this.$headingStyle() ?? {}),
+      ...(this.$style() ?? {}),
     });
   });
 }
