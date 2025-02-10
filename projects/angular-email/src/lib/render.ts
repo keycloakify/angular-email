@@ -20,6 +20,7 @@ type Render = {
     cssFilePaths?: string[];
     /** path or configuration object */
     tailwindConfig?: string | Partial<Config>;
+    signalInputsPrefix?: string;
   };
 };
 
@@ -33,7 +34,7 @@ type Render = {
  * @returns {Promise<string>} The rendered HTML or plain text.
  */
 export const render = async ({ component, selector, props, options }: Render) => {
-  const normalizedHtml = await renderNgComponent(component, selector, props);
+  const normalizedHtml = await renderNgComponent(component, selector, props, options?.signalInputsPrefix);
   const html = applyHtmlTransformations(normalizedHtml, options?.cssFilePaths);
   if (options?.plainText) {
     return renderAsPlainText(html);
@@ -72,15 +73,20 @@ const renderAsPlainText = (markup: string) => {
  * @param selector - The CSS selector for the component.
  * @returns A promise that resolves to the rendered HTML string.
  */
-const renderNgComponent = async (component: Type<unknown>, selector: string, props?: Record<string, any>) => {
+const renderNgComponent = async (
+  component: Type<unknown>,
+  selector: string,
+  props?: Record<string, any>,
+  signalInputsPrefix?: string,
+) => {
   const bootstrap = async () => {
     const appRef = await bootstrapApplication(component, {
       providers: [provideExperimentalZonelessChangeDetection(), provideServerRendering()],
     });
     appRef.components.forEach((componentRef) => {
       Object.entries(props ?? {}).forEach(([key, value]) => {
-        if (key in componentRef.instance) {
-          componentRef.instance[key] = value;
+        if (key in componentRef.instance || `${signalInputsPrefix ?? ''}${key}` in componentRef.instance) {
+          componentRef.setInput(key, value);
         }
       });
       componentRef.changeDetectorRef.detectChanges();
