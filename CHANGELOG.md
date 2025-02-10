@@ -1,3 +1,13 @@
+## [0.0.1-rc.4](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.3...v0.0.1-rc.4) (2025-02-10)
+
+
+### Bug Fixes
+
+* passing props to component ([605018b](https://github.com/keycloakify/angular-email/commit/605018b2d2706cb3271450f7aafa4aa35a9cfd98))
+* preview ([8a3878f](https://github.com/keycloakify/angular-email/commit/8a3878f477ddb0d8c2654fdcb21111cfe5babdf0))
+
+
+
 ## [0.0.1-rc.3](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.2...v0.0.1-rc.3) (2025-02-10)
 
 
