@@ -7,9 +7,12 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 })
 export class PreviewComponent {
   $preview = input('', { alias: 'preview' });
+
+  maxLength = 150;
   $text = computed(() => {
     const preview = this.$preview();
+    if (preview.length >= this.maxLength) return null;
     const whiteSpaceCodes = '\xa0\u200C\u200B\u200D\u200E\u200F\uFEFF';
-    return whiteSpaceCodes.repeat(150 - preview.length);
+    return whiteSpaceCodes.repeat(this.maxLength - preview.length);
   });
 }

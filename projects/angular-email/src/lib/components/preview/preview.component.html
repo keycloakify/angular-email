@@ -1,6 +1,11 @@
+@let text = $text();
+
 <div
   id="__angular-email-preview"
   style="display: none; overflow: hidden; line-height: 1px; opacity: 0; max-height: 0; max-width: 0"
 >
   {{ $preview() }}
+  @if (text) {
+    <div>{{ text }}</div>
+  }
 </div>
