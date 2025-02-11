@@ -120,7 +120,7 @@ import {
   styles: [],
 })
 export class TailwindComponent {
-  preview = '';
+  preview = `Read Alex's review`;
 
   authorName = 'Alex';
   baseUrl = 'http://localhost:4200';

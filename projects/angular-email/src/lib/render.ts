@@ -3,11 +3,12 @@ import { provideExperimentalZonelessChangeDetection, Type } from '@angular/core'
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideServerRendering, renderApplication } from '@angular/platform-server';
 import { render as maizzleRender } from '@maizzle/framework';
-import * as cheerio from 'cheerio';
+import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
 import { readFileSync } from 'node:fs';
+import prettyPrint from 'pretty';
 import { Config } from 'tailwindcss';
-import { HTMLElements } from './utils';
+import { HTMLElements, unescapeForRawComponent } from './utils';
 
 type Render = {
   component: Type<unknown>;
@@ -59,9 +60,23 @@ export const render = async ({ component, selector, props, options }: Render) =>
  */
 const renderAsPlainText = (markup: string) => {
   return convert(markup, {
+    decodeEntities: true,
+    formatters: {
+      raw: (elem, _walk, builder) => {
+        if (elem.children.length && elem.children[0].type === 'comment') {
+          builder.addInline(unescapeForRawComponent(elem.children[0].data!.trim()));
+        }
+      },
+    },
     selectors: [
+      { selector: '[data-skip="true"]', format: 'skip' },
       { selector: 'img', format: 'skip' },
       { selector: '#__angular-email-preview', format: 'skip' },
+      {
+        format: 'raw',
+        options: {},
+        selector: 'angular-email-raw',
+      },
     ],
   });
 };
@@ -127,13 +142,16 @@ const normalizeNgHtml = (html: string, selector: string): string => {
  * @returns The transformed HTML string.
  */
 const applyHtmlTransformations = (html: string, cssFilePaths?: string[]) => {
-  const $ = cheerio.load(html, { xml: { lowerCaseAttributeNames: false, lowerCaseTags: false } });
+  const $ = cheerio.load(html, {
+    xml: { lowerCaseAttributeNames: false, lowerCaseTags: false },
+  });
   replacePlaceholders($);
   applyStyles($, cssFilePaths ?? []);
   return $.html()
+    .replaceAll('\n', '')
+    .replace(/\s+/g, ' ')
     .replaceAll('&lt;', '<')
     .replaceAll('&gt;', '>')
-    .replaceAll('&amp;nbsp;', '&nbsp;')
     .replaceAll('&#x24;', '$');
 };
 
@@ -150,7 +168,7 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
   $('[data-html]').each(function () {
     const content = $(this).attr('data-html');
     if (content) {
-      $(this).replaceWith(`${content}\n`);
+      $(this).replaceWith(`${content}`);
     }
   });
 };
@@ -181,6 +199,17 @@ const inlineCss = async (html: string, pretty: boolean = false, tailwindConfig?:
   const tailwindcssPresetEmail = (await import('tailwindcss-preset-email')).default;
   return (
     await maizzleRender(html, {
+      afterTransformers: ({ html }) => {
+        const renderedHtml = unescapeForRawComponent(
+          html
+            .replaceAll('\n', '')
+            .replace(/\s+/g, ' ')
+            .replaceAll('&#x24;', '$')
+            .replace(/<angular-email-raw[\s\S]*?><!--(.*?)--><\/angular-email-raw>/gm, `$1`),
+        );
+        if (pretty) return prettyPrint(renderedHtml);
+        return renderedHtml;
+      },
       css: {
         shorthand: true,
         inline: {
@@ -188,6 +217,7 @@ const inlineCss = async (html: string, pretty: boolean = false, tailwindConfig?:
           applyHeightAttributes: true,
         },
         purge: {
+          doNotRemoveHTMLCommentsWhoseOpeningTagContains: ['[if', '[endif', '<#if', '</#if', '<#else', '<#elseif'],
           removeHTMLComments: false,
         },
         tailwind: {
@@ -200,8 +230,8 @@ const inlineCss = async (html: string, pretty: boolean = false, tailwindConfig?:
           ],
         },
       },
-      prettify: pretty,
-      minify: !pretty,
+      prettify: false,
+      minify: true,
     })
   ).html;
 };

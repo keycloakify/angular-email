@@ -8,9 +8,9 @@ import { TailwindComponent } from './tailwind.component';
 render({
   component: TailwindComponent,
   selector: 'app-root',
-  props: { preview: `Read Alex's review` },
   options: {
-    pretty: true,
+    pretty: false,
+    plainText: false,
     cssFilePaths: [resolve(import.meta.dirname, '../styles.css')],
     tailwindConfig: resolve(import.meta.dirname, '../tailwind.config.js'),
   },

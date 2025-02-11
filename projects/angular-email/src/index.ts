@@ -16,6 +16,7 @@ export * from './lib/components/html/html.component';
 export * from './lib/components/img/img.component';
 export * from './lib/components/link/link.component';
 export * from './lib/components/preview/preview.component';
+export * from './lib/components/raw/raw.component';
 export * from './lib/components/section/section.component';
 export * from './lib/components/text/text.component';
 export * from './lib/render';

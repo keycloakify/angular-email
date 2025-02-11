@@ -6,6 +6,9 @@
 >
   {{ $preview() }}
   @if (text) {
-    <span [attr.data-html]="text"></span>
+    <ng-email-raw
+      [content]="text"
+      [disablePlainTextOutput]="false"
+    ></ng-email-raw>
   }
 </div>
