@@ -1,3 +1,12 @@
+## [0.0.1-rc.7](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.6...v0.0.1-rc.7) (2025-02-11)
+
+
+### Features
+
+* add raw component ([8114b93](https://github.com/keycloakify/angular-email/commit/8114b93ff6672bad29c98c22ce10a1a125bb0042))
+
+
+
 ## [0.0.1-rc.6](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.5...v0.0.1-rc.6) (2025-02-10)
 
 
