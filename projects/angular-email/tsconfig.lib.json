@@ -10,6 +10,8 @@
     "types": [],
   },
   "exclude": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "bin/build.ts",
+    "bin/tsconfig.json",
   ]
 }

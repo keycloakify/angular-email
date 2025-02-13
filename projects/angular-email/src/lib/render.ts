@@ -5,7 +5,6 @@ import { provideServerRendering, renderApplication } from '@angular/platform-ser
 import { render as maizzleRender } from '@maizzle/framework';
 import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
-import { readFileSync } from 'node:fs';
 import prettyPrint from 'pretty';
 import { Config } from 'tailwindcss';
 import { HTMLElements, unescapeForRawComponent } from './utils';
@@ -18,9 +17,8 @@ type Render = {
   options?: {
     plainText?: boolean;
     pretty?: boolean;
-    cssFilePaths?: string[];
-    /** path or configuration object */
-    tailwindConfig?: string | Partial<Config>;
+    /** tailwind configuration object */
+    tailwindConfig?: Partial<Config>;
     signalInputsPrefix?: string;
   };
 };
@@ -35,14 +33,19 @@ type Render = {
  * @returns {Promise<string>} The rendered HTML or plain text.
  */
 export const render = async ({ component, selector, props, options }: Render) => {
-  const normalizedHtml = await renderNgComponent(component, selector, props, options?.signalInputsPrefix);
-  const html = applyHtmlTransformations(normalizedHtml, options?.cssFilePaths);
+  const { styles, html: normalizedHtml } = await renderNgComponent(
+    component,
+    selector,
+    props,
+    options?.signalInputsPrefix,
+  );
+  const html = applyHtmlTransformations(normalizedHtml, styles);
   if (options?.plainText) {
     return renderAsPlainText(html);
   }
   const doctype =
     '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-  const tailwindConfig = await getTailwindConfig(options?.tailwindConfig);
+  const tailwindConfig = options?.tailwindConfig;
   const markup = await inlineCss(html, !!options?.pretty, tailwindConfig);
   const document = `${doctype}${markup}`;
   return document;
@@ -111,7 +114,18 @@ const renderNgComponent = async (
   const ngHtml = await renderApplication(bootstrap, {
     document: `<${selector}></${selector}>`,
   });
-  return normalizeNgHtml(ngHtml, selector);
+  const $ = cheerio.load(ngHtml, {
+    xml: { lowerCaseAttributeNames: false, lowerCaseTags: false },
+  });
+  const styles: string[] = [];
+  $('style').each(function () {
+    const content = $(this).html();
+    if (content) {
+      styles.push(content);
+    }
+  });
+  const html = normalizeNgHtml(ngHtml, selector);
+  return { styles, html };
 };
 
 /**
@@ -125,7 +139,7 @@ const renderNgComponent = async (
 const normalizeNgHtml = (html: string, selector: string): string => {
   const nsHtmlRegex = new RegExp(`<(?!(\\/?(${HTMLElements.join('|')})))[^>]+>`, 'gm');
   return html
-    .replace(new RegExp(`.+<${selector}[\\s\\S]*?>([\\s\\S]*?)<\\/${selector}>.+`, 'gm'), '$1')
+    .replace(new RegExp(`[\\s\\S]*?<${selector}[\\s\\S]*?>([\\s\\S]*?)<\\/${selector}>[\\s\\S]*?`, 'gm'), '$1')
     .replace(nsHtmlRegex, '');
 };
 
@@ -141,12 +155,12 @@ const normalizeNgHtml = (html: string, selector: string): string => {
  * @param cssFilePaths - An optional array of CSS file paths to apply styles from.
  * @returns The transformed HTML string.
  */
-const applyHtmlTransformations = (html: string, cssFilePaths?: string[]) => {
+const applyHtmlTransformations = (html: string, styles: string[]) => {
   const $ = cheerio.load(html, {
     xml: { lowerCaseAttributeNames: false, lowerCaseTags: false },
   });
   replacePlaceholders($);
-  applyStyles($, cssFilePaths ?? []);
+  applyStyles($, styles);
   return $.html()
     .replaceAll('\n', '')
     .replace(/\s+/g, ' ')
@@ -179,10 +193,9 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
  * @param $ - The Cheerio API instance used to manipulate the HTML document.
  * @param cssFilePaths - An array of file paths to the CSS files to be applied.
  */
-const applyStyles = ($: cheerio.CheerioAPI, cssFilePaths: string[]) => {
-  (cssFilePaths ?? []).forEach((path) => {
-    const styleContent = readFileSync(path, { encoding: 'utf-8' });
-    $('head').append(`<style>${styleContent}</style>`);
+const applyStyles = ($: cheerio.CheerioAPI, styles: string[]) => {
+  styles.forEach((style) => {
+    $('head').append(`<style>${style}</style>`);
   });
 };
 
@@ -234,22 +247,4 @@ const inlineCss = async (html: string, pretty: boolean = false, tailwindConfig?:
       minify: true,
     })
   ).html;
-};
-
-/**
- * Asynchronously retrieves the Tailwind CSS configuration.
- *
- * @param tailwindConfig - The path to the Tailwind CSS configuration file or a partial configuration object.
- * @returns A promise that resolves to a partial Tailwind CSS configuration object, or `undefined` if no configuration is provided.
- */
-const getTailwindConfig = async (tailwindConfig?: string | Partial<Config>) => {
-  let config: Partial<Config> | undefined;
-  if (tailwindConfig) {
-    if (typeof tailwindConfig === 'string') {
-      config = (await import(tailwindConfig)).default;
-    } else {
-      config = tailwindConfig;
-    }
-  }
-  return config;
 };

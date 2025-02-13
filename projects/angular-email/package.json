@@ -30,10 +30,14 @@
     "@angular/build": "^19.1.0",
     "@angular/platform-server": "^19.1.0",
     "@maizzle/framework": "^5.0.0",
-    "tailwindcss-preset-email": "^1.4.0"
+    "tailwindcss-preset-email": "^1.4.0",
+    "termost": "^1.4.0"
   },
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
+  },
+  "bin": {
+    "keycloakify-angular-email": "bin/build.js"
   }
 }

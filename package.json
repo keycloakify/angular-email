@@ -5,9 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build angular-email",
+    "build": "ng build angular-email && tsc -p projects/angular-email/bin/tsconfig.json",
     "watch": "ng build angular-email --watch",
-    "render:test": "tsx projects/showcase/src/app/test-render.ts && prettier -w projects/showcase/src/app/test.html",
+    "render:test": "keycloakify-angular-email build -p projects/showcase/emails -o dist/emails",
     "release": "sh scripts/release.sh",
     "changelog": "npx conventional-changelog -t -p angular -i CHANGELOG.md -s -r 0",
     "_format": "prettier '**/*.{ts,html,json,md}'",
@@ -52,6 +52,7 @@
     "npm-check-updates": "^17.1.14",
     "prettier": "^3.4.2",
     "tailwindcss-preset-email": "^1.4.0",
+    "termost": "^1.4.0",
     "tsx": "^4.19.2",
     "typescript": "~5.7.3",
     "typescript-eslint": "8.23.0"

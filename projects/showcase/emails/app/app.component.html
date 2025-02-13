@@ -1,0 +1,79 @@
+<ng-email-html>
+  <ng-email-head>
+    <ng-email-color-scheme></ng-email-color-scheme>
+  </ng-email-head>
+  <ng-email-preview [preview]="previewText" />
+  <ng-email-body>
+    <ng-email-section [style]="main">
+      <ng-email-container [style]="container">
+        <ng-email-img
+          [src]="'https://svelte-email-rjaapma15-konzeptfabrik.vercel.app/airbnb-logo.png'"
+          width="96"
+          height="30"
+          alt="Airbnb"
+        />
+        <ng-email-section>
+          <ng-email-img
+            [src]="authorImage"
+            styleClass="zullo"
+            width="96"
+            height="96"
+            [alt]="authorName"
+            [style]="userImage"
+          />
+        </ng-email-section>
+        <ng-email-heading [style]="heading">Here's what {{ authorName }} wrote</ng-email-heading>
+        <ng-email-text [style]="review">{{ reviewText }}</ng-email-text>
+        <ng-email-text [style]="paragraph">
+          Now that the review period is over, we’ve posted
+          {{ authorName }}’s review to your Airbnb profile.
+        </ng-email-text>
+        <ng-email-text [style]="paragraph">
+          While it’s too late to write a review of your own, you can send your feedback to {{ authorName }}
+          using your Airbnb message thread.
+        </ng-email-text>
+        <ng-email-section [style]="{ padding: '16px 0 20px' }">
+          <ng-email-button
+            [style]="button"
+            styleClass="mt-1"
+            href="https://airbnb.com/"
+            [textContent]="'Send My Feedback'"
+            >Send My Feedback</ng-email-button
+          >
+        </ng-email-section>
+        <ng-email-hr [style]="hr" />
+        <ng-email-text [style]="question">Common questions</ng-email-text>
+        <ng-email-text>
+          <ng-email-link
+            href="https://airbnb.com/help/article/13"
+            [style]="link"
+            >How do reviews work?</ng-email-link
+          >
+        </ng-email-text>
+        <ng-email-text>
+          <ng-email-link
+            href="https://airbnb.com/help/article/1257"
+            [style]="link"
+          >
+            How do star ratings work?
+          </ng-email-link>
+        </ng-email-text>
+        <ng-email-text>
+          <ng-email-link
+            href="https://airbnb.com/help/article/995"
+            [style]="link"
+          >
+            Can I leave a review after 14 days?
+          </ng-email-link>
+        </ng-email-text>
+        <ng-email-hr [style]="hr" />
+        <ng-email-text [style]="footer">Airbnb, Inc., 888 Brannan St, San Francisco, CA 94103</ng-email-text>
+        <ng-email-link
+          href="https://airbnb.com"
+          [style]="reportLink"
+          >Report unsafe behavior</ng-email-link
+        >
+      </ng-email-container>
+    </ng-email-section>
+  </ng-email-body>
+</ng-email-html>

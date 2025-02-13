@@ -1,6 +1,7 @@
 import { createCompilerPlugin } from '@angular/build/private';
+import { Plugin } from 'esbuild';
 
-export const angularEsbuildPlugin = (cwd: string) =>
+export const angularEsbuildPlugin = (cwd: string): Plugin =>
   createCompilerPlugin(
     {
       browserOnlyBuild: false,
@@ -16,10 +17,10 @@ export const angularEsbuildPlugin = (cwd: string) =>
       },
       inlineFonts: false,
       inlineStyleLanguage: 'css',
-      optimization: false,
+      optimization: true,
       sourcemap: false,
       target: [],
-      workspaceRoot: '',
+      workspaceRoot: cwd,
       outputNames: { bundles: '', media: '' },
     },
   );

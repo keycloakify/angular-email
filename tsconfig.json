@@ -31,5 +31,9 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": [
+    "projects/angular-email/bin/build.ts",
+    "projects/angular-email/bin/tsconfig.json",
+  ]
 }

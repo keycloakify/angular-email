@@ -1,0 +1,15 @@
+{
+    "extends": "../../../tsconfig.json",
+    "compilerOptions": {
+        "module": "ESNext",
+        "target": "ES2017",
+        "esModuleInterop": true,
+        "moduleResolution": "bundler",
+        "outDir": "../../../dist/angular-email/bin",
+        "rootDir": "."
+    },
+    "include": [
+        "build.ts",
+    ],
+    "exclude": []
+}

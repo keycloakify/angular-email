@@ -7,7 +7,8 @@
     "@angular/build",
     "@angular/platform-server",
     "@maizzle/framework",
-    "tailwindcss-preset-email"
+    "tailwindcss-preset-email",
+    "termost"
   ],
   "lib": {
     "entryFile": "src/index.ts"
