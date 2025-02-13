@@ -1,3 +1,12 @@
+## [0.0.1-rc.10](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.9...v0.0.1-rc.10) (2025-02-13)
+
+
+### Bug Fixes
+
+* lib readme ([2e1ad40](https://github.com/keycloakify/angular-email/commit/2e1ad40f4def1f9cf591a18f8734d30402d42461))
+
+
+
 ## [0.0.1-rc.9](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.8...v0.0.1-rc.9) (2025-02-13)
 
 
