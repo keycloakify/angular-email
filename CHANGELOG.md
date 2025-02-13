@@ -1,3 +1,12 @@
+## [0.0.1-rc.8](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.7...v0.0.1-rc.8) (2025-02-13)
+
+
+### Features
+
+* add bin command to directly build ([5903597](https://github.com/keycloakify/angular-email/commit/5903597fb95a12cf199be3c42904642a9f12b901))
+
+
+
 ## [0.0.1-rc.7](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.6...v0.0.1-rc.7) (2025-02-11)
 
 
