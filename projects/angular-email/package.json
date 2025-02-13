@@ -1,6 +1,6 @@
 {
   "name": "@keycloakify/angular-email",
-  "version": "0.0.1-rc.8",
+  "version": "0.0.1-rc.9",
   "license": "MIT",
   "type": "module",
   "description": "Angular Email Builder",

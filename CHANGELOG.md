@@ -1,3 +1,7 @@
+## [0.0.1-rc.9](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.8...v0.0.1-rc.9) (2025-02-13)
+
+
+
 ## [0.0.1-rc.8](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.7...v0.0.1-rc.8) (2025-02-13)
 
 
