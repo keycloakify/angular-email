@@ -1,3 +1,12 @@
+## [0.0.1-rc.12](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.11...v0.0.1-rc.12) (2025-03-15)
+
+
+### Bug Fixes
+
+* set esbuild version ([95ffaa2](https://github.com/keycloakify/angular-email/commit/95ffaa26282e583edc9ff882a96e294d13f98925))
+
+
+
 ## [0.0.1-rc.11](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.10...v0.0.1-rc.11) (2025-03-15)
 
 
