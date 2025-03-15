@@ -1,3 +1,12 @@
+## [0.0.1-rc.11](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.10...v0.0.1-rc.11) (2025-03-15)
+
+
+### Features
+
+* export toHTML function ([b2a7a42](https://github.com/keycloakify/angular-email/commit/b2a7a42a13d060d5412fb3d87d6e448a3007fd47))
+
+
+
 ## [0.0.1-rc.10](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.9...v0.0.1-rc.10) (2025-02-13)
 
 
