@@ -23,4 +23,4 @@ export const angularEsbuildPlugin = (cwd: string): Plugin =>
       workspaceRoot: cwd,
       outputNames: { bundles: '', media: '' },
     },
-  );
+  ) as unknown as Plugin;

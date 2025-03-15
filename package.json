@@ -44,6 +44,7 @@
     "dom-serializer": "^2.0.0",
     "domhandler": "^5.0.3",
     "domutils": "^3.2.2",
+    "esbuild": "^0.25.1",
     "eslint": "^9.20.0",
     "eslint-plugin-prettier": "^5.2.3",
     "html-to-text": "^9.0.5",
