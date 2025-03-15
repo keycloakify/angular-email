@@ -12,6 +12,7 @@ import {
   LinkComponent,
   PreviewComponent,
   render,
+  RenderToHtml,
   SectionComponent,
   TextComponent,
 } from '@keycloakify/angular-email';
@@ -124,6 +125,8 @@ export class AppComponent {
   };
 }
 
-export const renderToHtml = () => {
-  return render({ component: AppComponent, selector: 'app-root', props: {}, options: { pretty: true } });
+type AppComponentProps = {};
+
+export const renderToHtml: RenderToHtml<AppComponentProps> = (props) => {
+  return render({ component: AppComponent, selector: 'app-root', props, options: { pretty: true } });
 };

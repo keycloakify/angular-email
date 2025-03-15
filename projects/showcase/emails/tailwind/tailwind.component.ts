@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, input, ViewEncapsulation } from '@angular/core';
 import {
   BodyComponent,
   ButtonComponent,
@@ -12,6 +12,7 @@ import {
   LinkComponent,
   PreviewComponent,
   render,
+  RenderToHtml,
   SectionComponent,
   TextComponent,
 } from '@keycloakify/angular-email';
@@ -39,7 +40,7 @@ import tailwindConfig from '../../tailwind.config';
   encapsulation: ViewEncapsulation.None,
 })
 export class TailwindComponent {
-  preview = `Read Alex's review`;
+  preview = input(`Read Alex's review`);
 
   authorName = 'Alex';
   baseUrl = 'http://localhost:4200';
@@ -49,11 +50,14 @@ export class TailwindComponent {
   He’s welcome back anytime and would easily recommend him to any
   host!”`;
 }
-export const renderToHtml = () => {
+
+export type TailwindComponentProps = { preview: string };
+
+export const renderToHtml: RenderToHtml<TailwindComponentProps> = (props) => {
   return render({
     component: TailwindComponent,
     selector: 'app-root',
-    props: {},
+    props,
     options: {
       pretty: true,
       tailwindConfig,

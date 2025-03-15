@@ -25,18 +25,20 @@ To render the email as HTML or plaintext, use Angular's rendering engine:
 ```typescript
 // email.component.ts
 ...
-import { render } from '@keycloakify/angular-email';
+import { render, RenderToHtml } from '@keycloakify/angular-email';
 
 ...
 export class EmailComponent {
   ....
 }
 
-export const renderToHtml = () => {
+type EmailComponentProps = {};
+
+export const renderToHtml: RenderToHtml<EmailComponentProps> = (props) => {
   return render({
     component: EmailComponent,
     selector: 'app-root',
-    props: {},
+    props,
     options: {
       pretty: true,
     },
@@ -50,6 +52,8 @@ export const renderToHtml = () => {
 export $EMAIL_COMPONENTS_DIR_PATH="src/emails"
 npx keycloakify-angular-email build -p $EMAIL_COMPONENTS_DIR_PATH
 ```
+
+NB: use `keycloakify-angular-email build` when you don't need to pass dynamic inputs to your components, otherwise see [Standalone Dynamic Rendering](#standalone-dynamic-rendering)
 
 ### With Keycloakify Emails
 
@@ -113,6 +117,104 @@ export default defineConfig(({ mode }) => ({
     }),
   ],
 }));
+```
+
+### Standalone Dynamic Rendering
+
+Use it in a server environment
+
+```js
+// index.mjs
+
+import { toHTML } from '@keycloakify/angular-email/node';
+
+toHTML({
+  filePath: 'path/to/your.component.ts',
+  props: { foo: 'bar' },
+})
+  .then((html) => {
+    console.log(html);
+  })
+  .catch((e) => {
+    console.error(e);
+  });
+```
+
+or
+
+```js
+// index.cjs
+
+const { toHTML } = require('@keycloakify/angular-email/node');
+
+toHTML({
+  filePath: 'path/to/your.component.ts',
+  props: { foo: 'bar' },
+})
+  .then((html) => {
+    console.log(html);
+  })
+  .catch((e) => {
+    console.error(e);
+  });
+```
+
+```sh
+# cmd
+
+node index.mjs # or node index.cjs
+```
+
+## API
+
+### @keycloakify/angular-email
+
+### Render
+
+```ts
+type Render<Input extends Record<string, any>> = {
+  component: Type<unknown>;
+  /** Component selector */
+  selector: string;
+  /** Component inputs */
+  props?: Input;
+  options?: {
+    /** render as text */
+    plainText?: boolean;
+    /** format the html output */
+    pretty?: boolean;
+    /** tailwind configuration object */
+    tailwindConfig?: Partial<Config>;
+    /** if you use prefix conventions on signal inputs */
+    signalInputsPrefix?: string;
+  };
+};
+```
+
+### render()
+
+```ts
+render<Input extends Record<string, any>>({ component, selector, props, options }: Render<Input>) => Promise<string>
+```
+
+### @keycloakify/angular-email/esbuild
+
+### angularEsbuildPlugin()
+
+```ts
+angularEsbuildPlugin(cwd: string) => Plugin
+```
+
+### @keycloakify/angular-email/node
+
+### toHTML()
+
+```ts
+toHTML<Input extends Record<string, any>>(options: {
+    filePath: string;
+    props?: Input;
+    root?: string;
+}) => Promise<string>
 ```
 
 ## Contributing

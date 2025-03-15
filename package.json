@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build angular-email && tsc -p projects/angular-email/bin/tsconfig.json",
+    "build": "sh scripts/build.sh",
     "watch": "ng build angular-email --watch",
     "render:test": "keycloakify-angular-email build -p projects/showcase/emails -o dist/emails",
     "release": "sh scripts/release.sh",

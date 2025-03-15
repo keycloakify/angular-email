@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "dist",
+        "skipLibCheck": true,
+        "noCheck": true,
+        "emitDeclarationOnly": true
+    },
+    "include": [
+        "*"
+    ]
+}

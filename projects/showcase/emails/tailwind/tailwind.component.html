@@ -1,8 +1,10 @@
+@let emailPreview = preview();
+
 <ng-email-html>
   <ng-email-head>
     <ng-email-color-scheme></ng-email-color-scheme>
   </ng-email-head>
-  <ng-email-preview [preview]="preview" />
+  <ng-email-preview [preview]="emailPreview" />
   <ng-email-body>
     <ng-email-section styleClass="bg-white">
       <ng-email-container styleClass="mx-auto pt-5 pb-12 w-[580px]">

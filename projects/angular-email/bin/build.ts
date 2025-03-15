@@ -120,7 +120,7 @@ const program = termost<CliCommandOptions>({
   version: pkg.version,
   onException: (error) => {
     console.error(error);
-    process.exit(1);
+    exit(1);
   },
 });
 

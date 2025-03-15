@@ -9,11 +9,11 @@ import prettyPrint from 'pretty';
 import { Config } from 'tailwindcss';
 import { HTMLElements, unescapeForRawComponent } from './utils';
 
-type Render = {
+type Render<Input extends Record<string, any>> = {
   component: Type<unknown>;
   /** Component selector */
   selector: string;
-  props?: Record<string, any>;
+  props?: Input;
   options?: {
     plainText?: boolean;
     pretty?: boolean;
@@ -32,7 +32,12 @@ type Render = {
  *
  * @returns {Promise<string>} The rendered HTML or plain text.
  */
-export const render = async ({ component, selector, props, options }: Render) => {
+export const render = async <Input extends Record<string, any>>({
+  component,
+  selector,
+  props,
+  options,
+}: Render<Input>) => {
   const { styles, html: normalizedHtml } = await renderNgComponent(
     component,
     selector,
@@ -50,6 +55,8 @@ export const render = async ({ component, selector, props, options }: Render) =>
   const document = `${doctype}${markup}`;
   return document;
 };
+
+export type RenderToHtml<Input extends Record<string, any>> = (props?: Input) => ReturnType<typeof render>;
 
 /**
  * Converts the given markup string to plain text while skipping certain elements.

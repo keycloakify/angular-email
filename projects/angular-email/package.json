@@ -38,6 +38,6 @@
     "access": "public"
   },
   "bin": {
-    "keycloakify-angular-email": "bin/build.js"
+    "keycloakify-angular-email": "bin/build.mjs"
   }
 }
