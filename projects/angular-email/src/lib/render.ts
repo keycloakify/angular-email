@@ -144,7 +144,7 @@ const renderNgComponent = async (
  * @returns The normalized HTML string with the content of the specified selector and without non-standard HTML elements.
  */
 const normalizeNgHtml = (html: string, selector: string): string => {
-  const nsHtmlRegex = new RegExp(`<(?!(\\/?(${HTMLElements.join('|')})))[^>]+>`, 'gm');
+  const nsHtmlRegex = new RegExp(`<(?!(\\/?(${HTMLElements.join('|')})(?![-\\w])))[^>]+>`, 'gm');
   return html
     .replace(new RegExp(`[\\s\\S]*?<${selector}[\\s\\S]*?>([\\s\\S]*?)<\\/${selector}>[\\s\\S]*?`, 'gm'), '$1')
     .replace(nsHtmlRegex, '');
