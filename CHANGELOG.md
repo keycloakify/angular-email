@@ -1,3 +1,12 @@
+## [0.0.1-rc.13](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.12...v0.0.1-rc.13) (2025-03-17)
+
+
+### Bug Fixes
+
+* missing row component ([f1a28f7](https://github.com/keycloakify/angular-email/commit/f1a28f738fb8578848a384390b27ed22d90f5016))
+
+
+
 ## [0.0.1-rc.12](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.11...v0.0.1-rc.12) (2025-03-15)
 
 
