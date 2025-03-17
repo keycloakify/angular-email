@@ -1,0 +1,16 @@
+<table
+  align="center"
+  width="100%"
+  [class]="$styleClass()"
+  [style]="$style()"
+  role="presentation"
+  cellSpacing="0"
+  cellPadding="0"
+  border="0"
+>
+  <tbody [style]="$disableDefaultStyle() ? {} : { width: '100%' }">
+    <tr [style]="$disableDefaultStyle() ? {} : { width: '100%' }">
+      <ng-content />
+    </tr>
+  </tbody>
+</table>

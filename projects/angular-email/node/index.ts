@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { angularEsbuildPlugin } from '@keycloakify/angular-email/esbuild';
-import esbuild from 'esbuild';
+import { build } from 'esbuild';
 import { rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { cwd, exit } from 'node:process';
@@ -22,7 +22,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
     const start = new Date();
     const basePath = root ?? cwd();
     const outdir = join(basePath, '.tmp/emails');
-    const result = await esbuild.build({
+    const result = await build({
       logLevel: 'warning',
       entryPoints: [filePath],
       bundle: true,
@@ -30,6 +30,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
       absWorkingDir: basePath,
       platform: 'node',
       sourcemap: false,
+      minify: true,
       packages: 'bundle',
       external: ['@maizzle/framework'],
       format: 'esm',

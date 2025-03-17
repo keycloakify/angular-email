@@ -1,7 +1,7 @@
-import esbuild from 'esbuild';
+import { build } from 'esbuild';
 import { join } from 'node:path';
 
-await esbuild.build({
+await build({
   entryPoints: [join(import.meta.dirname, 'index.ts')],
   absWorkingDir: import.meta.dirname,
   allowOverwrite: true,
@@ -9,11 +9,12 @@ await esbuild.build({
   format: 'cjs',
   platform: 'node',
   sourcemap: false,
+  minify: true,
   packages: 'external',
   outfile: 'dist/index.cjs',
 });
 
-await esbuild.build({
+await build({
   entryPoints: [join(import.meta.dirname, 'index.ts')],
   absWorkingDir: import.meta.dirname,
   allowOverwrite: true,
@@ -21,6 +22,7 @@ await esbuild.build({
   format: 'esm',
   platform: 'node',
   sourcemap: false,
+  minify: true,
   packages: 'external',
   outfile: 'dist/index.js',
 });
