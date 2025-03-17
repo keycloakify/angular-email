@@ -1,6 +1,6 @@
 {
   "name": "angular-email",
-  "version": "0.0.1-rc.13",
+  "version": "0.0.1-rc.14",
   "type": "module",
   "scripts": {
     "ng": "ng",

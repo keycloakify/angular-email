@@ -1,3 +1,12 @@
+## [0.0.1-rc.14](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.13...v0.0.1-rc.14) (2025-03-17)
+
+
+### Bug Fixes
+
+* regex replacement ([352e7aa](https://github.com/keycloakify/angular-email/commit/352e7aa6dadf6cd1d93cc9152f45382f5ce842da))
+
+
+
 ## [0.0.1-rc.13](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.12...v0.0.1-rc.13) (2025-03-17)
 
 
