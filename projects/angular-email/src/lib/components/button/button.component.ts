@@ -32,11 +32,11 @@ export class ButtonComponent {
 
   private $baseStyle = computed(() => ({
     '-webkit-text-size-adjust': 'none',
-    borderRadius: this.$borderRadius(),
+    borderRadius: `${this.$borderRadius()}px`,
     display: 'inline-block',
-    fontSize: this.$fontSize(),
+    fontSize: `${this.$fontSize()}px`,
     lineHeight: `${this.$lineHeight()}px`,
-    maxWidth: this.$width(),
+    maxWidth: `${this.$width()}px`,
     textAlign: 'center',
     textDecoration: 'none',
     width: '100%',
