@@ -27,7 +27,7 @@
           role="presentation"
           [style]="{
             border: $borderSize() + 'px solid ' + ($borderColor() ?? 'inherit'),
-            borderRadius,
+            borderRadius: borderRadius ? borderRadius + 'px' : undefined,
           }"
         >
           <tr>
@@ -36,10 +36,10 @@
               [width]="width"
               [height]="height"
               [style]="{
-                borderRadius,
-                height,
-                width,
-                maxWidth: width,
+                borderRadius: borderRadius ? borderRadius + 'px' : undefined,
+                height: height ? height + 'px' : undefined,
+                width: width ? width + 'px' : undefined,
+                maxWidth: width ? width + 'px' : undefined,
                 textAlign: 'center',
               }"
             >
