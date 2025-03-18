@@ -1,3 +1,12 @@
+## [0.0.1-rc.15](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.14...v0.0.1-rc.15) (2025-03-18)
+
+
+### Bug Fixes
+
+* missing units ([48c6978](https://github.com/keycloakify/angular-email/commit/48c6978ea0c5d51dc567e4fed83bbc7e9854461b))
+
+
+
 ## [0.0.1-rc.14](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.13...v0.0.1-rc.14) (2025-03-17)
 
 
