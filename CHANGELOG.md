@@ -1,3 +1,12 @@
+## [0.0.1-rc.20](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.19...v0.0.1-rc.20) (2025-03-25)
+
+
+### Bug Fixes
+
+* missing peer ([0b72fef](https://github.com/keycloakify/angular-email/commit/0b72fefa73d4b763fdb3890117a8cb6512917aeb))
+
+
+
 ## [0.0.1-rc.19](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.18...v0.0.1-rc.19) (2025-03-25)
 
 
