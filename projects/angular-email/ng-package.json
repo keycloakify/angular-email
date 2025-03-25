@@ -9,6 +9,7 @@
     "tailwindcss-preset-email",
     "tailwindcss",
     "juice",
+    "pretty",
     "postcss",
     "termost"
   ],
