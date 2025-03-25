@@ -169,8 +169,8 @@ const applyHtmlTransformations = (html: string, styles: string[]) => {
   replacePlaceholders($);
   applyStyles($, styles);
   return $.html()
-    .replaceAll('\n', '')
     .replace(/\s+/g, ' ')
+    .replace(/>\s+</g, '><')
     .replaceAll('&lt;', '<')
     .replaceAll('&gt;', '>')
     .replaceAll('&#x24;', '$');
@@ -222,8 +222,8 @@ const inlineCss = async (html: string, pretty: boolean = false, tailwindConfig?:
       afterTransformers: ({ html }) => {
         const renderedHtml = unescapeForRawComponent(
           html
-            .replaceAll('\n', '')
             .replace(/\s+/g, ' ')
+            .replace(/>\s+</g, '><')
             .replaceAll('&#x24;', '$')
             .replace(/<angular-email-raw[\s\S]*?><!--(.*?)--><\/angular-email-raw>/gm, `$1`),
         );
