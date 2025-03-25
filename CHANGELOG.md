@@ -1,3 +1,12 @@
+## [0.0.1-rc.17](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.16...v0.0.1-rc.17) (2025-03-25)
+
+
+### Bug Fixes
+
+* broken minification ([8607ab6](https://github.com/keycloakify/angular-email/commit/8607ab6c857b9f81137154c3d7b2ff1a400b2d99))
+
+
+
 ## [0.0.1-rc.16](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.15...v0.0.1-rc.16) (2025-03-18)
 
 
