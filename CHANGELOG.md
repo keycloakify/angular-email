@@ -1,3 +1,12 @@
+## [0.0.1-rc.18](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.17...v0.0.1-rc.18) (2025-03-25)
+
+
+### Features
+
+* better performance ([c820904](https://github.com/keycloakify/angular-email/commit/c82090498bc2b2392f9328c8812f581d31a72d05))
+
+
+
 ## [0.0.1-rc.17](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.16...v0.0.1-rc.17) (2025-03-25)
 
 
