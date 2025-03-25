@@ -109,7 +109,9 @@ export default defineConfig(({ mode }) => ({
           cwd: import.meta.dirname,
           esbuild: {
             packages: 'bundle',
-            external: ['@maizzle/framework'],
+            external: ['juice', 'postcss'],
+            format: 'cjs',
+            outExtension: { '.js': '.cjs' },
             plugins: [angularEsbuildPlugin(import.meta.dirname)],
           },
         });
@@ -228,5 +230,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgments
 
 - Inspired by [jsx-email](https://github.com/rezqio/jsx-email)
-- Builded with [@maizzle/framework](https://github.com/maizzle/framework)
 - Developed by [Luca Peruzzo](https://github.com/luca-peruzzo)
