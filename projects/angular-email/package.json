@@ -29,8 +29,9 @@
     "cheerio": "^1.0.0",
     "@angular/build": "^19.1.0",
     "@angular/platform-server": "^19.1.0",
-    "@maizzle/framework": "^5.0.0",
     "tailwindcss-preset-email": "^1.4.0",
+    "juice": "^11.0.1",
+    "postcss": "^8.5.3",
     "termost": "^1.4.0"
   },
   "sideEffects": false,

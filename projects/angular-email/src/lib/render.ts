@@ -2,11 +2,12 @@
 import { provideExperimentalZonelessChangeDetection, Type } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideServerRendering, renderApplication } from '@angular/platform-server';
-import { render as maizzleRender } from '@maizzle/framework';
 import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
+import juice from 'juice';
+import postcss from 'postcss';
 import prettyPrint from 'pretty';
-import { Config } from 'tailwindcss';
+import tailwindcss, { Config } from 'tailwindcss';
 import { HTMLElements, unescapeForRawComponent } from './utils';
 
 type Render<Input extends Record<string, any>> = {
@@ -38,20 +39,23 @@ export const render = async <Input extends Record<string, any>>({
   props,
   options,
 }: Render<Input>) => {
-  const { styles, html: normalizedHtml } = await renderNgComponent(
+  const { style, html: normalizedHtml } = await renderNgComponent(
     component,
     selector,
     props,
     options?.signalInputsPrefix,
   );
-  const html = applyHtmlTransformations(normalizedHtml, styles);
+  const html = applyHtmlTransformations(normalizedHtml);
+
   if (options?.plainText) {
     return renderAsPlainText(html);
   }
+  const tailwindConfig = options?.tailwindConfig;
+  const css = await parseStyles(html, style, tailwindConfig);
   const doctype =
     '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-  const tailwindConfig = options?.tailwindConfig;
-  const markup = await inlineCss(html, !!options?.pretty, tailwindConfig);
+
+  const markup = await inlineCss(html, css, !!options?.pretty);
   const document = `${doctype}${markup}`;
   return document;
 };
@@ -124,15 +128,15 @@ const renderNgComponent = async (
   const $ = cheerio.load(ngHtml, {
     xml: { lowerCaseAttributeNames: false, lowerCaseTags: false },
   });
-  const styles: string[] = [];
+  let style: string = '';
   $('style').each(function () {
     const content = $(this).html();
     if (content) {
-      styles.push(content);
+      style += `\n${content}`;
     }
   });
   const html = normalizeNgHtml(ngHtml, selector);
-  return { styles, html };
+  return { style, html };
 };
 
 /**
@@ -162,12 +166,12 @@ const normalizeNgHtml = (html: string, selector: string): string => {
  * @param cssFilePaths - An optional array of CSS file paths to apply styles from.
  * @returns The transformed HTML string.
  */
-const applyHtmlTransformations = (html: string, styles: string[]) => {
+const applyHtmlTransformations = (html: string) => {
   const $ = cheerio.load(html, {
     xml: { lowerCaseAttributeNames: false, lowerCaseTags: false },
   });
   replacePlaceholders($);
-  applyStyles($, styles);
+
   return $.html()
     .replace(/\s+/g, ' ')
     .replace(/>\s+</g, '><')
@@ -197,61 +201,56 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
 /**
  * Applies the styles from the specified CSS file paths to the HTML document.
  *
- * @param $ - The Cheerio API instance used to manipulate the HTML document.
- * @param cssFilePaths - An array of file paths to the CSS files to be applied.
+ * @param html - The HTML string to process.
+ * @param style - The raw content of <style> tags
+ * @param tailwindConfig - Optional Tailwind CSS configuration to use. If not provided, the `tailwindcss-preset-email` preset will be used.
+ *
  */
-const applyStyles = ($: cheerio.CheerioAPI, styles: string[]) => {
-  styles.forEach((style) => {
-    $('head').append(`<style>${style}</style>`);
-  });
+const parseStyles = async (html: string, style: string, tailwindConfig?: Partial<Config>) => {
+  //@ts-expect-error: missing exports
+  const tailwindcssPresetEmail = (await import('tailwindcss-preset-email')).default;
+
+  const result = await postcss(
+    tailwindcss({
+      presets: tailwindConfig ? [tailwindConfig] : [tailwindcssPresetEmail],
+      content: [
+        {
+          raw: html,
+          extension: 'html',
+        },
+      ],
+    }),
+  ).process(style, { map: false, from: undefined });
+  return result.css;
 };
 
 /**
  * Inlines CSS into the provided HTML string using Maizzle and Tailwind CSS.
  *
  * @param html - The HTML string to process.
+ * @param css - The CSS to inline.
  * @param pretty - Whether to prettify the output HTML. Defaults to `false`.
- * @param tailwindConfig - Optional Tailwind CSS configuration to use. If not provided, the `tailwindcss-preset-email` preset will be used.
  * @returns A promise that resolves to the processed HTML string with inlined CSS.
  */
-const inlineCss = async (html: string, pretty: boolean = false, tailwindConfig?: Partial<Config>) => {
-  //@ts-expect-error: missing exports
-  const tailwindcssPresetEmail = (await import('tailwindcss-preset-email')).default;
-  return (
-    await maizzleRender(html, {
-      afterTransformers: ({ html }) => {
-        const renderedHtml = unescapeForRawComponent(
-          html
-            .replace(/\s+/g, ' ')
-            .replace(/>\s+</g, '><')
-            .replaceAll('&#x24;', '$')
-            .replace(/<angular-email-raw[\s\S]*?><!--(.*?)--><\/angular-email-raw>/gm, `$1`),
-        );
-        if (pretty) return prettyPrint(renderedHtml);
-        return renderedHtml;
-      },
-      css: {
-        shorthand: true,
-        inline: {
-          applyWidthAttributes: true,
-          applyHeightAttributes: true,
-        },
-        purge: {
-          doNotRemoveHTMLCommentsWhoseOpeningTagContains: ['[if', '[endif', '<#if', '</#if', '<#else', '<#elseif'],
-          removeHTMLComments: false,
-        },
-        tailwind: {
-          presets: tailwindConfig ? [tailwindConfig] : [tailwindcssPresetEmail],
-          content: [
-            {
-              raw: html,
-              extension: 'html',
-            },
-          ],
-        },
-      },
-      prettify: false,
-      minify: true,
-    })
-  ).html;
+
+const inlineCss = async (html: string, css: string, pretty: boolean = false) => {
+  juice.styleToAttribute = {};
+  juice.excludedProperties.push(...[]);
+  juice.widthElements = ['img', 'video'].map((i) => i.toUpperCase() as unknown as HTMLElement);
+  juice.heightElements = ['img', 'video'].map((i) => i.toUpperCase() as unknown as HTMLElement);
+
+  const inlined = unescapeForRawComponent(
+    juice
+      .inlineContent(html, css, {
+        applyWidthAttributes: true,
+        applyHeightAttributes: true,
+        removeStyleTags: false,
+      })
+      .replace(/\s+/g, ' ')
+      .replace(/>\s+</g, '><')
+      .replaceAll('&#x24;', '$')
+      .replace(/<angular-email-raw[\s\S]*?><!--(.*?)--><\/angular-email-raw>/gm, `$1`),
+  );
+  if (pretty) return prettyPrint(inlined);
+  return inlined;
 };

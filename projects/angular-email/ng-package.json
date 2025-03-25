@@ -6,8 +6,10 @@
     "cheerio",
     "@angular/build",
     "@angular/platform-server",
-    "@maizzle/framework",
     "tailwindcss-preset-email",
+    "tailwindcss",
+    "juice",
+    "postcss",
     "termost"
   ],
   "lib": {
