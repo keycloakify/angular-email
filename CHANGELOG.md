@@ -1,3 +1,12 @@
+## [0.0.1-rc.19](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.18...v0.0.1-rc.19) (2025-03-25)
+
+
+### Bug Fixes
+
+* bin command and README ([95dbfdf](https://github.com/keycloakify/angular-email/commit/95dbfdf6fc0392a85fa2d23af0f350838cb21b61))
+
+
+
 ## [0.0.1-rc.18](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.17...v0.0.1-rc.18) (2025-03-25)
 
 

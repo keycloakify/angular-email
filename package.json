@@ -1,6 +1,6 @@
 {
   "name": "angular-email",
-  "version": "0.0.1-rc.18",
+  "version": "0.0.1-rc.19",
   "type": "module",
   "scripts": {
     "ng": "ng",
@@ -29,6 +29,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@keycloakify/angular-email": "file://./dist/angular-email",
     "@angular-devkit/build-angular": "^19.2.3",
     "@angular/build": "^19.2.3",
     "@angular/cli": "^19.2.3",
