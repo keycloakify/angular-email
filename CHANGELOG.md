@@ -1,3 +1,12 @@
+## [0.0.2](https://github.com/keycloakify/angular-email/compare/v0.0.1...v0.0.2) (2025-03-31)
+
+
+### Bug Fixes
+
+* esm usage ([39e74ba](https://github.com/keycloakify/angular-email/commit/39e74bae60f106f9502ccd0e77c1911e1f17d49f))
+
+
+
 ## [0.0.1](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.20...v0.0.1) (2025-03-31)
 
 
