@@ -39,6 +39,12 @@ export const render = async <Input extends Record<string, any>>({
   props,
   options,
 }: Render<Input>) => {
+  console.log = (
+    (log) =>
+    (...args) => {
+      if (args[0] !== 'Angular is running in development mode.') log(...args);
+    }
+  )(console.log);
   const { style, html: normalizedHtml } = await renderNgComponent(
     component,
     selector,
