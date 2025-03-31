@@ -6,7 +6,6 @@
     "cheerio",
     "@angular/build",
     "@angular/platform-server",
-    "tailwindcss-preset-email",
     "tailwindcss",
     "juice",
     "pretty",

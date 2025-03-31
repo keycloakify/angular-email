@@ -109,9 +109,9 @@ export default defineConfig(({ mode }) => ({
           cwd: import.meta.dirname,
           esbuild: {
             packages: 'bundle',
-            external: ['juice', 'postcss'],
-            format: 'cjs',
-            outExtension: { '.js': '.cjs' },
+            external: ['juice', 'postcss', 'tailwindcss'],
+            format: 'esm',
+            outExtension: { '.js': '.mjs' },
             plugins: [angularEsbuildPlugin(import.meta.dirname)],
           },
         });
@@ -218,6 +218,10 @@ toHTML<Input extends Record<string, any>>(options: {
     root?: string;
 }) => Promise<string>
 ```
+
+### @keycloakify/angular-email/tailwindcss-preset-email
+
+Just a tailwind v3 preset, inspired by [@maizzle/tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email)
 
 ## Contributing
 

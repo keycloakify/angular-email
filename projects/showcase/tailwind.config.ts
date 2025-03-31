@@ -1,10 +1,9 @@
+import { tailwindcssPresetEmail } from '@keycloakify/angular-email/tailwindcss-preset-email';
 import { Config } from 'tailwindcss';
-// @ts-expect-error: no d.ts
-import presetEmail from 'tailwindcss-preset-email';
 
 export default {
   content: ['./**/*.{html,ts}'],
-  presets: [presetEmail],
+  presets: [tailwindcssPresetEmail],
   theme: {
     extend: {
       fontFamily: {

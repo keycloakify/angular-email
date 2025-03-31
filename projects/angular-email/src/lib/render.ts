@@ -5,9 +5,8 @@ import { provideServerRendering, renderApplication } from '@angular/platform-ser
 import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
 import juice from 'juice';
-import postcss from 'postcss';
 import prettyPrint from 'pretty';
-import tailwindcss, { Config } from 'tailwindcss';
+import { Config } from 'tailwindcss';
 import { HTMLElements, unescapeForRawComponent } from './utils';
 
 type Render<Input extends Record<string, any>> = {
@@ -213,8 +212,9 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
  *
  */
 const parseStyles = async (html: string, style: string, tailwindConfig?: Partial<Config>) => {
-  //@ts-expect-error: missing exports
-  const tailwindcssPresetEmail = (await import('tailwindcss-preset-email')).default;
+  const { tailwindcssPresetEmail } = await import('@keycloakify/angular-email/tailwindcss-preset-email');
+  const { default: postcss } = await import('postcss');
+  const { default: tailwindcss } = await import('tailwindcss');
 
   const result = await postcss(
     tailwindcss({
