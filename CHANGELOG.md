@@ -1,3 +1,12 @@
+## [0.0.1](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.20...v0.0.1) (2025-03-31)
+
+
+### Bug Fixes
+
+* silencing log ([7cbdc66](https://github.com/keycloakify/angular-email/commit/7cbdc667b59fc44e3ba330853e9a9b739c3ea146))
+
+
+
 ## [0.0.1-rc.20](https://github.com/keycloakify/angular-email/compare/v0.0.1-rc.19...v0.0.1-rc.20) (2025-03-25)
 
 
