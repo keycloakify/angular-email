@@ -6,7 +6,7 @@ import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
 import juice from 'juice';
 import prettyPrint from 'pretty';
-import { Config } from 'tailwindcss';
+import { Config } from 'tailwindcss-v3';
 import { HTMLElements, unescapeForRawComponent } from './utils';
 
 type Render<Input extends Record<string, any>> = {
@@ -214,7 +214,7 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
 const parseStyles = async (html: string, style: string, tailwindConfig?: Partial<Config>) => {
   const { tailwindcssPresetEmail } = await import('@keycloakify/angular-email/tailwindcss-preset-email');
   const { default: postcss } = await import('postcss');
-  const { default: tailwindcss } = await import('tailwindcss');
+  const { default: tailwindcss } = await import('tailwindcss-v3');
 
   const result = await postcss(
     tailwindcss({

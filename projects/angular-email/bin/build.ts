@@ -24,7 +24,7 @@ async function bundle(entryPoints: string[], cwd: string, outdir: string) {
     platform: 'node',
     sourcemap: true,
     packages: 'bundle',
-    external: ['juice', 'postcss', 'tailwindcss'],
+    external: ['juice', 'postcss', 'tailwindcss-v3'],
     format: 'esm',
     outExtension: { '.js': '.mjs' },
     target: 'node20',

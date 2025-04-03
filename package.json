@@ -47,6 +47,7 @@
     "eslint": "^9.23.0",
     "eslint-plugin-prettier": "^5.2.5",
     "tailwindcss": "^3.4.17",
+    "tailwindcss-v3": "npm:tailwindcss@^3.4.17",
     "html-to-text": "^9.0.5",
     "htmlparser2": "^10.0.0",
     "juice": "^11.0.1",

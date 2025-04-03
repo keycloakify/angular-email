@@ -6,7 +6,7 @@
     "cheerio",
     "@angular/build",
     "@angular/platform-server",
-    "tailwindcss",
+    "tailwindcss-v3",
     "juice",
     "pretty",
     "postcss",

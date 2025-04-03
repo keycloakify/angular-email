@@ -1,4 +1,4 @@
-import plugin from 'tailwindcss/plugin.js';
+import plugin from 'tailwindcss-v3/plugin.js';
 import msoBorderColors from './msoColors';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

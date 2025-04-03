@@ -109,7 +109,7 @@ export default defineConfig(({ mode }) => ({
           cwd: import.meta.dirname,
           esbuild: {
             packages: 'bundle',
-            external: ['juice', 'postcss', 'tailwindcss'],
+            external: ['juice', 'postcss', 'tailwindcss-v3'],
             format: 'esm',
             outExtension: { '.js': '.mjs' },
             plugins: [angularEsbuildPlugin(import.meta.dirname)],

@@ -1,4 +1,4 @@
-import plugin from 'tailwindcss/plugin.js';
+import plugin from 'tailwindcss-v3/plugin.js';
 
 const emailClientVariants = plugin(function ({ addVariant }) {
   // Outlook.com dark mode

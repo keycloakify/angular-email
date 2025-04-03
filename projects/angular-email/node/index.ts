@@ -33,7 +33,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
       sourcemap: false,
       minify: true,
       packages: 'bundle',
-      external: ['juice', 'postcss', 'tailwindcss'],
+      external: ['juice', 'postcss', 'tailwindcss-v3'],
       format: 'esm',
       outExtension: { '.js': '.mjs' },
       target: 'node20',

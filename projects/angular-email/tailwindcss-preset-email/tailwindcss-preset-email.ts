@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import plugin from 'tailwindcss/plugin.js';
+import plugin from 'tailwindcss-v3/plugin.js';
 import internalFilterPlugins from './filters';
 import tailwindcssEmailVariants from './tailwindcss-email-variants';
 import tailwindcssMso from './tailwindcss-mso';
 
 const { disabledFilterPlugins, ...filterPlugins } = internalFilterPlugins;
 
-/** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss-v3').Config} */
 export const tailwindcssPresetEmail = {
   important: true,
   theme: {

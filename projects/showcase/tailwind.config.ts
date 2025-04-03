@@ -1,5 +1,5 @@
 import { tailwindcssPresetEmail } from '@keycloakify/angular-email/tailwindcss-preset-email';
-import { Config } from 'tailwindcss';
+import { Config } from 'tailwindcss-v3';
 
 export default {
   content: ['./**/*.{html,ts}'],
