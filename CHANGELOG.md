@@ -1,3 +1,17 @@
+## [0.0.3](https://github.com/keycloakify/angular-email/compare/v0.0.2...v0.0.3) (2025-04-03)
+
+
+### Bug Fixes
+
+* undefined rendered value ([b2c6e49](https://github.com/keycloakify/angular-email/commit/b2c6e49f09926729c3e0e4876a8113ea1a122450))
+
+
+### Features
+
+* use npm alias to avoid tailwind v3/v4 override ([af1b6fe](https://github.com/keycloakify/angular-email/commit/af1b6fef46c8536e7e5ac3bfb3ee093e88a64dda))
+
+
+
 ## [0.0.2](https://github.com/keycloakify/angular-email/compare/v0.0.1...v0.0.2) (2025-03-31)
 
 
