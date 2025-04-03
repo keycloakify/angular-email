@@ -185,7 +185,7 @@ type Render<Input extends Record<string, any>> = {
     plainText?: boolean;
     /** format the html output */
     pretty?: boolean;
-    /** tailwind configuration object */
+    /** tailwind v3 configuration object */
     tailwindConfig?: Partial<Config>;
     /** if you use prefix conventions on signal inputs */
     signalInputsPrefix?: string;
@@ -222,6 +222,12 @@ toHTML<Input extends Record<string, any>>(options: {
 ### @keycloakify/angular-email/tailwindcss-preset-email
 
 Just a tailwind v3 preset, inspired by [@maizzle/tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email)
+
+**NB**: tailwind v4 is not supported due to high level css generation and poor support in overriding default utilities
+
+[add support for disabling core plugins](https://github.com/tailwindlabs/tailwindcss/discussions/16132)
+
+[Cannot override tailwind utilities](https://github.com/tailwindlabs/tailwindcss/issues/16856)
 
 ## Contributing
 
