@@ -36,7 +36,7 @@ export class ButtonComponent {
     display: 'inline-block',
     fontSize: `${this.$fontSize()}px`,
     lineHeight: `${this.$lineHeight()}px`,
-    maxWidth: `${this.$width()}px`,
+    maxWidth: this.$width() ? `${this.$width()}px` : undefined,
     textAlign: 'center',
     textDecoration: 'none',
     width: '100%',
