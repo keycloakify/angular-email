@@ -30,7 +30,6 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@keycloakify/angular-email": "file:/Users/luca/Documents/github/keycloakify/angular/angular-email/dist/angular-email",
     "@angular/build": "^20.1.0",
     "@angular/cli": "^20.1.0",
     "@angular/compiler-cli": "^20.1.0",
