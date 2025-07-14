@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, DOCUMENT } from '@angular/core';
 
 @Component({
   selector: 'ng-email-container',

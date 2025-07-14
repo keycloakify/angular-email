@@ -1,7 +1,8 @@
+import { renderApplication } from '@angular/platform-server';
+import { provideServerRendering } from '@angular/ssr';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { provideExperimentalZonelessChangeDetection, Type } from '@angular/core';
+import { provideZonelessChangeDetection, Type } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideServerRendering, renderApplication } from '@angular/platform-server';
 import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
 import juice from 'juice';
@@ -115,7 +116,7 @@ const renderNgComponent = async (
 ) => {
   const bootstrap = async () => {
     const appRef = await bootstrapApplication(component, {
-      providers: [provideExperimentalZonelessChangeDetection(), provideServerRendering()],
+      providers: [provideZonelessChangeDetection(), provideServerRendering()],
     });
     appRef.components.forEach((componentRef) => {
       Object.entries(props ?? {}).forEach(([key, value]) => {
