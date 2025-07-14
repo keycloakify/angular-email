@@ -1,3 +1,12 @@
+## [0.0.4](https://github.com/keycloakify/angular-email/compare/v0.0.3...v0.0.4) (2025-07-14)
+
+
+### Bug Fixes
+
+* clean local dep ([a4c913a](https://github.com/keycloakify/angular-email/commit/a4c913a51a1cf2824f60ad65d2ec4442859ab7ae))
+
+
+
 ## [0.0.3](https://github.com/keycloakify/angular-email/compare/v0.0.2...v0.0.3) (2025-04-03)
 
 
