@@ -99,10 +99,10 @@ const build = async (emailFilesPath: string, outdir: string = 'dist/emails'): Pr
       return { ...module, file };
     });
     const modules = await Promise.all(promises);
-    modules.forEach(async (module) => {
+    for (const module of modules) {
       const html = await module.renderToHtml();
       await writeFile(`${outdir}/${basename(module.file).split('.')[0]}.html`, html);
-    });
+    }
     await rm(tmp, { recursive: true, force: true });
     console.log('\x1b[36m%s\x1b[0m', `build complete!`);
     exit(0);
