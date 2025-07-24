@@ -1,3 +1,12 @@
+## [0.0.5](https://github.com/keycloakify/angular-email/compare/v0.0.4...v0.0.5) (2025-07-24)
+
+
+### Bug Fixes
+
+* async rendering ([abd158c](https://github.com/keycloakify/angular-email/commit/abd158cd13701a31a97336de70a67639ee64faf6))
+
+
+
 ## [0.0.4](https://github.com/keycloakify/angular-email/compare/v0.0.3...v0.0.4) (2025-07-14)
 
 
