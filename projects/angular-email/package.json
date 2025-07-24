@@ -1,6 +1,6 @@
 {
   "name": "@keycloakify/angular-email",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "type": "module",
   "description": "Angular Email Builder",
@@ -30,6 +30,7 @@
     "@angular/build": "^20.1.0",
     "@angular/platform-server": "^20.1.0",
     "@angular/ssr": "^20.1.0",
+    "@angular/router": "^20.1.0",
     "juice": "^11.0.1",
     "postcss": "^8.5.3",
     "tailwindcss-v3": "npm:tailwindcss@^3.4.17",
