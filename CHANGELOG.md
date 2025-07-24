@@ -1,3 +1,12 @@
+## [0.0.7](https://github.com/keycloakify/angular-email/compare/v0.0.6...v0.0.7) (2025-07-24)
+
+
+### Bug Fixes
+
+* peer dep ([22ade4e](https://github.com/keycloakify/angular-email/commit/22ade4ec65dc30c6ec6ebbd392eb817b0c7529aa))
+
+
+
 ## [0.0.6](https://github.com/keycloakify/angular-email/compare/v0.0.5...v0.0.6) (2025-07-24)
 
 
