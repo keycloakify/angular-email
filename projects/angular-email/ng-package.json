@@ -7,6 +7,7 @@
     "@angular/build",
     "@angular/platform-server",
     "@angular/ssr",
+    "@angular/router",
     "tailwindcss-v3",
     "juice",
     "pretty",
