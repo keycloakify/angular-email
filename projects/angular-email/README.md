@@ -57,6 +57,22 @@ NB: use `keycloakify-angular-email build` when you don't need to pass dynamic in
 
 ### With Keycloakify Emails
 
+```json
+// emails/tsconfig.json
+
+{
+  "extends": "../tsconfig.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "../out-tsc/emails",
+    "types": []
+  },
+  "files": [],
+  "include": ["*.ts", "**/*.ts"]
+}
+
+```
+
 ```ts
 // email.component.ts
 ...
@@ -112,7 +128,7 @@ export default defineConfig(({ mode }) => ({
             external: ['juice', 'postcss', 'tailwindcss-v3'],
             format: 'esm',
             outExtension: { '.js': '.mjs' },
-            plugins: [angularEsbuildPlugin(import.meta.dirname)],
+            plugins: [angularEsbuildPlugin(join(import.meta.dirname, '/emails'))],
           },
         });
       },
