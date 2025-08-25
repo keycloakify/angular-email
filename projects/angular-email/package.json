@@ -41,6 +41,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    "./node": {
+      "types": "./node/index.d.ts",
+      "import": "./node/index.js",
+      "require": "./node/index.cjs",
+      "default": "./node/index.cjs"
+    }
+  },
   "bin": {
     "keycloakify-angular-email": "bin/build.mjs"
   }

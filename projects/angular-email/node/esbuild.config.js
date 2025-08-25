@@ -11,7 +11,7 @@ await build({
   sourcemap: false,
   minify: true,
   packages: 'external',
-  outfile: 'dist/index.cjs',
+  outfile: '../../../dist/angular-email/node/index.cjs',
 });
 
 await build({
@@ -24,5 +24,5 @@ await build({
   sourcemap: false,
   minify: true,
   packages: 'external',
-  outfile: 'dist/index.js',
+  outfile: '../../../dist/angular-email/node/index.js',
 });

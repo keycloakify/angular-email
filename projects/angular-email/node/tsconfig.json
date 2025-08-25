@@ -1,10 +1,12 @@
 {
     "compilerOptions": {
         "declaration": true,
-        "declarationDir": "dist",
+        "declarationDir": "../../../dist/angular-email/node",
         "skipLibCheck": true,
         "noCheck": true,
-        "emitDeclarationOnly": true
+        "emitDeclarationOnly": true,
+        "outDir": "../../../dist/angular-email/node",
+        "rootDir": "."
     },
     "include": [
         "*"
