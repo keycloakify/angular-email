@@ -14,6 +14,11 @@ yarn add @keycloakify/angular-email
 
 ## Usage
 
+| Angular | tailwindcss | @keycloakify/angular-email | Maintained |
+| ------- | ----------- | -------------------------- | ---------- |
+| 20      | 4.x+        | 1.x+                       | yes        |
+| 20      | 3.x+        | 0.x+                       | only bugs  |
+
 ### Creating an Email Component
 
 see this [example](https://github.com/keycloakify/angular-email/blob/main/projects/showcase/src/app/app.component.ts)
@@ -125,7 +130,7 @@ export default defineConfig(({ mode }) => ({
           cwd: import.meta.dirname,
           esbuild: {
             packages: 'bundle',
-            external: ['juice', 'postcss', 'tailwindcss-v3'],
+            external: ['juice', 'postcss', 'tailwindcss', '@tailwindcss/postcss', 'postcss-custom-properties', 'postcss-calc'],
             format: 'esm',
             outExtension: { '.js': '.mjs' },
             plugins: [angularEsbuildPlugin(join(import.meta.dirname, '/emails'))],
@@ -201,8 +206,8 @@ type Render<Input extends Record<string, any>> = {
     plainText?: boolean;
     /** format the html output */
     pretty?: boolean;
-    /** tailwind v3 configuration object */
-    tailwindConfig?: Partial<Config>;
+    /** tailwind v4 usage */
+    withTailwind?: boolean;
     /** if you use prefix conventions on signal inputs */
     signalInputsPrefix?: string;
   };
@@ -237,13 +242,44 @@ toHTML<Input extends Record<string, any>>(options: {
 
 ### @keycloakify/angular-email/tailwindcss-preset-email
 
-Just a tailwind v3 preset, inspired by [@maizzle/tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email)
+Just a tailwind v4 preset, inspired by [@maizzle/tailwindcss](https://github.com/maizzle/tailwindcss)
 
-**NB**: tailwind v4 is not supported due to high level css generation and poor support in overriding default utilities
+```css
+/* styles.css */
+@import '@keycloakify/angular-email/tailwindcss-preset-email';
+```
 
-[add support for disabling core plugins](https://github.com/tailwindlabs/tailwindcss/discussions/16132)
 
-[Cannot override tailwind utilities](https://github.com/tailwindlabs/tailwindcss/issues/16856)
+```typescript
+// email.component.ts
+...
+import { Component, ViewEncapsulation } from '@angular/core';
+import { render, RenderToHtml } from '@keycloakify/angular-email';
+
+...
+@Component({
+  ...
+  styleUrls: ['styles.css'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class EmailComponent {
+  ....
+}
+
+type EmailComponentProps = {};
+
+export const renderToHtml: RenderToHtml<EmailComponentProps> = (props) => {
+  return render({
+    component: EmailComponent,
+    selector: 'app-root',
+    props,
+    options: {
+      pretty: true,
+      withTailwind: true,
+    },
+  });
+};
+```
 
 ## Contributing
 

@@ -16,7 +16,6 @@ import {
   SectionComponent,
   TextComponent,
 } from '@keycloakify/angular-email';
-import tailwindConfig from '../../tailwind.config';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +59,7 @@ export const renderToHtml: RenderToHtml<TailwindComponentProps> = (props) => {
     props,
     options: {
       pretty: true,
-      tailwindConfig,
+      withTailwind: true,
     },
   });
 };
