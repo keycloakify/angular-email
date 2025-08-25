@@ -1,3 +1,17 @@
+## [0.0.8](https://github.com/keycloakify/angular-email/compare/v0.0.7...v0.0.8) (2025-08-25)
+
+
+### Bug Fixes
+
+* update README ([01ceb71](https://github.com/keycloakify/angular-email/commit/01ceb71c45c2e7a0c7a48e83320dfe4781b2df60))
+
+
+### Features
+
+* better build script ([ae0437f](https://github.com/keycloakify/angular-email/commit/ae0437fb6be787cdb1903ae35a3bab10b72418a0))
+
+
+
 ## [0.0.7](https://github.com/keycloakify/angular-email/compare/v0.0.6...v0.0.7) (2025-07-24)
 
 
