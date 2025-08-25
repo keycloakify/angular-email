@@ -8,7 +8,9 @@
     "@angular/platform-server",
     "@angular/ssr",
     "@angular/router",
-    "tailwindcss-v3",
+    "tailwindcss",
+    "postcss-custom-properties",
+    "postcss-calc",
     "juice",
     "pretty",
     "postcss",
@@ -17,5 +19,5 @@
   "lib": {
     "entryFile": "src/index.ts"
   },
-  "assets": ["./LICENSE.md", "./README.md"]
+  "assets": ["./LICENSE.md", "./README.md", "./tailwindcss-preset-email"]
 }

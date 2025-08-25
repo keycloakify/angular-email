@@ -33,7 +33,10 @@
     "@angular/router": "^20.1.0",
     "juice": "^11.0.1",
     "postcss": "^8.5.3",
-    "tailwindcss-v3": "npm:tailwindcss@^3.4.17",
+    "postcss-calc": "^10.1.1",
+    "postcss-custom-properties": "^14.0.6",
+    "tailwindcss": "^4.1.12",
+    "@tailwindcss/postcss": "^4.1.12",
     "pretty": "^2.0.0",
     "termost": "^1.4.0"
   },
@@ -42,12 +45,15 @@
     "access": "public"
   },
   "exports": {
-    "./node": {
-      "types": "./node/index.d.ts",
-      "import": "./node/index.js",
-      "require": "./node/index.cjs",
-      "default": "./node/index.cjs"
-    }
+    "./tailwindcss-preset-email": "./tailwindcss-preset-email/index.css",
+    "./tailwindcss-preset-email/mso": "./tailwindcss-preset-email/mso.css",
+    "./tailwindcss-preset-email/clients": "./tailwindcss-preset-email/clients.css",
+    "./tailwindcss-preset-email/text": "./tailwindcss-preset-email/theme/text.css",
+    "./tailwindcss-preset-email/colors": "./tailwindcss-preset-email/theme/colors.css",
+    "./tailwindcss-preset-email/shadows": "./tailwindcss-preset-email/theme/shadows.css",
+    "./tailwindcss-preset-email/filters": "./tailwindcss-preset-email/theme/filters.css",
+    "./tailwindcss-preset-email/spacing": "./tailwindcss-preset-email/theme/spacing.css",
+    "./tailwindcss-preset-email/borders": "./tailwindcss-preset-email/theme/borders.css"
   },
   "bin": {
     "keycloakify-angular-email": "bin/build.mjs"

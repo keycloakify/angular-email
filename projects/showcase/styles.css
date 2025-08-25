@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind components;
-@tailwind utilities;
+@import '@keycloakify/angular-email/tailwindcss-preset-email';
+
+@theme {
+  --font-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
+}
 
 html {
   @apply font-default;

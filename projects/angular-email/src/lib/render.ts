@@ -1,13 +1,13 @@
-import { renderApplication } from '@angular/platform-server';
-import { provideServerRendering } from '@angular/ssr';
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { provideZonelessChangeDetection, Type } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { renderApplication } from '@angular/platform-server';
+import { provideServerRendering } from '@angular/ssr';
 import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
 import juice from 'juice';
 import prettyPrint from 'pretty';
-import { Config } from 'tailwindcss-v3';
 import { HTMLElements, unescapeForRawComponent } from './utils';
 
 type Render<Input extends Record<string, any>> = {
@@ -18,8 +18,7 @@ type Render<Input extends Record<string, any>> = {
   options?: {
     plainText?: boolean;
     pretty?: boolean;
-    /** tailwind configuration object */
-    tailwindConfig?: Partial<Config>;
+    withTailwind?: boolean;
     signalInputsPrefix?: string;
   };
 };
@@ -56,8 +55,8 @@ export const render = async <Input extends Record<string, any>>({
   if (options?.plainText) {
     return renderAsPlainText(html);
   }
-  const tailwindConfig = options?.tailwindConfig;
-  const css = await parseStyles(html, style, tailwindConfig);
+  const withTailwind = options?.withTailwind;
+  const css = await parseStyles(style, withTailwind);
   const doctype =
     '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
 
@@ -207,27 +206,28 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
 /**
  * Applies the styles from the specified CSS file paths to the HTML document.
  *
- * @param html - The HTML string to process.
  * @param style - The raw content of <style> tags
- * @param tailwindConfig - Optional Tailwind CSS configuration to use. If not provided, the `tailwindcss-preset-email` preset will be used.
+ * @param withTailwind - Optional Tailwind CSS v4 usage.
  *
  */
-const parseStyles = async (html: string, style: string, tailwindConfig?: Partial<Config>) => {
-  const { tailwindcssPresetEmail } = await import('@keycloakify/angular-email/tailwindcss-preset-email');
+const parseStyles = async (style: string, withTailwind: boolean = false) => {
+  if (!withTailwind) return style;
   const { default: postcss } = await import('postcss');
-  const { default: tailwindcss } = await import('tailwindcss-v3');
+  const { default: tailwindcss } = await import('@tailwindcss/postcss');
+  const { default: calc } = await import('postcss-calc');
+  const { default: properties } = await import('postcss-custom-properties');
 
-  const result = await postcss(
-    tailwindcss({
-      presets: tailwindConfig ? [tailwindConfig] : [tailwindcssPresetEmail],
-      content: [
-        {
-          raw: html,
-          extension: 'html',
-        },
-      ],
-    }),
-  ).process(style, { map: false, from: undefined });
+  const result = await postcss(tailwindcss(), properties({ preserve: false }), calc({ preserve: false })).process(
+    style
+      .replace(/\s+/g, ' ')
+      .replace(/>\s+</g, '><')
+      .replaceAll('&lt;', '<')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&#x24;', '$')
+      .replaceAll('&quot;', '"')
+      .replaceAll('&amp;', '&'),
+    { map: false, from: undefined },
+  );
   return result.css;
 };
 
@@ -252,6 +252,7 @@ const inlineCss = async (html: string, css: string, pretty: boolean = false) => 
         applyWidthAttributes: true,
         applyHeightAttributes: true,
         removeStyleTags: false,
+        resolveCSSVariables: true,
       })
       .replace(/\s+/g, ' ')
       .replace(/>\s+</g, '><')
