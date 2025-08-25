@@ -53,7 +53,13 @@
     "./tailwindcss-preset-email/shadows": "./tailwindcss-preset-email/theme/shadows.css",
     "./tailwindcss-preset-email/filters": "./tailwindcss-preset-email/theme/filters.css",
     "./tailwindcss-preset-email/spacing": "./tailwindcss-preset-email/theme/spacing.css",
-    "./tailwindcss-preset-email/borders": "./tailwindcss-preset-email/theme/borders.css"
+    "./tailwindcss-preset-email/borders": "./tailwindcss-preset-email/theme/borders.css",
+    "./node": {
+      "types": "./node/index.d.ts",
+      "import": "./node/index.js",
+      "require": "./node/index.cjs",
+      "default": "./node/index.cjs"
+    }
   },
   "bin": {
     "keycloakify-angular-email": "bin/build.mjs"
