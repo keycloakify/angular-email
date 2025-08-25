@@ -429,5 +429,5 @@
 }
 
 @utility mso-border-effect-* {
-  mso-border-shadow: --value("3d", "box");
+  mso-border-effect: --value("3d", "box");
 }

@@ -27,7 +27,7 @@
 
 @variant notion (#mail-content-wrapper &);
 
-@variant ox (&[class^="ox-"] &);
+@variant ox (&[class^="ox-"]);
 
 @variant ogsc ([data-ogsc] &);
 @variant ogsb ([data-ogsb] &);

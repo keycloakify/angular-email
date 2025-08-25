@@ -9,6 +9,7 @@
     "@angular/ssr",
     "@angular/router",
     "tailwindcss",
+    "@tailwindcss/postcss",
     "postcss-custom-properties",
     "postcss-calc",
     "juice",
