@@ -47,9 +47,10 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
       plugins: [angularEsbuildPlugin(basePath)],
       metafile: true,
     });
-
-    const meta = Object.entries(result.metafile.outputs)[0];
-    const outputFilePath = pathToFileURL(resolve(basePath, meta[0])).toString();
+    const outputs = Object.entries(result.metafile.outputs);
+    const entry = outputs.find(([, info]) => info.entryPoint === filePath)?.[0] ?? outputs[0]?.[0];
+    if (!entry) throw new Error('Failed to locate entry output from esbuild metafile');
+    const outputFilePath = pathToFileURL(resolve(basePath, entry)).toString();
     const module = await (import(outputFilePath) as Promise<{ renderToHtml: (props?: Input) => Promise<string> }>);
     const html = await module.renderToHtml(props);
     await rm(outdir, { recursive: true, force: true });

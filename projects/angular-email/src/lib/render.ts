@@ -38,31 +38,36 @@ export const render = async <Input extends Record<string, any>>({
   props,
   options,
 }: Render<Input>) => {
+  const __originalConsoleLog = console.log;
   console.log = (
     (log) =>
     (...args) => {
       if (args[0] !== 'Angular is running in development mode.') log(...args);
     }
   )(console.log);
-  const { style, html: normalizedHtml } = await renderNgComponent(
-    component,
-    selector,
-    props,
-    options?.signalInputsPrefix,
-  );
-  const html = applyHtmlTransformations(normalizedHtml);
+  try {
+    const { style, html: normalizedHtml } = await renderNgComponent(
+      component,
+      selector,
+      props,
+      options?.signalInputsPrefix,
+    );
+    const html = applyHtmlTransformations(normalizedHtml);
 
-  if (options?.plainText) {
-    return renderAsPlainText(html);
+    if (options?.plainText) {
+      return renderAsPlainText(html);
+    }
+    const withTailwind = options?.withTailwind;
+    const css = await parseStyles(style, withTailwind);
+    const doctype =
+      '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+
+    const markup = await inlineCss(html, css, !!options?.pretty);
+    const document = `${doctype}${markup}`;
+    return document;
+  } finally {
+    console.log = __originalConsoleLog;
   }
-  const withTailwind = options?.withTailwind;
-  const css = await parseStyles(style, withTailwind);
-  const doctype =
-    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-
-  const markup = await inlineCss(html, css, !!options?.pretty);
-  const document = `${doctype}${markup}`;
-  return document;
 };
 
 export type RenderToHtml<Input extends Record<string, any>> = (props?: Input) => ReturnType<typeof render>;
