@@ -5,6 +5,7 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+cp ./README.md projects/angular-email/README.md
 npx ng build angular-email
 node projects/angular-email/bin/esbuild.config.js
 node projects/angular-email/node/esbuild.config.js

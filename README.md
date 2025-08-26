@@ -14,10 +14,10 @@ yarn add @keycloakify/angular-email
 
 ## Usage
 
-| Angular | tailwindcss | @keycloakify/angular-email | Maintained |
-| ------- | ----------- | -------------------------- | ---------- |
-| 20      | 4.x+        | 1.x+                       | yes        |
-| 20      | 3.x+        | 0.x+                       | only bugs  |
+| Angular | tailwindcss | @keycloakify/angular-email | Maintained    |
+| ------- | ----------- | -------------------------- | ------------- |
+| 20      | 4.x+        | 1.x+                       | Yes           |
+| 20      | 3.x+        | 0.x+                       | Bugfixes only |
 
 ### Creating an Email Component
 

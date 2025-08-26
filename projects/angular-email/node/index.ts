@@ -42,9 +42,15 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
       metafile: true,
     });
     const outputs = Object.entries(result.metafile.outputs);
-    const entry = outputs.find(([, info]) => info.entryPoint === filePath)?.[0] ?? outputs[0]?.[0];
-    if (!entry) throw new Error('Failed to locate entry output from esbuild metafile');
-    const outputFilePath = pathToFileURL(resolve(basePath, entry)).toString();
+    const abs = (p: string) => resolve(basePath, p);
+    const wanted = abs(filePath);
+    const entry = outputs.find(([, info]) => info.entryPoint && abs(info.entryPoint) === wanted)?.[0];
+    if (!entry)
+      throw new Error(
+        `Failed to locate entry output for "${filePath}". ` +
+          `Looked for an output whose info.entryPoint resolves to ${wanted}.`,
+      );
+    const outputFilePath = pathToFileURL(abs(entry)).toString();
     const module = await (import(outputFilePath) as Promise<{ renderToHtml: (props?: Input) => Promise<string> }>);
     const html = await module.renderToHtml(props);
     await rm(outdir, { recursive: true, force: true });
@@ -52,11 +58,11 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
     const seconds = (end.getTime() - start.getTime()) / 1000;
     const filename = filePath.split('/').pop();
     console.log('\x1b[36m%s\x1b[0m', `rendered ${filename} to html in ${seconds}s`);
-    console.log = log;
     return html;
   } catch (e) {
-    console.log = log;
     console.error(e);
     exit(1);
+  } finally {
+    console.log = log;
   }
 };

@@ -96,7 +96,14 @@ const build = async (
 
     const bundled = await bundle(entryPoints, cwd(), tmp, externals);
     const promises = tpls.map(async (file) => {
-      const module = await (import(bundled[file]) as Promise<{ renderToHtml: () => Promise<string> }>);
+      const key = bundled[file] ?? bundled[resolve(cwd(), file)];
+      if (!key) {
+        throw new Error(
+          `Failed to locate bundled URL for "${file}". ` +
+            `Ensure getTemplates() returns absolute paths and esbuild.metafile entryPoint mapping uses the same base.`,
+        );
+      }
+      const module = await (import(key) as Promise<{ renderToHtml: () => Promise<string> }>);
 
       console.log(`- ${file}`);
 
@@ -134,19 +141,19 @@ const program = termost<CliCommandOptions>({
 program.option({
   key: 'emailFilesPath',
   name: { long: 'emailFilesPath', short: 'p' },
-  description: '',
+  description: 'input directory for angular email components',
   defaultValue: '',
 });
 program.option({
   key: 'outDir',
   name: { long: 'outDir', short: 'o' },
-  description: '',
+  description: 'output directory for generated html',
   defaultValue: 'dist/emails',
 });
 program.option({
   key: 'externals',
   name: { long: 'externals', short: 'e' },
-  description: '',
+  description: 'Comma-separated packages to mark as external in esbuild (e.g. tailwindcss,postcss,postcss-calc)',
   defaultValue: '',
 });
 program
@@ -184,7 +191,10 @@ program
     handler: async (context) => {
       let externals: string[] = [];
       if (context.externals) {
-        externals = context.externals.split(',').map((e) => e.trim());
+        externals = context.externals
+          .split(',')
+          .map((e) => e.trim())
+          .filter(Boolean);
       }
       await build(context.emailFilesPath, context.outDir, externals);
     },
