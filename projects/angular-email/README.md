@@ -211,7 +211,7 @@ type Render<Input extends Record<string, any>> = {
     plainText?: boolean;
     /** format the html output */
     pretty?: boolean;
-    /** Optional hook for manipulate the css extracted. Useful for postcss processing */
+    /** Optional hook for manipulate the css extracted. Useful for PostCSS processing */
     cssProcessor?: (css: string) => Promise<string>;
     /** if you use prefix conventions on signal inputs */
     signalInputsPrefix?: string;
