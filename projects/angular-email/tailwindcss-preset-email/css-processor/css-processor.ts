@@ -27,17 +27,9 @@ export const cssProcessor = async (style: string) => {
 
           // 2. Walk all rules and replace var() usages
           root.walkDecls((decl) => {
-            // Replace all var() usages in the declaration
             decl.value = decl.value.replace(/var\((--tw-[^,)]+)\)/g, (match, varName) => {
               return defaultVars.has(varName) ? defaultVars.get(varName)! : match;
             });
-            // const match = decl.value.match(/var\((--tw-[^,)]+)\)/);
-            // if (match) {
-            //   const varName = match[1];
-            //   if (defaultVars.has(varName)) {
-            //     decl.value = decl.value.replace(match[0], defaultVars.get(varName)!);
-            //   }
-            // }
           });
         },
       },
