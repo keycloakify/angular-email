@@ -54,11 +54,11 @@ export const renderToHtml: RenderToHtml<EmailComponentProps> = (props) => {
 ```sh
 # cmd
 
-export $EMAIL_COMPONENTS_DIR_PATH="src/emails"
-export $EMAIL_OUTPUT_DIR_PATH="dist/emails"
-export $EMAIL_EXTERNAL_PACKAGES="tailwindcss,@tailwindcss/postcss,postcss,postcss-calc,postcss-custom-properties,postcss-preset-env,postcss-logical"
+export EMAIL_COMPONENTS_DIR_PATH="src/emails"
+export EMAIL_OUTPUT_DIR_PATH="dist/emails"
+export EMAIL_EXTERNAL_PACKAGES="tailwindcss,@tailwindcss/postcss,postcss,postcss-calc,postcss-custom-properties,postcss-preset-env,postcss-logical"
 
-npx keycloakify-angular-email build -p $EMAIL_COMPONENTS_DIR_PATH -o $EMAIL_OUTPUT_DIR_PATH -e $EMAIL_EXTERNAL_PACKAGES
+npx keycloakify-angular-email build -p "$EMAIL_COMPONENTS_DIR_PATH" -o "$EMAIL_OUTPUT_DIR_PATH" -e "$EMAIL_EXTERNAL_PACKAGES"
 ```
 
 NB: use `keycloakify-angular-email build` when you don't need to pass dynamic inputs to your components, otherwise see [Standalone Dynamic Rendering](#standalone-dynamic-rendering)
