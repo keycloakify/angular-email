@@ -10,6 +10,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
   filePath: string;
   props?: Input;
   root?: string;
+  externals?: string[];
 }) => {
   /** disable angular log */
   const log = console.log;
@@ -17,7 +18,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
     if (data[0] === 'Angular is running in development mode.') return;
     return console.info(...data);
   };
-  const { filePath, props, root } = options;
+  const { filePath, props, root, externals = [] } = options;
   try {
     const start = new Date();
     const basePath = root ?? cwd();
@@ -33,14 +34,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
       sourcemap: false,
       minify: true,
       packages: 'bundle',
-      external: [
-        'juice',
-        'postcss',
-        'tailwindcss',
-        '@tailwindcss/postcss',
-        'postcss-custom-properties',
-        'postcss-calc',
-      ],
+      external: ['juice', ...externals],
       format: 'esm',
       outExtension: { '.js': '.mjs' },
       target: 'node20',

@@ -55,7 +55,10 @@ export const renderToHtml: RenderToHtml<EmailComponentProps> = (props) => {
 # cmd
 
 export $EMAIL_COMPONENTS_DIR_PATH="src/emails"
-npx keycloakify-angular-email build -p $EMAIL_COMPONENTS_DIR_PATH
+export $EMAIL_OUTPUT_DIR_PATH="dist/emails"
+export $EMAIL_EXTERNAL_PACKAGES="tailwindcss,@tailwindcss/postcss,postcss,postcss-calc,postcss-custom-properties,postcss-preset-env,postcss-logical"
+
+npx keycloakify-angular-email build -p $EMAIL_COMPONENTS_DIR_PATH -o $EMAIL_OUTPUT_DIR_PATH -e $EMAIL_EXTERNAL_PACKAGES
 ```
 
 NB: use `keycloakify-angular-email build` when you don't need to pass dynamic inputs to your components, otherwise see [Standalone Dynamic Rendering](#standalone-dynamic-rendering)
@@ -130,7 +133,7 @@ export default defineConfig(({ mode }) => ({
           cwd: import.meta.dirname,
           esbuild: {
             packages: 'bundle',
-            external: ['juice', 'postcss', 'tailwindcss', '@tailwindcss/postcss', 'postcss-custom-properties', 'postcss-calc'],
+            external: ['juice', '...other packages you might use to process css'],
             format: 'esm',
             outExtension: { '.js': '.mjs' },
             plugins: [angularEsbuildPlugin(join(import.meta.dirname, '/emails'))],
@@ -154,6 +157,7 @@ import { toHTML } from '@keycloakify/angular-email/node';
 toHTML({
   filePath: 'path/to/your.component.ts',
   props: { foo: 'bar' },
+  externals: []
 })
   .then((html) => {
     console.log(html);
@@ -173,6 +177,7 @@ const { toHTML } = require('@keycloakify/angular-email/node');
 toHTML({
   filePath: 'path/to/your.component.ts',
   props: { foo: 'bar' },
+  externals: []
 })
   .then((html) => {
     console.log(html);
@@ -206,8 +211,8 @@ type Render<Input extends Record<string, any>> = {
     plainText?: boolean;
     /** format the html output */
     pretty?: boolean;
-    /** tailwind v4 usage */
-    withTailwind?: boolean;
+    /** Optional hook for manipulate the css extracted. Useful for postcss processing */
+    cssProcessor?: (css: string) => Promise<string>;
     /** if you use prefix conventions on signal inputs */
     signalInputsPrefix?: string;
   };
@@ -237,6 +242,7 @@ toHTML<Input extends Record<string, any>>(options: {
     filePath: string;
     props?: Input;
     root?: string;
+    externals?: string[];
 }) => Promise<string>
 ```
 
@@ -255,6 +261,9 @@ Just a tailwind v4 preset, inspired by [@maizzle/tailwindcss](https://github.com
 ...
 import { Component, ViewEncapsulation } from '@angular/core';
 import { render, RenderToHtml } from '@keycloakify/angular-email';
+// or your custom css processor implementation
+import { cssProcessor } from '@keycloakify/angular-email/tailwindcss-preset-email/css-processor';
+
 
 ...
 @Component({
@@ -275,7 +284,7 @@ export const renderToHtml: RenderToHtml<EmailComponentProps> = (props) => {
     props,
     options: {
       pretty: true,
-      withTailwind: true,
+      cssProcessor,
     },
   });
 };

@@ -8,13 +8,8 @@
     "@angular/platform-server",
     "@angular/ssr",
     "@angular/router",
-    "tailwindcss",
-    "@tailwindcss/postcss",
-    "postcss-custom-properties",
-    "postcss-calc",
     "juice",
     "pretty",
-    "postcss",
     "termost"
   ],
   "lib": {

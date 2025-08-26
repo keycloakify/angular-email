@@ -18,7 +18,7 @@ type Render<Input extends Record<string, any>> = {
   options?: {
     plainText?: boolean;
     pretty?: boolean;
-    withTailwind?: boolean;
+    cssProcessor?: (css: string) => Promise<string>;
     signalInputsPrefix?: string;
   };
 };
@@ -57,8 +57,8 @@ export const render = async <Input extends Record<string, any>>({
     if (options?.plainText) {
       return renderAsPlainText(html);
     }
-    const withTailwind = options?.withTailwind;
-    const css = await parseStyles(style, withTailwind);
+    const cssProcessor = options?.cssProcessor;
+    const css = await parseStyles(style, cssProcessor);
     const doctype =
       '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
 
@@ -212,28 +212,31 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
  * Applies the styles from the specified CSS file paths to the HTML document.
  *
  * @param style - The raw content of <style> tags
- * @param withTailwind - Optional Tailwind CSS v4 usage.
+ * @param cssProcessor - Optional hook for manipulate the css extracted.
+ * Useful for postcss processing
  *
  */
-const parseStyles = async (style: string, withTailwind: boolean = false) => {
-  if (!withTailwind) return style;
-  const { default: postcss } = await import('postcss');
-  const { default: tailwindcss } = await import('@tailwindcss/postcss');
-  const { default: calc } = await import('postcss-calc');
-  const { default: properties } = await import('postcss-custom-properties');
+const parseStyles = async (style: string, cssProcessor?: (css: string) => Promise<string>) => {
+  const normalized = normalizeCssInput(style);
+  if (!cssProcessor) return normalized;
+  return await cssProcessor(normalized);
+};
 
-  const result = await postcss(tailwindcss(), properties({ preserve: false }), calc({ preserve: false })).process(
-    style
-      .replace(/\s+/g, ' ')
-      .replace(/>\s+</g, '><')
-      .replaceAll('&lt;', '<')
-      .replaceAll('&gt;', '>')
-      .replaceAll('&#x24;', '$')
-      .replaceAll('&quot;', '"')
-      .replaceAll('&amp;', '&'),
-    { map: false, from: undefined },
-  );
-  return result.css;
+/**
+ * Normalize css
+ *
+ * @param input css to normalize
+ * @returns normalized css
+ */
+const normalizeCssInput = (input: string): string => {
+  return input
+    .replace(/\s+/g, ' ')
+    .replace(/>\s+</g, '><')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&#x24;', '$')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&amp;', '&');
 };
 
 /**
@@ -257,7 +260,6 @@ const inlineCss = async (html: string, css: string, pretty: boolean = false) => 
         applyWidthAttributes: true,
         applyHeightAttributes: true,
         removeStyleTags: false,
-        resolveCSSVariables: true,
       })
       .replace(/\s+/g, ' ')
       .replace(/>\s+</g, '><')
