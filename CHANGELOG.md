@@ -1,3 +1,12 @@
+# [1.0.0](https://github.com/keycloakify/angular-email/compare/v0.0.8...v1.0.0) (2025-08-26)
+
+
+### Features
+
+* external css manipulation using cssProcessor hook ([#3](https://github.com/keycloakify/angular-email/issues/3)) ([b1501f0](https://github.com/keycloakify/angular-email/commit/b1501f0acc1d2ac35c012e4aabb0ef47dc0b7126))
+
+
+
 ## [0.0.8](https://github.com/keycloakify/angular-email/compare/v0.0.7...v0.0.8) (2025-08-25)
 
 

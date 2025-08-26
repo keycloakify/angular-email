@@ -1,6 +1,6 @@
 {
   "name": "@keycloakify/angular-email",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "description": "Angular Email Builder",
@@ -19,7 +19,7 @@
     "keycloakify"
   ],
   "homepage": "https://www.keycloakify.dev",
-    "peerDependencies": {
+  "peerDependencies": {
     "@angular/common": "^20.1.0",
     "@angular/core": "^20.1.0",
     "postcss": "^8.5.3",
