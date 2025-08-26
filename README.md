@@ -78,7 +78,6 @@ NB: use `keycloakify-angular-email build` when you don't need to pass dynamic in
   "files": [],
   "include": ["*.ts", "**/*.ts"]
 }
-
 ```
 
 ```ts
@@ -125,7 +124,7 @@ export default defineConfig(({ mode }) => ({
       ...
       postBuild: async (buildContext) => {
         await buildEmailTheme({
-          templatesSrcDirPath: join(import.meta.dirname, '/emails/templates'),
+          templatesSrcDirPath: join(import.meta.dirname, 'emails', 'templates'),
           filterTemplate: (filePath: string) => !!filePath.endsWith('.component.ts'),
           themeNames: buildContext.themeNames,
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
@@ -136,7 +135,7 @@ export default defineConfig(({ mode }) => ({
             external: ['juice', '...other packages you might use to process css'],
             format: 'esm',
             outExtension: { '.js': '.mjs' },
-            plugins: [angularEsbuildPlugin(join(import.meta.dirname, '/emails'))],
+            plugins: [angularEsbuildPlugin(join(import.meta.dirname, 'emails'))],
           },
         });
       },
@@ -157,7 +156,7 @@ import { toHTML } from '@keycloakify/angular-email/node';
 toHTML({
   filePath: 'path/to/your.component.ts',
   props: { foo: 'bar' },
-  externals: []
+  externals: [],
 })
   .then((html) => {
     console.log(html);
@@ -177,7 +176,7 @@ const { toHTML } = require('@keycloakify/angular-email/node');
 toHTML({
   filePath: 'path/to/your.component.ts',
   props: { foo: 'bar' },
-  externals: []
+  externals: [],
 })
   .then((html) => {
     console.log(html);
@@ -254,7 +253,6 @@ Just a tailwind v4 preset, inspired by [@maizzle/tailwindcss](https://github.com
 /* styles.css */
 @import '@keycloakify/angular-email/tailwindcss-preset-email';
 ```
-
 
 ```typescript
 // email.component.ts
