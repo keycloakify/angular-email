@@ -14,6 +14,11 @@ yarn add @keycloakify/angular-email
 
 ## Usage
 
+| Angular | tailwindcss | @keycloakify/angular-email | Maintained    |
+| ------- | ----------- | -------------------------- | ------------- |
+| 20      | 4.x+        | 1.x+                       | Yes           |
+| 20      | 3.x+        | 0.x+                       | Bugfixes only |
+
 ### Creating an Email Component
 
 see this [example](https://github.com/keycloakify/angular-email/blob/main/projects/showcase/src/app/app.component.ts)
@@ -49,8 +54,11 @@ export const renderToHtml: RenderToHtml<EmailComponentProps> = (props) => {
 ```sh
 # cmd
 
-export $EMAIL_COMPONENTS_DIR_PATH="src/emails"
-npx keycloakify-angular-email build -p $EMAIL_COMPONENTS_DIR_PATH
+export EMAIL_COMPONENTS_DIR_PATH="src/emails"
+export EMAIL_OUTPUT_DIR_PATH="dist/emails"
+export EMAIL_EXTERNAL_PACKAGES="tailwindcss,@tailwindcss/postcss,postcss,postcss-calc,postcss-custom-properties,postcss-preset-env,postcss-logical"
+
+npx keycloakify-angular-email build -p "$EMAIL_COMPONENTS_DIR_PATH" -o "$EMAIL_OUTPUT_DIR_PATH" -e "$EMAIL_EXTERNAL_PACKAGES"
 ```
 
 NB: use `keycloakify-angular-email build` when you don't need to pass dynamic inputs to your components, otherwise see [Standalone Dynamic Rendering](#standalone-dynamic-rendering)
@@ -70,7 +78,6 @@ NB: use `keycloakify-angular-email build` when you don't need to pass dynamic in
   "files": [],
   "include": ["*.ts", "**/*.ts"]
 }
-
 ```
 
 ```ts
@@ -117,7 +124,7 @@ export default defineConfig(({ mode }) => ({
       ...
       postBuild: async (buildContext) => {
         await buildEmailTheme({
-          templatesSrcDirPath: join(import.meta.dirname, '/emails/templates'),
+          templatesSrcDirPath: join(import.meta.dirname, 'emails', 'templates'),
           filterTemplate: (filePath: string) => !!filePath.endsWith('.component.ts'),
           themeNames: buildContext.themeNames,
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
@@ -125,10 +132,10 @@ export default defineConfig(({ mode }) => ({
           cwd: import.meta.dirname,
           esbuild: {
             packages: 'bundle',
-            external: ['juice', 'postcss', 'tailwindcss-v3'],
+            external: ['juice', '...other packages you might use to process css'],
             format: 'esm',
             outExtension: { '.js': '.mjs' },
-            plugins: [angularEsbuildPlugin(join(import.meta.dirname, '/emails'))],
+            plugins: [angularEsbuildPlugin(join(import.meta.dirname, 'emails'))],
           },
         });
       },
@@ -149,6 +156,7 @@ import { toHTML } from '@keycloakify/angular-email/node';
 toHTML({
   filePath: 'path/to/your.component.ts',
   props: { foo: 'bar' },
+  externals: [],
 })
   .then((html) => {
     console.log(html);
@@ -168,6 +176,7 @@ const { toHTML } = require('@keycloakify/angular-email/node');
 toHTML({
   filePath: 'path/to/your.component.ts',
   props: { foo: 'bar' },
+  externals: [],
 })
   .then((html) => {
     console.log(html);
@@ -201,8 +210,8 @@ type Render<Input extends Record<string, any>> = {
     plainText?: boolean;
     /** format the html output */
     pretty?: boolean;
-    /** tailwind v3 configuration object */
-    tailwindConfig?: Partial<Config>;
+    /** Optional hook for manipulate the css extracted. Useful for PostCSS processing */
+    cssProcessor?: (css: string) => Promise<string>;
     /** if you use prefix conventions on signal inputs */
     signalInputsPrefix?: string;
   };
@@ -232,18 +241,52 @@ toHTML<Input extends Record<string, any>>(options: {
     filePath: string;
     props?: Input;
     root?: string;
+    externals?: string[];
 }) => Promise<string>
 ```
 
 ### @keycloakify/angular-email/tailwindcss-preset-email
 
-Just a tailwind v3 preset, inspired by [@maizzle/tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email)
+Just a tailwind v4 preset, inspired by [@maizzle/tailwindcss](https://github.com/maizzle/tailwindcss)
 
-**NB**: tailwind v4 is not supported due to high level css generation and poor support in overriding default utilities
+```css
+/* styles.css */
+@import '@keycloakify/angular-email/tailwindcss-preset-email';
+```
 
-[add support for disabling core plugins](https://github.com/tailwindlabs/tailwindcss/discussions/16132)
+```typescript
+// email.component.ts
+...
+import { Component, ViewEncapsulation } from '@angular/core';
+import { render, RenderToHtml } from '@keycloakify/angular-email';
+// or your custom css processor implementation
+import { cssProcessor } from '@keycloakify/angular-email/tailwindcss-preset-email/css-processor';
 
-[Cannot override tailwind utilities](https://github.com/tailwindlabs/tailwindcss/issues/16856)
+
+...
+@Component({
+  ...
+  styleUrls: ['styles.css'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class EmailComponent {
+  ....
+}
+
+type EmailComponentProps = {};
+
+export const renderToHtml: RenderToHtml<EmailComponentProps> = (props) => {
+  return render({
+    component: EmailComponent,
+    selector: 'app-root',
+    props,
+    options: {
+      pretty: true,
+      cssProcessor,
+    },
+  });
+};
+```
 
 ## Contributing
 

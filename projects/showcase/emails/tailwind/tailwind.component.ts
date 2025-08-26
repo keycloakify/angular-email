@@ -16,7 +16,7 @@ import {
   SectionComponent,
   TextComponent,
 } from '@keycloakify/angular-email';
-import tailwindConfig from '../../tailwind.config';
+import { cssProcessor } from '@keycloakify/angular-email/tailwindcss-preset-email/css-processor';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +60,7 @@ export const renderToHtml: RenderToHtml<TailwindComponentProps> = (props) => {
     props,
     options: {
       pretty: true,
-      tailwindConfig,
+      cssProcessor: cssProcessor,
     },
   });
 };

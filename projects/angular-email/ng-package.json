@@ -8,14 +8,12 @@
     "@angular/platform-server",
     "@angular/ssr",
     "@angular/router",
-    "tailwindcss-v3",
     "juice",
     "pretty",
-    "postcss",
     "termost"
   ],
   "lib": {
     "entryFile": "src/index.ts"
   },
-  "assets": ["./LICENSE.md", "./README.md"]
+  "assets": ["./LICENSE.md", "./README.md", "./tailwindcss-preset-email"]
 }

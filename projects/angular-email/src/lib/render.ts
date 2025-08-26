@@ -1,13 +1,13 @@
-import { renderApplication } from '@angular/platform-server';
-import { provideServerRendering } from '@angular/ssr';
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { provideZonelessChangeDetection, Type } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { renderApplication } from '@angular/platform-server';
+import { provideServerRendering } from '@angular/ssr';
 import * as cheerio from 'cheerio/slim';
 import { convert } from 'html-to-text';
 import juice from 'juice';
 import prettyPrint from 'pretty';
-import { Config } from 'tailwindcss-v3';
 import { HTMLElements, unescapeForRawComponent } from './utils';
 
 type Render<Input extends Record<string, any>> = {
@@ -18,8 +18,7 @@ type Render<Input extends Record<string, any>> = {
   options?: {
     plainText?: boolean;
     pretty?: boolean;
-    /** tailwind configuration object */
-    tailwindConfig?: Partial<Config>;
+    cssProcessor?: (css: string) => Promise<string>;
     signalInputsPrefix?: string;
   };
 };
@@ -39,31 +38,36 @@ export const render = async <Input extends Record<string, any>>({
   props,
   options,
 }: Render<Input>) => {
+  const __originalConsoleLog = console.log;
   console.log = (
     (log) =>
     (...args) => {
       if (args[0] !== 'Angular is running in development mode.') log(...args);
     }
   )(console.log);
-  const { style, html: normalizedHtml } = await renderNgComponent(
-    component,
-    selector,
-    props,
-    options?.signalInputsPrefix,
-  );
-  const html = applyHtmlTransformations(normalizedHtml);
+  try {
+    const { style, html: normalizedHtml } = await renderNgComponent(
+      component,
+      selector,
+      props,
+      options?.signalInputsPrefix,
+    );
+    const html = applyHtmlTransformations(normalizedHtml);
 
-  if (options?.plainText) {
-    return renderAsPlainText(html);
+    if (options?.plainText) {
+      return renderAsPlainText(html);
+    }
+    const cssProcessor = options?.cssProcessor;
+    const css = await parseStyles(style, cssProcessor);
+    const doctype =
+      '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+
+    const markup = await inlineCss(html, css, !!options?.pretty);
+    const document = `${doctype}${markup}`;
+    return document;
+  } finally {
+    console.log = __originalConsoleLog;
   }
-  const tailwindConfig = options?.tailwindConfig;
-  const css = await parseStyles(html, style, tailwindConfig);
-  const doctype =
-    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-
-  const markup = await inlineCss(html, css, !!options?.pretty);
-  const document = `${doctype}${markup}`;
-  return document;
 };
 
 export type RenderToHtml<Input extends Record<string, any>> = (props?: Input) => ReturnType<typeof render>;
@@ -207,28 +211,32 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
 /**
  * Applies the styles from the specified CSS file paths to the HTML document.
  *
- * @param html - The HTML string to process.
  * @param style - The raw content of <style> tags
- * @param tailwindConfig - Optional Tailwind CSS configuration to use. If not provided, the `tailwindcss-preset-email` preset will be used.
+ * @param cssProcessor - Optional hook for manipulate the css extracted.
+ * Useful for postcss processing
  *
  */
-const parseStyles = async (html: string, style: string, tailwindConfig?: Partial<Config>) => {
-  const { tailwindcssPresetEmail } = await import('@keycloakify/angular-email/tailwindcss-preset-email');
-  const { default: postcss } = await import('postcss');
-  const { default: tailwindcss } = await import('tailwindcss-v3');
+const parseStyles = async (style: string, cssProcessor?: (css: string) => Promise<string>) => {
+  const normalized = normalizeCssInput(style);
+  if (!cssProcessor) return normalized;
+  return await cssProcessor(normalized);
+};
 
-  const result = await postcss(
-    tailwindcss({
-      presets: tailwindConfig ? [tailwindConfig] : [tailwindcssPresetEmail],
-      content: [
-        {
-          raw: html,
-          extension: 'html',
-        },
-      ],
-    }),
-  ).process(style, { map: false, from: undefined });
-  return result.css;
+/**
+ * Normalize css
+ *
+ * @param input css to normalize
+ * @returns normalized css
+ */
+const normalizeCssInput = (input: string): string => {
+  return input
+    .replace(/\s+/g, ' ')
+    .replace(/>\s+</g, '><')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&#x24;', '$')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&amp;', '&');
 };
 
 /**

@@ -10,6 +10,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
   filePath: string;
   props?: Input;
   root?: string;
+  externals?: string[];
 }) => {
   /** disable angular log */
   const log = console.log;
@@ -17,7 +18,7 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
     if (data[0] === 'Angular is running in development mode.') return;
     return console.info(...data);
   };
-  const { filePath, props, root } = options;
+  const { filePath, props, root, externals = [] } = options;
   try {
     const start = new Date();
     const basePath = root ?? cwd();
@@ -33,16 +34,23 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
       sourcemap: false,
       minify: true,
       packages: 'bundle',
-      external: ['juice', 'postcss', 'tailwindcss-v3'],
+      external: ['juice', ...externals],
       format: 'esm',
       outExtension: { '.js': '.mjs' },
       target: 'node20',
       plugins: [angularEsbuildPlugin(basePath)],
       metafile: true,
     });
-
-    const meta = Object.entries(result.metafile.outputs)[0];
-    const outputFilePath = pathToFileURL(resolve(basePath, meta[0])).toString();
+    const outputs = Object.entries(result.metafile.outputs);
+    const abs = (p: string) => resolve(basePath, p);
+    const wanted = abs(filePath);
+    const entry = outputs.find(([, info]) => info.entryPoint && abs(info.entryPoint) === wanted)?.[0];
+    if (!entry)
+      throw new Error(
+        `Failed to locate entry output for "${filePath}". ` +
+          `Looked for an output whose info.entryPoint resolves to ${wanted}.`,
+      );
+    const outputFilePath = pathToFileURL(abs(entry)).toString();
     const module = await (import(outputFilePath) as Promise<{ renderToHtml: (props?: Input) => Promise<string> }>);
     const html = await module.renderToHtml(props);
     await rm(outdir, { recursive: true, force: true });
@@ -50,11 +58,11 @@ export const toHTML = async <Input extends Record<string, any>>(options: {
     const seconds = (end.getTime() - start.getTime()) / 1000;
     const filename = filePath.split('/').pop();
     console.log('\x1b[36m%s\x1b[0m', `rendered ${filename} to html in ${seconds}s`);
-    console.log = log;
     return html;
   } catch (e) {
-    console.log = log;
     console.error(e);
     exit(1);
+  } finally {
+    console.log = log;
   }
 };

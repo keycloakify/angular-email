@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 import { termost } from 'termost';
 import pkg from '../package.json' with { type: 'json' };
 
-async function bundle(entryPoints: string[], cwd: string, outdir: string) {
+async function bundle(entryPoints: string[], cwd: string, outdir: string, externals: string[] = []) {
   // we have to use a bundler to preprocess templates code
   // It's better to not use the same bundling configuration used for the
   // frontend theme, because for email templates there might be a different
@@ -24,7 +24,7 @@ async function bundle(entryPoints: string[], cwd: string, outdir: string) {
     platform: 'node',
     sourcemap: true,
     packages: 'bundle',
-    external: ['juice', 'postcss', 'tailwindcss-v3'],
+    external: ['juice', ...externals],
     format: 'esm',
     outExtension: { '.js': '.mjs' },
     target: 'node20',
@@ -74,7 +74,11 @@ async function getTemplates(dirPath: string, filterTemplate?: (filePath: string)
   }
 }
 
-const build = async (emailFilesPath: string, outdir: string = 'dist/emails'): Promise<void> => {
+const build = async (
+  emailFilesPath: string,
+  outdir: string = 'dist/emails',
+  externals: string[] = [],
+): Promise<void> => {
   if (!emailFilesPath) {
     console.error('emailFilesPath is required!');
     exit(1);
@@ -90,9 +94,16 @@ const build = async (emailFilesPath: string, outdir: string = 'dist/emails'): Pr
     }
     const entryPoints = [...tpls];
 
-    const bundled = await bundle(entryPoints, cwd(), tmp);
+    const bundled = await bundle(entryPoints, cwd(), tmp, externals);
     const promises = tpls.map(async (file) => {
-      const module = await (import(bundled[file]) as Promise<{ renderToHtml: () => Promise<string> }>);
+      const key = bundled[file] ?? bundled[resolve(cwd(), file)];
+      if (!key) {
+        throw new Error(
+          `Failed to locate bundled URL for "${file}". ` +
+            `Ensure getTemplates() returns absolute paths and esbuild.metafile entryPoint mapping uses the same base.`,
+        );
+      }
+      const module = await (import(key) as Promise<{ renderToHtml: () => Promise<string> }>);
 
       console.log(`- ${file}`);
 
@@ -115,6 +126,7 @@ const build = async (emailFilesPath: string, outdir: string = 'dist/emails'): Pr
 type CliCommandOptions = {
   emailFilesPath: string;
   outDir: string;
+  externals?: string;
 };
 const program = termost<CliCommandOptions>({
   name: 'keycloakify-angular-email',
@@ -129,14 +141,20 @@ const program = termost<CliCommandOptions>({
 program.option({
   key: 'emailFilesPath',
   name: { long: 'emailFilesPath', short: 'p' },
-  description: '',
+  description: 'input directory for angular email components',
   defaultValue: '',
 });
 program.option({
   key: 'outDir',
   name: { long: 'outDir', short: 'o' },
-  description: '',
+  description: 'output directory for generated html',
   defaultValue: 'dist/emails',
+});
+program.option({
+  key: 'externals',
+  name: { long: 'externals', short: 'e' },
+  description: 'Comma-separated packages to mark as external in esbuild (e.g. tailwindcss,postcss,postcss-calc)',
+  defaultValue: '',
 });
 program
   .command({
@@ -161,8 +179,23 @@ program
       return Boolean(context.outDir);
     },
   })
+  .input({
+    key: 'externals',
+    type: 'text',
+    label: 'any additional package to mark as external (comma separated)?',
+    skip() {
+      return true;
+    },
+  })
   .task({
     handler: async (context) => {
-      await build(context.emailFilesPath, context.outDir);
+      let externals: string[] = [];
+      if (context.externals) {
+        externals = context.externals
+          .split(',')
+          .map((e) => e.trim())
+          .filter(Boolean);
+      }
+      await build(context.emailFilesPath, context.outDir, externals);
     },
   });
