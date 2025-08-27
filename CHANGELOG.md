@@ -1,3 +1,12 @@
+## [1.0.3](https://github.com/keycloakify/angular-email/compare/v1.0.2...v1.0.3) (2025-08-27)
+
+
+### Bug Fixes
+
+* missing css normalization ([ac37093](https://github.com/keycloakify/angular-email/commit/ac370931a2e350d482ad6049e4e0285862a5c9af))
+
+
+
 ## [1.0.2](https://github.com/keycloakify/angular-email/compare/v1.0.1...v1.0.2) (2025-08-27)
 
 
