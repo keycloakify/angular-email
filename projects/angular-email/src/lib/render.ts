@@ -221,7 +221,7 @@ const parseStyles = async (
 ) => {
   const normalized = normalizeCssInput(style);
   if (!cssProcessor) return normalized;
-  const processed = await cssProcessor(style, html);
+  const processed = await cssProcessor(normalized, html);
   return processed;
 };
 
