@@ -14,10 +14,10 @@ yarn add @keycloakify/angular-email
 
 ## Usage
 
-| Angular | tailwindcss | @keycloakify/angular-email | Maintained    |
-| ------- | ----------- | -------------------------- | ------------- |
-| 20      | 4.x+        | 1.x+                       | Yes           |
-| 20      | 3.x+        | 0.x+                       | Bugfixes only |
+| Angular | Tailwind CSS | @keycloakify/angular-email | Maintained    |
+| ------- | ------------ | -------------------------- | ------------- |
+| 20      | 4.x+         | 1.x+                       | Yes           |
+| 20      | 3.x+         | 0.x+                       | Bugfixes only |
 
 ### Creating an Email Component
 
@@ -210,8 +210,8 @@ type Render<Input extends Record<string, any>> = {
     plainText?: boolean;
     /** format the html output */
     pretty?: boolean;
-    /** Optional hook for manipulate the css extracted. Useful for PostCSS processing */
-    cssProcessor?: (css: string) => Promise<string>;
+    /** Optional hook to manipulate the extracted CSS. Useful for PostCSS processing */
+    cssProcessor?: (css: string, html: string) => Promise<string>;
     /** if you use prefix conventions on signal inputs */
     signalInputsPrefix?: string;
   };

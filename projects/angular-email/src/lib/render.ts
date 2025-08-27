@@ -58,7 +58,7 @@ export const render = async <Input extends Record<string, any>>({
       return renderAsPlainText(html);
     }
     const cssProcessor = options?.cssProcessor;
-    const css = await parseStyles(style, cssProcessor);
+    const css = await parseStyles(style, html, cssProcessor);
     const doctype =
       '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
 
@@ -160,7 +160,7 @@ const renderNgComponent = async (
 const normalizeNgHtml = (html: string, selector: string): string => {
   const nsHtmlRegex = new RegExp(`<(?!(\\/?(${HTMLElements.join('|')})(?![-\\w])))[^>]+>`, 'gm');
   return html
-    .replace(new RegExp(`[\\s\\S]*?<${selector}[\\s\\S]*?>([\\s\\S]*?)<\\/${selector}>[\\s\\S]*?`, 'gm'), '$1')
+    .replace(new RegExp(`[\\s\\S]*?<${selector}[\\s\\S]*?>([\\s\\S]*?)<\\/${selector}>[\\s\\S]*?.+`, 'gm'), '$1')
     .replace(nsHtmlRegex, '');
 };
 
@@ -177,9 +177,7 @@ const normalizeNgHtml = (html: string, selector: string): string => {
  * @returns The transformed HTML string.
  */
 const applyHtmlTransformations = (html: string) => {
-  const $ = cheerio.load(html, {
-    xml: { lowerCaseAttributeNames: false, lowerCaseTags: false },
-  });
+  const $ = cheerio.load(html);
   replacePlaceholders($);
 
   return $.html()
@@ -216,10 +214,15 @@ const replacePlaceholders = ($: cheerio.CheerioAPI) => {
  * Useful for postcss processing
  *
  */
-const parseStyles = async (style: string, cssProcessor?: (css: string) => Promise<string>) => {
+const parseStyles = async (
+  style: string,
+  html: string,
+  cssProcessor?: (css: string, html: string) => Promise<string>,
+) => {
   const normalized = normalizeCssInput(style);
   if (!cssProcessor) return normalized;
-  return await cssProcessor(normalized);
+  const processed = await cssProcessor(style, html);
+  return processed;
 };
 
 /**

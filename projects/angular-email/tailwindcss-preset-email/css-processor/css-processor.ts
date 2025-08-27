@@ -5,10 +5,28 @@ import properties from 'postcss-custom-properties';
 import logical, { type DirectionFlow } from 'postcss-logical';
 import preset from 'postcss-preset-env';
 
-export const cssProcessor = async (style: string) => {
+export const cssProcessor = async (style: string, html: string) => {
   try {
+    const inlineSafelist = html
+      ? Array.from(
+          new Set(
+            (html.match(/class=["']([^"']+)["']/g) ?? [])
+              .flatMap((m) =>
+                m
+                  .replace(/^class=["']|["']$/g, '')
+                  .trim()
+                  .split(/\s+/),
+              )
+              .filter(Boolean),
+          ),
+        )
+          .slice(0, 5000) // safety cap
+          .map((c) => c.replace(/\\/g, '\\\\').replace(/"/g, '\\"'))
+          .join(' ')
+      : '';
+    const styleWithSources = inlineSafelist.length > 0 ? `@source inline("${inlineSafelist}");\n${style}` : style;
     const result = await postcss(
-      tailwindcss(),
+      tailwindcss({ base: '' }),
       properties({ preserve: false }),
       calc({ preserve: false }),
       {
@@ -63,7 +81,7 @@ export const cssProcessor = async (style: string) => {
           inlineDirection: 'left-to-right' as DirectionFlow,
         },
       }),
-    ).process(style, { map: false, from: undefined });
+    ).process(styleWithSources, { map: false, from: undefined });
     return result.css;
   } catch (error) {
     console.error('CSS processing failed:', error);
