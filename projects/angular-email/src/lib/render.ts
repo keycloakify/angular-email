@@ -18,7 +18,7 @@ type Render<Input extends Record<string, any>> = {
   options?: {
     plainText?: boolean;
     pretty?: boolean;
-    cssProcessor?: (css: string) => Promise<string>;
+    cssProcessor?: (css: string, html: string) => Promise<string>;
     signalInputsPrefix?: string;
   };
 };
