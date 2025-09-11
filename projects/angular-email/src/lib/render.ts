@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { provideZonelessChangeDetection, Type } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication, BootstrapContext } from '@angular/platform-browser';
 import { renderApplication } from '@angular/platform-server';
 import { provideServerRendering } from '@angular/ssr';
 import * as cheerio from 'cheerio/slim';
@@ -118,10 +118,14 @@ const renderNgComponent = async (
   props?: Record<string, any>,
   signalInputsPrefix?: string,
 ) => {
-  const bootstrap = async () => {
-    const appRef = await bootstrapApplication(component, {
-      providers: [provideZonelessChangeDetection(), provideServerRendering()],
-    });
+  const bootstrap = async (context?: BootstrapContext) => {
+    const appRef = await bootstrapApplication(
+      component,
+      {
+        providers: [provideZonelessChangeDetection(), provideServerRendering()],
+      },
+      context,
+    );
     appRef.components.forEach((componentRef) => {
       Object.entries(props ?? {}).forEach(([key, value]) => {
         if (key in componentRef.instance || `${signalInputsPrefix ?? ''}${key}` in componentRef.instance) {
