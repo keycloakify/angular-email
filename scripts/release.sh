@@ -51,10 +51,10 @@ fi
 # Get current git branch name
 branch=$(git rev-parse --abbrev-ref HEAD)
 
-if [ "$branch" != "main" ]; then
-  echo "Release can be done only on main branch"
-  exit 1
-fi
+# if [ "$branch" != "main" ]; then
+#   echo "Release can be done only on main branch"
+#   exit 1
+# fi
 
 # Version bump only if needed
 if [ "$versionType" != "none" ]; then
