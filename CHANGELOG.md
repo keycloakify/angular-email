@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/keycloakify/angular-email/compare/v1.0.5...v1.0.6) (2025-09-25)
+
+
+### Features
+
+* update README ([8f5d803](https://github.com/keycloakify/angular-email/commit/8f5d80374850db6a5b9a04810c3ccce56dc22f44))
+
+
+
 ## [1.0.5](https://github.com/keycloakify/angular-email/compare/v1.0.4...v1.0.5) (2025-09-18)
 
 
