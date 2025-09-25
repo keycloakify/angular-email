@@ -65,6 +65,8 @@ NB: use `keycloakify-angular-email build` when you don't need to pass dynamic in
 
 ### With Keycloakify Emails
 
+see [Email POC](https://github.com/keycloakify/keycloakify-starter-angular-vite/tree/custom_email_poc) for a full example
+
 ```json
 // emails/tsconfig.json
 
@@ -130,6 +132,9 @@ export default defineConfig(({ mode }) => ({
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
           locales: ['en'],
           cwd: import.meta.dirname,
+          i18nSourceFile: join(import.meta.dirname, 'emails', 'i18n.ts'),
+          environmentVariables: buildContext.environmentVariables,
+          assetsDirPath: join(import.meta.dirname, 'emails', 'templates', 'assets'),
           esbuild: {
             packages: 'bundle',
             external: ['juice', '...other packages you might use to process css'],
