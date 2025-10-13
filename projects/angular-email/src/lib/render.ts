@@ -267,6 +267,7 @@ const inlineCss = async (html: string, css: string, pretty: boolean = false) => 
         applyWidthAttributes: true,
         applyHeightAttributes: true,
         removeStyleTags: false,
+        resolveCSSVariables: true,
       })
       .replace(/\s+/g, ' ')
       .replace(/>\s+</g, '><')
