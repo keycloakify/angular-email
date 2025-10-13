@@ -1,4 +1,4 @@
-## [1.0.6](https://github.com/keycloakify/angular-email/compare/v1.0.5...v1.0.6) (2025-09-25)
+## [1.0.7](https://github.com/keycloakify/angular-email/compare/v1.0.6...v1.0.7) (2025-10-13)
 
 
 ### Features
