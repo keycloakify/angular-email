@@ -1,4 +1,13 @@
-## [1.0.7](https://github.com/keycloakify/angular-email/compare/v1.0.6...v1.0.7) (2025-10-13)
+## [1.0.8](https://github.com/keycloakify/angular-email/compare/v1.0.7...v1.0.8) (2025-10-13)
+
+
+### Features
+
+* add css variables resolution by juice ([ae67f5d](https://github.com/keycloakify/angular-email/commit/ae67f5d632fdbe5ca5d851782608b46b3afa0da6))
+
+
+
+## [1.0.6](https://github.com/keycloakify/angular-email/compare/v1.0.5...v1.0.6) (2025-09-25)
 
 
 ### Features
