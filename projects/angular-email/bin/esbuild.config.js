@@ -2,7 +2,7 @@ import { build } from 'esbuild';
 import { join } from 'node:path';
 
 await build({
-  entryPoints: [join(import.meta.dirname, 'build.ts')],
+  entryPoints: [join(import.meta.dirname, '*.ts')],
   absWorkingDir: import.meta.dirname,
   allowOverwrite: true,
   bundle: false,
@@ -12,5 +12,6 @@ await build({
   minify: true,
   packages: 'external',
   tsconfig: join(import.meta.dirname, 'tsconfig.json'),
-  outfile: '../../../dist/angular-email/bin/build.mjs',
+  outdir: '../../../dist/angular-email/bin',
+  // outExtension: { '.js': '.mjs' },
 });

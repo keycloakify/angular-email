@@ -87,6 +87,6 @@
     }
   },
   "bin": {
-    "keycloakify-angular-email": "bin/build.mjs"
+    "keycloakify-angular-email": "bin/main.js"
   }
 }
