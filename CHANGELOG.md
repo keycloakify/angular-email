@@ -1,3 +1,13 @@
+## [1.0.10](https://github.com/keycloakify/angular-email/compare/v1.0.9...v1.0.10) (2025-11-15)
+
+
+### Features
+
+* update bin scripts ([7d32289](https://github.com/keycloakify/angular-email/commit/7d32289bacbcf2cbf52b0265e3fac0700c5398bd))
+* update node v ([19c10ff](https://github.com/keycloakify/angular-email/commit/19c10fff79c1196d19eb2ee1727e5620e02595f8))
+
+
+
 ## [1.0.9](https://github.com/keycloakify/angular-email/compare/v1.0.8...v1.0.9) (2025-10-17)
 
 
