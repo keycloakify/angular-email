@@ -1,4 +1,17 @@
+## [1.1.2](https://github.com/keycloakify/angular-email/compare/v1.1.1...v1.1.2) (2026-01-20)
+
+
+### Bug Fixes
+
+* prevent heading to be uppercased on plain text transformation ([206e30e](https://github.com/keycloakify/angular-email/commit/206e30e9757b301d9dbca02a23582d3d7e825947)), closes [#15](https://github.com/keycloakify/angular-email/issues/15)
+
+
+
 ## [1.1.1](https://github.com/keycloakify/angular-email/compare/v1.1.0...v1.1.1) (2026-01-15)
+
+
+
+# [1.1.0](https://github.com/keycloakify/angular-email/compare/v1.0.10...v1.1.0) (2025-12-22)
 
 
 
