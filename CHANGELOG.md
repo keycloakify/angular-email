@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/keycloakify/angular-email/compare/v1.2.0...v1.2.1) (2026-06-07)
+
+
+### Bug Fixes
+
+* ci ([8c1d0d8](https://github.com/keycloakify/angular-email/commit/8c1d0d8cbaa9127b98b032e803b85b61eaf0e272))
+
 # [1.2.0](https://github.com/keycloakify/angular-email/compare/v1.1.6...v1.2.0) (2026-06-07)
 
 ## [1.1.6](https://github.com/keycloakify/angular-email/compare/v1.1.5...v1.1.6) (2026-05-11)
