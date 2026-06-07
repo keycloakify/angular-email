@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 import { exit } from 'node:process';
+import { createRequire } from 'node:module';
 import { termost } from 'termost';
-import pkg from '../package.json' with { type: 'json' };
 import { build } from './build.js';
+
+const pkg = createRequire(import.meta.url)('../package.json') as { version: string };
 
 type CliCommandOptions = {
   emailFilesPath: string;

@@ -55,15 +55,15 @@
   },
   "dependencies": {
     "tslib": "^2.8.1",
-    "html-to-text": "^9.0.5",
+    "html-to-text": "^10.0.0",
     "cheerio": "^1.2.0",
-    "@angular/build": "^21.2.7",
-    "@angular/platform-server": "^21.2.8",
-    "@angular/ssr": "^21.2.7",
-    "@angular/router": "^21.2.8",
-    "juice": "^11.1.1",
+    "@angular/build": "^21.2.14",
+    "@angular/platform-server": "^21.2.16",
+    "@angular/ssr": "^21.2.14",
+    "@angular/router": "^21.2.16",
+    "juice": "^12.1.0",
     "pretty": "^2.0.0",
-    "termost": "^1.9.0"
+    "termost": "^1.9.1"
   },
   "sideEffects": false,
   "publishConfig": {
@@ -88,5 +88,8 @@
   },
   "bin": {
     "keycloakify-angular-email": "bin/main.js"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
