@@ -190,12 +190,32 @@ const applyHtmlTransformations = (html: string) => {
   const $ = cheerio.load(html);
   replacePlaceholders($);
 
-  return $.html()
-    .replace(/\s+/g, ' ')
-    .replace(/>\s+</g, '><')
-    .replaceAll('&lt;', '<')
-    .replaceAll('&gt;', '>')
-    .replaceAll('&#x24;', '$');
+  return resolveCssVarNamespace(
+    $.html()
+      .replace(/\s+/g, ' ')
+      .replace(/>\s+</g, '><')
+      .replaceAll('&lt;', '<')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&#x24;', '$'),
+  );
+};
+
+/**
+ * Resolves the CSS variable namespace placeholder emitted by the Angular compiler.
+ *
+ * Since Angular 22.1 every custom property declared in a component stylesheet
+ * (or bound in a template) is compiled to `--%NS%name`. The placeholder is meant
+ * to be resolved by the DOM renderer, which replaces it with the namespace opted
+ * in through `provideCssVarNamespacing()` or with an empty string when unused.
+ * That only happens with `@angular/platform-browser` >= 22.1: with an older
+ * renderer the placeholder leaks into the rendered markup and produces invalid
+ * custom properties, breaking every `var()` and theme lookup downstream.
+ *
+ * @param input the rendered css or html
+ * @returns the input with any leftover placeholder removed
+ */
+const resolveCssVarNamespace = (input: string): string => {
+  return input.replaceAll('--%NS%', '--');
 };
 
 /**
@@ -242,14 +262,16 @@ const parseStyles = async (
  * @returns normalized css
  */
 const normalizeCssInput = (input: string): string => {
-  return input
-    .replace(/\s+/g, ' ')
-    .replace(/>\s+</g, '><')
-    .replaceAll('&lt;', '<')
-    .replaceAll('&gt;', '>')
-    .replaceAll('&#x24;', '$')
-    .replaceAll('&quot;', '"')
-    .replaceAll('&amp;', '&');
+  return resolveCssVarNamespace(
+    input
+      .replace(/\s+/g, ' ')
+      .replace(/>\s+</g, '><')
+      .replaceAll('&lt;', '<')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&#x24;', '$')
+      .replaceAll('&quot;', '"')
+      .replaceAll('&amp;', '&'),
+  );
 };
 
 /**
