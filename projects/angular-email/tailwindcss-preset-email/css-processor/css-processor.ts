@@ -28,7 +28,7 @@ export const cssProcessor = async (style: string, html: string) => {
     const result = await postcss(
       tailwindcss({ base: '' }),
       properties({ preserve: false }),
-      calc({ preserve: false }),
+      calc(),
       {
         postcssPlugin: 'inline-tw-vars-from-layer',
         Once(root) {
