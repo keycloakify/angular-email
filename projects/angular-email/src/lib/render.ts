@@ -286,8 +286,8 @@ const normalizeCssInput = (input: string): string => {
 const inlineCss = async (html: string, css: string, pretty: boolean = false) => {
   juice.styleToAttribute = {};
   juice.excludedProperties.push(...[]);
-  juice.widthElements = ['img', 'video'].map((i) => i.toUpperCase() as unknown as HTMLElement);
-  juice.heightElements = ['img', 'video'].map((i) => i.toUpperCase() as unknown as HTMLElement);
+  juice.widthElements = ['img', 'video'].map((i) => i.toUpperCase());
+  juice.heightElements = ['img', 'video'].map((i) => i.toUpperCase());
 
   const inlined = unescapeForRawComponent(
     juice

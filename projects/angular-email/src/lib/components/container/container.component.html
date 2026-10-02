@@ -1,8 +1,9 @@
 @let containerWidth = $containerWidth();
 @let alignment = $alignment();
+@let disableDefaultStyle = $disableDefaultStyle();
 
 <div [style]="{ tableLayout: 'fixed', width: '100%' }">
-  <div [style]="{ margin: '0 auto', maxWidth: containerWidth }">
+  <div [style]="{ margin: '0 auto', maxWidth: disableDefaultStyle ? undefined : containerWidth + 'px' }">
     <noscript [attr.data-html]="$innerHtmlPre()"></noscript>
     <table
       [align]="alignment"

@@ -13,8 +13,9 @@ export class ImgComponent {
   $disableDefaultStyle = input<boolean>(false, { alias: 'disableDefaultStyle' });
   $alt = input('', { alias: 'alt' });
   $src = input('', { alias: 'src' });
-  $width = input('0', { alias: 'width' });
-  $height = input('0', { alias: 'height' });
+  // Outlook (Word engine) sizes images from the HTML attributes only: emitted only when set
+  $width = input<string | number | undefined>(undefined, { alias: 'width' });
+  $height = input<string | number | undefined>(undefined, { alias: 'height' });
   $imageStyle = computed(() => {
     return {
       ...(this.$disableDefaultStyle()

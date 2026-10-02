@@ -86,10 +86,10 @@ export class ButtonComponent {
     const textColor = this.$textColor();
     const textContent = this.$textContent();
     return `<!--[if mso]>
-            <v:roundrect href="${href}" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="${height !== undefined ? `height:${height}px` : ''};v-text-anchor:middle;${width !== undefined ? `height:${width}px` : ''};" arcsize="${arcsize}%" ${
-              borderColor ? `strokecolor=${borderColor}` : ''
+            <v:roundrect href="${href}" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="${height !== undefined ? `height:${height}px` : ''};v-text-anchor:middle;${width !== undefined ? `width:${width}px` : ''};" arcsize="${arcsize}%" ${
+              borderColor ? `strokecolor="${borderColor}"` : ''
             } ${borderSize ? `strokeweight="${borderSize}px"` : `stroke="false"`} ${
-              backgroundColor ? `fillcolor=${backgroundColor}` : `fill="false"`
+              backgroundColor ? `fillcolor="${backgroundColor}"` : `fill="false"`
             }>
             <w:anchorlock/>
             <center style="font-size:${fontSize}px;${textColor ? `color:${textColor};` : ''}">

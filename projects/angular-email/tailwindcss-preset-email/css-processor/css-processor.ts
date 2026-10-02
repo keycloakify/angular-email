@@ -30,6 +30,19 @@ export const cssProcessor = async (style: string, html: string) => {
       properties({ preserve: false }),
       calc(),
       {
+        // postcss-calc >= 11 reduces `calc(4px * 12)` to `calc(48px)` but keeps the wrapper:
+        // email clients without calc() support (Outlook, Outlook.com) drop the whole declaration.
+        // Only single-value calc() are unwrapped; real expressions (e.g. `calc(100% - 20px)`) are kept.
+        // OnceExit: postcss-calc reduces in its own OnceExit, which runs before this one (plugin order).
+        postcssPlugin: 'unwrap-single-value-calc',
+        OnceExit(root) {
+          root.walkDecls((decl) => {
+            if (!decl.value.includes('calc(')) return;
+            decl.value = decl.value.replace(/calc\(\s*([+-]?(?:\d+\.?\d*|\.\d+)(?:[a-z]+|%)?)\s*\)/gi, '$1');
+          });
+        },
+      },
+      {
         postcssPlugin: 'inline-tw-vars-from-layer',
         Once(root) {
           const defaultVars = new Map<string, string>();
@@ -85,6 +98,8 @@ export const cssProcessor = async (style: string, html: string) => {
     return result.css;
   } catch (error) {
     console.error('CSS processing failed:', error);
-    throw new Error(`Failed to process CSS: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(`Failed to process CSS: ${error instanceof Error ? error.message : 'Unknown error'}`, {
+      cause: error,
+    });
   }
 };
