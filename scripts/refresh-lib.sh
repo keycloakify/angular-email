@@ -1,22 +1,15 @@
 #!/bin/bash
 set -e
 
-PACKAGE="@keycloakify/angular-email"
-LOCAL_PATH="$(pwd)/dist/angular-email"
+# @keycloakify/angular-email is a `link:` dependency to dist/angular-email:
+# install, build the library, then install again so its bin gets linked.
 
-echo "🔹 Removing $PACKAGE from dependencies..."
-npm uninstall $PACKAGE
+echo "🔹 Installing dependencies..."
+pnpm install
 
-echo "🔹 Installing remaining dependencies..."
-npm install
+pnpm build
 
-npm run build
-
-echo "🔹 Re-adding $PACKAGE to dependencies..."
-
-npm install "file:/$LOCAL_PATH"
-
-echo "🔹 Re-installing all dependencies..."
-npm install
+echo "🔹 Re-linking dist/angular-email..."
+pnpm install
 
 echo "✅ Done!"

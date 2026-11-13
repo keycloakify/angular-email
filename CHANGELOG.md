@@ -1,143 +1,443 @@
-## 1.6.0 (2026-10-02)
+# Changelog
 
-* fix: async rendering ([abd158c](https://github.com/keycloakify/angular-email/commit/abd158c))
-* fix: bin command and README ([95dbfdf](https://github.com/keycloakify/angular-email/commit/95dbfdf))
-* fix: broken css on certain conditions ([0ccc792](https://github.com/keycloakify/angular-email/commit/0ccc792))
-* fix: broken minification ([8607ab6](https://github.com/keycloakify/angular-email/commit/8607ab6))
-* fix: build engine ([478f014](https://github.com/keycloakify/angular-email/commit/478f014))
-* fix: ci ([8c1d0d8](https://github.com/keycloakify/angular-email/commit/8c1d0d8))
-* fix: clean local dep ([a4c913a](https://github.com/keycloakify/angular-email/commit/a4c913a))
-* fix: css calc breaking change ([b3b8f04](https://github.com/keycloakify/angular-email/commit/b3b8f04))
-* fix: esm usage ([39e74ba](https://github.com/keycloakify/angular-email/commit/39e74ba))
-* fix: lib readme ([2e1ad40](https://github.com/keycloakify/angular-email/commit/2e1ad40))
-* fix: missing css normalization ([ac37093](https://github.com/keycloakify/angular-email/commit/ac37093))
-* fix: missing peer ([0b72fef](https://github.com/keycloakify/angular-email/commit/0b72fef))
-* fix: missing row component ([f1a28f7](https://github.com/keycloakify/angular-email/commit/f1a28f7))
-* fix: missing units ([795bf8b](https://github.com/keycloakify/angular-email/commit/795bf8b))
-* fix: missing units ([48c6978](https://github.com/keycloakify/angular-email/commit/48c6978))
-* fix: passing props to component ([605018b](https://github.com/keycloakify/angular-email/commit/605018b))
-* fix: peer dep ([22ade4e](https://github.com/keycloakify/angular-email/commit/22ade4e))
-* fix: preserve "$" char ([2ee28f5](https://github.com/keycloakify/angular-email/commit/2ee28f5))
-* fix: prevent heading to be uppercased on plain text transformation ([206e30e](https://github.com/keycloakify/angular-email/commit/206e30e)), closes [#15](https://github.com/keycloakify/angular-email/issues/15)
-* fix: preview ([8a3878f](https://github.com/keycloakify/angular-email/commit/8a3878f))
-* fix: regex replacement ([352e7aa](https://github.com/keycloakify/angular-email/commit/352e7aa))
-* fix: set esbuild version ([95ffaa2](https://github.com/keycloakify/angular-email/commit/95ffaa2))
-* fix: setInput works in real env ([912d9e8](https://github.com/keycloakify/angular-email/commit/912d9e8))
-* fix: silencing log ([7cbdc66](https://github.com/keycloakify/angular-email/commit/7cbdc66))
-* fix: type error ([1cffa03](https://github.com/keycloakify/angular-email/commit/1cffa03))
-* fix: undefined rendered value ([b2c6e49](https://github.com/keycloakify/angular-email/commit/b2c6e49))
-* fix: update README ([01ceb71](https://github.com/keycloakify/angular-email/commit/01ceb71))
-* fix: wrong cd path ([b15c9da](https://github.com/keycloakify/angular-email/commit/b15c9da))
-* chore: add github ci workflow ([79ab50e](https://github.com/keycloakify/angular-email/commit/79ab50e))
-* chore: clean ([e864867](https://github.com/keycloakify/angular-email/commit/e864867))
-* chore: clean class ([06bcc0b](https://github.com/keycloakify/angular-email/commit/06bcc0b))
-* chore: prerelease ([f9e5e73](https://github.com/keycloakify/angular-email/commit/f9e5e73))
-* chore: prerelease ([3688b05](https://github.com/keycloakify/angular-email/commit/3688b05))
-* chore: prerelease ([b94004d](https://github.com/keycloakify/angular-email/commit/b94004d))
-* chore: set package ([01b1838](https://github.com/keycloakify/angular-email/commit/01b1838))
-* chore: update ci ([34d9153](https://github.com/keycloakify/angular-email/commit/34d9153))
-* chore: update dependencies ([72a5cb9](https://github.com/keycloakify/angular-email/commit/72a5cb9))
-* chore: update dependencies ([d1b10f8](https://github.com/keycloakify/angular-email/commit/d1b10f8))
-* chore: update dependencies ([3738b4b](https://github.com/keycloakify/angular-email/commit/3738b4b))
-* chore: update dependencies ([d7d0b38](https://github.com/keycloakify/angular-email/commit/d7d0b38))
-* chore: update dependencies ([73c5d2a](https://github.com/keycloakify/angular-email/commit/73c5d2a))
-* chore: update dependencies ([2601021](https://github.com/keycloakify/angular-email/commit/2601021))
-* chore: update dependencies ([0067961](https://github.com/keycloakify/angular-email/commit/0067961))
-* chore: update dependencies ([6e2f7be](https://github.com/keycloakify/angular-email/commit/6e2f7be))
-* chore: update dependencies ([3f9a3d5](https://github.com/keycloakify/angular-email/commit/3f9a3d5))
-* chore: update dependencies ([e013c38](https://github.com/keycloakify/angular-email/commit/e013c38))
-* chore: update dependencies ([c569e54](https://github.com/keycloakify/angular-email/commit/c569e54))
-* chore: update dependencies ([65d8efe](https://github.com/keycloakify/angular-email/commit/65d8efe))
-* chore: update deps ([d13a63a](https://github.com/keycloakify/angular-email/commit/d13a63a))
-* chore: update deps ([8ad197c](https://github.com/keycloakify/angular-email/commit/8ad197c))
-* chore: update deps ([41e3a11](https://github.com/keycloakify/angular-email/commit/41e3a11))
-* chore: update deps ([2c36364](https://github.com/keycloakify/angular-email/commit/2c36364))
-* chore: update README ([bcda361](https://github.com/keycloakify/angular-email/commit/bcda361))
-* chore: update README ([446ce1c](https://github.com/keycloakify/angular-email/commit/446ce1c))
-* chore: update README and LICENSE ([75c018b](https://github.com/keycloakify/angular-email/commit/75c018b))
-* chore: update to angular 20 ([a0386e8](https://github.com/keycloakify/angular-email/commit/a0386e8))
-* chore(deps-dev): bump flatted from 3.3.3 to 3.4.2 ([6eca931](https://github.com/keycloakify/angular-email/commit/6eca931))
-* chore(deps-dev): bump js-cookie from 3.0.5 to 3.0.7 ([33795ab](https://github.com/keycloakify/angular-email/commit/33795ab))
-* chore(deps): bump @angular/platform-server from 20.2.1 to 20.3.0 ([d1093e9](https://github.com/keycloakify/angular-email/commit/d1093e9))
-* chore(deps): bump @angular/platform-server from 21.2.12 to 21.2.13 ([ce1a5f0](https://github.com/keycloakify/angular-email/commit/ce1a5f0))
-* chore(deps): bump @angular/ssr from 20.2.0 to 20.3.0 ([048ef3f](https://github.com/keycloakify/angular-email/commit/048ef3f))
-* chore(deps): bump @angular/ssr from 20.3.5 to 20.3.6 ([17929ea](https://github.com/keycloakify/angular-email/commit/17929ea))
-* chore(deps): bump @angular/ssr from 21.1.0 to 21.2.0 ([2278241](https://github.com/keycloakify/angular-email/commit/2278241))
-* chore(deps): bump @hono/node-server from 1.19.9 to 1.19.10 ([8953d2a](https://github.com/keycloakify/angular-email/commit/8953d2a))
-* chore(deps): bump hono from 4.11.4 to 4.12.0 ([adeefac](https://github.com/keycloakify/angular-email/commit/adeefac))
-* chore(deps): bump hono from 4.12.18 to 4.12.23 ([934f1d2](https://github.com/keycloakify/angular-email/commit/934f1d2))
-* chore(deps): bump hono from 4.12.3 to 4.12.7 ([fb68908](https://github.com/keycloakify/angular-email/commit/fb68908))
-* chore(deps): bump immutable from 5.1.3 to 5.1.5 ([7d66223](https://github.com/keycloakify/angular-email/commit/7d66223))
-* chore(deps): bump qs from 6.14.0 to 6.14.1 ([c6627be](https://github.com/keycloakify/angular-email/commit/c6627be))
-* chore(deps): bump qs from 6.14.1 to 6.14.2 ([8f02897](https://github.com/keycloakify/angular-email/commit/8f02897))
-* chore(deps): bump qs from 6.15.0 to 6.15.2 ([eaa6c1f](https://github.com/keycloakify/angular-email/commit/eaa6c1f))
-* chore(deps): bump tar from 7.5.4 to 7.5.9 ([26fda83](https://github.com/keycloakify/angular-email/commit/26fda83))
-* chore(deps): bump tar from 7.5.9 to 7.5.11 ([a29c6bd](https://github.com/keycloakify/angular-email/commit/a29c6bd))
-* chore(version): 💯 bump version to 0.0.1 ([3adb7cc](https://github.com/keycloakify/angular-email/commit/3adb7cc))
-* chore(version): 💯 bump version to 0.0.2 ([4327f7e](https://github.com/keycloakify/angular-email/commit/4327f7e))
-* chore(version): 💯 bump version to 0.0.3 ([f9df574](https://github.com/keycloakify/angular-email/commit/f9df574))
-* chore(version): 💯 bump version to 0.0.4 ([d6414c0](https://github.com/keycloakify/angular-email/commit/d6414c0))
-* chore(version): 💯 bump version to 0.0.5 ([55d6709](https://github.com/keycloakify/angular-email/commit/55d6709))
-* chore(version): 💯 bump version to 0.0.6 ([f189136](https://github.com/keycloakify/angular-email/commit/f189136))
-* chore(version): 💯 bump version to 0.0.7 ([6e42f0f](https://github.com/keycloakify/angular-email/commit/6e42f0f))
-* chore(version): 💯 bump version to 0.0.8 ([cede27f](https://github.com/keycloakify/angular-email/commit/cede27f))
-* chore(version): 💯 bump version to 1.0.0 ([5b58eb4](https://github.com/keycloakify/angular-email/commit/5b58eb4))
-* chore(version): 💯 bump version to 1.0.1 ([c2f3294](https://github.com/keycloakify/angular-email/commit/c2f3294))
-* chore(version): 💯 bump version to 1.0.10 ([38d4101](https://github.com/keycloakify/angular-email/commit/38d4101))
-* chore(version): 💯 bump version to 1.0.2 ([8d68c9f](https://github.com/keycloakify/angular-email/commit/8d68c9f))
-* chore(version): 💯 bump version to 1.0.3 ([153fb48](https://github.com/keycloakify/angular-email/commit/153fb48))
-* chore(version): 💯 bump version to 1.0.4 ([f5bfc83](https://github.com/keycloakify/angular-email/commit/f5bfc83))
-* chore(version): 💯 bump version to 1.0.5 ([ddd7ad8](https://github.com/keycloakify/angular-email/commit/ddd7ad8))
-* chore(version): 💯 bump version to 1.0.6 ([df77f33](https://github.com/keycloakify/angular-email/commit/df77f33))
-* chore(version): 💯 bump version to 1.0.7 ([ae3e666](https://github.com/keycloakify/angular-email/commit/ae3e666))
-* chore(version): 💯 bump version to 1.0.8 ([fc45002](https://github.com/keycloakify/angular-email/commit/fc45002))
-* chore(version): 💯 bump version to 1.0.9 ([4b4d74d](https://github.com/keycloakify/angular-email/commit/4b4d74d))
-* chore(version): 💯 bump version to 1.1.0 ([e55fb90](https://github.com/keycloakify/angular-email/commit/e55fb90))
-* chore(version): 💯 bump version to 1.1.1 ([96a43cb](https://github.com/keycloakify/angular-email/commit/96a43cb))
-* chore(version): 💯 bump version to 1.1.2 ([7b452d9](https://github.com/keycloakify/angular-email/commit/7b452d9))
-* chore(version): 💯 bump version to 1.1.3 ([2db962c](https://github.com/keycloakify/angular-email/commit/2db962c))
-* chore(version): 💯 bump version to 1.1.4 ([acade27](https://github.com/keycloakify/angular-email/commit/acade27))
-* chore(version): 💯 bump version to 1.1.5 ([a67bd5e](https://github.com/keycloakify/angular-email/commit/a67bd5e))
-* chore(version): 💯 bump version to 1.1.6 ([9b3852a](https://github.com/keycloakify/angular-email/commit/9b3852a))
-* chore(version): 💯 bump version to 1.2.0 ([ab72a7a](https://github.com/keycloakify/angular-email/commit/ab72a7a))
-* chore(version): 💯 bump version to 1.2.1 ([257981d](https://github.com/keycloakify/angular-email/commit/257981d))
-* chore(version): 💯 bump version to 1.3.0 ([e98e1c0](https://github.com/keycloakify/angular-email/commit/e98e1c0))
-* chore(version): 💯 bump version to 1.4.0 ([9968ff1](https://github.com/keycloakify/angular-email/commit/9968ff1))
-* chore(version): 💯 bump version to 1.5.0 ([9264f5b](https://github.com/keycloakify/angular-email/commit/9264f5b))
-* chore(version): 🔜 release candidate version 0.0.1-rc.10 ([1633ad3](https://github.com/keycloakify/angular-email/commit/1633ad3))
-* chore(version): 🔜 release candidate version 0.0.1-rc.11 ([d9a99ae](https://github.com/keycloakify/angular-email/commit/d9a99ae))
-* chore(version): 🔜 release candidate version 0.0.1-rc.12 ([8aa9b33](https://github.com/keycloakify/angular-email/commit/8aa9b33))
-* chore(version): 🔜 release candidate version 0.0.1-rc.13 ([86ae168](https://github.com/keycloakify/angular-email/commit/86ae168))
-* chore(version): 🔜 release candidate version 0.0.1-rc.14 ([8ab23bb](https://github.com/keycloakify/angular-email/commit/8ab23bb))
-* chore(version): 🔜 release candidate version 0.0.1-rc.15 ([471a0eb](https://github.com/keycloakify/angular-email/commit/471a0eb))
-* chore(version): 🔜 release candidate version 0.0.1-rc.16 ([c2bdb58](https://github.com/keycloakify/angular-email/commit/c2bdb58))
-* chore(version): 🔜 release candidate version 0.0.1-rc.17 ([0a5d168](https://github.com/keycloakify/angular-email/commit/0a5d168))
-* chore(version): 🔜 release candidate version 0.0.1-rc.18 ([7cea646](https://github.com/keycloakify/angular-email/commit/7cea646))
-* chore(version): 🔜 release candidate version 0.0.1-rc.19 ([e65e423](https://github.com/keycloakify/angular-email/commit/e65e423))
-* chore(version): 🔜 release candidate version 0.0.1-rc.2 ([5f8a0d8](https://github.com/keycloakify/angular-email/commit/5f8a0d8))
-* chore(version): 🔜 release candidate version 0.0.1-rc.20 ([fb680a0](https://github.com/keycloakify/angular-email/commit/fb680a0))
-* chore(version): 🔜 release candidate version 0.0.1-rc.3 ([ac5ccd3](https://github.com/keycloakify/angular-email/commit/ac5ccd3))
-* chore(version): 🔜 release candidate version 0.0.1-rc.4 ([964d106](https://github.com/keycloakify/angular-email/commit/964d106))
-* chore(version): 🔜 release candidate version 0.0.1-rc.5 ([62ade89](https://github.com/keycloakify/angular-email/commit/62ade89))
-* chore(version): 🔜 release candidate version 0.0.1-rc.6 ([f0708c4](https://github.com/keycloakify/angular-email/commit/f0708c4))
-* chore(version): 🔜 release candidate version 0.0.1-rc.7 ([689c3dc](https://github.com/keycloakify/angular-email/commit/689c3dc))
-* chore(version): 🔜 release candidate version 0.0.1-rc.8 ([446f268](https://github.com/keycloakify/angular-email/commit/446f268))
-* chore(version): 🔜 release candidate version 0.0.1-rc.9 ([1aeccff](https://github.com/keycloakify/angular-email/commit/1aeccff))
-* feat: add bin command to directly build ([5903597](https://github.com/keycloakify/angular-email/commit/5903597))
-* feat: add css variables resolution by juice ([ae67f5d](https://github.com/keycloakify/angular-email/commit/ae67f5d))
-* feat: add raw component ([8114b93](https://github.com/keycloakify/angular-email/commit/8114b93))
-* feat: add render test script ([bf2676a](https://github.com/keycloakify/angular-email/commit/bf2676a))
-* feat: better build script ([ae0437f](https://github.com/keycloakify/angular-email/commit/ae0437f))
-* feat: better performance ([c820904](https://github.com/keycloakify/angular-email/commit/c820904))
-* feat: export toHTML function ([b2a7a42](https://github.com/keycloakify/angular-email/commit/b2a7a42))
-* feat: external css manipulation using cssProcessor hook (#3) ([b1501f0](https://github.com/keycloakify/angular-email/commit/b1501f0)), closes [#3](https://github.com/keycloakify/angular-email/issues/3)
-* feat: separate html ([8b98424](https://github.com/keycloakify/angular-email/commit/8b98424))
-* feat: setup angular-email ([5d3d9d2](https://github.com/keycloakify/angular-email/commit/5d3d9d2))
-* feat: update and replace angular name space on var ([947c47d](https://github.com/keycloakify/angular-email/commit/947c47d))
-* feat: update bin scripts ([7d32289](https://github.com/keycloakify/angular-email/commit/7d32289))
-* feat: update build system for tailwind usage ([ddc0a1b](https://github.com/keycloakify/angular-email/commit/ddc0a1b))
-* feat: update node v ([19c10ff](https://github.com/keycloakify/angular-email/commit/19c10ff))
-* feat: update README ([8f5d803](https://github.com/keycloakify/angular-email/commit/8f5d803))
-* feat: use npm alias to avoid tailwind v3/v4 override ([af1b6fe](https://github.com/keycloakify/angular-email/commit/af1b6fe))
-* initial commit ([8c75039](https://github.com/keycloakify/angular-email/commit/8c75039))
-* publish ([c67d38a](https://github.com/keycloakify/angular-email/commit/c67d38a))
+All notable changes to this project will be documented in this file.
+
+## [2026-11-13] — Hand-written changelog
+
+**Type:** chore
+
+### Changes
+
+- **Changelog rewritten by hand**: one readable entry per stable release (v0.0.1 → v1.6.0), rebuilt from commits and
+  diffs, instead of the single conventional-changelog block listing every commit.
+- **No more regeneration at release time**: `release.sh` used to delete `CHANGELOG.md` and rebuild it with
+  conventional-changelog, which would have overwritten the hand-written entries. Stable releases now only stamp a
+  version delimiter above the new entries through `scripts/stamp-changelog.sh` (idempotent); release candidates are
+  not stamped. The `changelog` script and the `conventional-changelog*` dev dependencies are removed.
+- `changelog-update` skill documents entry format, ordering and delimiters.
+- Verified: stamping a fake v1.6.1 puts the delimiter above the topmost entry, a second run is a no-op.
+
+### Files modified
+
+- `CHANGELOG.md` — rewritten
+- `scripts/stamp-changelog.sh` (new) — version delimiter
+- `scripts/release.sh` — stamps the changelog on stable releases instead of regenerating it
+- `package.json`, `pnpm-lock.yaml` — `changelog` script and `conventional-changelog*` removed
+- `.claude/skills/changelog-update/SKILL.md` (new), `.claude/CLAUDE.md`, `.claude/AGENTS.md` — changelog rules
+
+## [2026-11-13] — Migrate to pnpm, dependency update
+
+**Type:** chore
+
+### Changes
+
+- **pnpm 12.18** replaces npm: `packageManager` field, `pnpm-lock.yaml` imported from the npm lockfile (same
+  resolved versions), `package-lock.json` removed.
+- The local `@keycloakify/angular-email` dependency is now `link:dist/angular-email` (a symlink, as npm's `file:`
+  was): install works before `dist` exists, `scripts/refresh-lib.sh` becomes install → build → install.
+- `pnpm-workspace.yaml`: the `esbuild` override moves to a catalog (pnpm deprecates the `$esbuild` syntax);
+  `allowBuilds` runs only esbuild's postinstall — `@parcel/watcher`, `lmdb` and `msgpackr-extract` only compile from
+  source when no prebuilt binary is available; the Angular 22.2.7 packages are excluded from pnpm's minimum release
+  age check.
+- CI installs with `pnpm/action-setup` + `pnpm install --frozen-lockfile`; publishing still uses `npm publish`
+  (OIDC trusted publishing).
+- **Format check now real**: `npm run _format --list-different` never forwarded the flag to prettier, so the CI check
+  always passed. pnpm forwards it: the 10 files that were out of format have been formatted.
+- Development dependencies: Angular 22.2.6 / CLI-build-ssr 22.2.7, Tailwind 4.3.5, juice 12.2.3, postcss plugins,
+  eslint 10.14, prettier 3.10, `@types/node` 26. Development Node version moved to `lts/lithium` (26). Library
+  peer and runtime dependency ranges are unchanged.
+- README: `pnpm add` among the install commands.
+- Verified: `pnpm install --frozen-lockfile`, `pnpm build`, `ng lint`, `pnpm render:test` (HTML identical to the npm
+  build), `pnpm _format --list-different`.
+
+### Files modified
+
+- `package.json`, `pnpm-workspace.yaml` (new), `pnpm-lock.yaml` (new), `package-lock.json` (removed)
+- `.nvmrc` — `lts/lithium`
+- `.github/workflows/ci.yaml` — pnpm setup and install
+- `scripts/build.sh`, `scripts/refresh-lib.sh`, `scripts/release.sh` — pnpm commands
+- `README.md`, `projects/angular-email/README.md` — pnpm install command
+- `.gitignore` — `pnpm-debug.log`
+- `.claude/CLAUDE.md` — pnpm commands
+- `.claude/settings.json` — formatting, `Write(node_modules/**)` deny removed
+- Prettier formatting only: `.vscode/settings.json`, `tsconfig.json`, `projects/angular-email/{bin,node}/tsconfig.json`,
+  `projects/angular-email/tsconfig.{lib,spec}.json`, `projects/showcase/.postcssrc.json`
+
+**═══════════════════ v1.6.0 — released 2026-10-02 ═══════════════════**
+
+## [2026-10-02] — Outlook fixes for button, image, container and calc()
+
+**Type:** bugfix
+
+### Changes
+
+- **Single-value `calc()` unwrapped.** postcss-calc 11 reduces `calc(4px * 12)` to `calc(48px)` but keeps the wrapper,
+  and clients without `calc()` support (Outlook, Outlook.com) drop the whole declaration. The Tailwind
+  `cssProcessor` now unwraps single-value `calc()` after postcss-calc; real expressions (`calc(100% - 20px)`) are kept.
+- **Button (VML):** the `v:roundrect` used the width for `height`, and `strokecolor` / `fillcolor` were unquoted.
+- **Image:** `width` / `height` are emitted as HTML attributes only when set (Outlook sizes images from the
+  attributes only); the default `'0'` is gone.
+- **Container:** `max-width` gets its `px` unit and is skipped when `disableDefaultStyle` is set.
+- CSS processing errors keep the original error as `cause`.
+- Dependencies: Angular 22.2, juice 12.2, termost 2, postcss plugins.
+
+**═══════════════════ v1.5.0 — released 2026-08-24 ═══════════════════**
+
+## [2026-08-24] — postcss-calc 11
+
+**Type:** bugfix
+
+### Changes
+
+- `postcss-calc` peer moved to `^11`, which dropped the `preserve` option: the Tailwind `cssProcessor` now calls
+  `calc()` without options.
+- Dependencies: Angular 22.1.3+.
+
+**═══════════════════ v1.4.0 — released 2026-08-11 ═══════════════════**
+
+## [2026-08-11] — Angular 22.1 CSS variable namespace
+
+**Type:** bugfix
+
+### Changes
+
+- Since Angular 22.1 every custom property in a component stylesheet is compiled to `--%NS%name`, a placeholder the
+  browser renderer resolves. With the server renderer it leaked into the output, breaking every `var()`: the render
+  pipeline now strips `--%NS%` from both HTML and CSS.
+- Dependencies: Angular 22.1, Tailwind 4.3.3.
+
+**═══════════════════ v1.3.0 — released 2026-06-18 ═══════════════════**
+
+## [2026-06-18] — Angular 22
+
+**Type:** chore
+
+### Changes
+
+- Peer and runtime dependencies moved to Angular 22, Tailwind 4.3.
+
+**═══════════════════ v1.2.1 — released 2026-06-07 ═══════════════════**
+
+## [2026-06-07] — CI release pipeline
+
+**Type:** chore
+
+### Changes
+
+- `garronej/ts-ci` replaced by an in-repo script (`.github/scripts/check-version-upgraded.mjs`) that detects version
+  bumps; the GitHub release is skipped when it already exists; `npm ci` instead of `npm install`;
+  checkout/setup-node v5. Dependabot enabled.
+
+**═══════════════════ v1.2.0 — released 2026-06-07 ═══════════════════**
+
+## [2026-06-07] — Node 22.12+, html-to-text 10, juice 12
+
+**Type:** chore
+
+### Changes
+
+- `engines.node` set to `>=22.12.0`.
+- The CLI reads its version through `createRequire` instead of a JSON import attribute.
+- Dependencies: html-to-text 10, juice 12, Angular 21.2.
+
+**═══════════════════ v1.1.6 — released 2026-05-11 ═══════════════════**
+
+## [2026-05-11] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed, no functional change.
+
+**═══════════════════ v1.1.5 — released 2026-04-13 ═══════════════════**
+
+## [2026-04-13] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed (Angular 21.2.8), no functional change.
+
+**═══════════════════ v1.1.4 — released 2026-03-23 ═══════════════════**
+
+## [2026-03-23] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed (Angular 21.2.5, Tailwind 4.2.2) and Dependabot security bumps (hono, tar, immutable,
+  flatted), no functional change.
+
+**═══════════════════ v1.1.3 — released 2026-02-28 ═══════════════════**
+
+## [2026-02-28] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed (Angular 21.2, Tailwind 4.2) and Dependabot security bumps (qs, tar, hono), no functional
+  change.
+
+**═══════════════════ v1.1.2 — released 2026-01-20 ═══════════════════**
+
+## [2026-01-20] — Plain text keeps heading case
+
+**Type:** bugfix
+**Ref:** https://github.com/keycloakify/angular-email/issues/15
+
+### Changes
+
+- `html-to-text` uppercased `h1`–`h6` in the plain text version: headings now keep their original case (same line
+  breaks as before).
+- Dependencies: Angular 21.1.
+
+**═══════════════════ v1.1.1 — released 2026-01-15 ═══════════════════**
+
+## [2026-01-15] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed, no functional change.
+
+**═══════════════════ v1.1.0 — released 2025-12-22 ═══════════════════**
+
+## [2025-12-22] — Angular 21
+
+**Type:** chore
+
+### Changes
+
+- Peer and runtime dependencies moved to Angular 21, Tailwind 4.1.18.
+- npm publishing through OIDC trusted publishing instead of an `NPM_TOKEN` secret.
+
+**═══════════════════ v1.0.10 — released 2025-11-15 ═══════════════════**
+
+## [2025-11-15] — CLI entry point split
+
+**Type:** chore
+
+### Changes
+
+- The CLI is split into `bin/main.ts` (command definition, with shebang) and `bin/build.ts` (exported `build`
+  function); the bin is now `bin/main.js` instead of `bin/build.mjs`.
+- Development Node version moved to `lts/krypton` (24).
+
+**═══════════════════ v1.0.9 — released 2025-10-17 ═══════════════════**
+
+## [2025-10-17] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed, no functional change.
+
+**═══════════════════ v1.0.8 — released 2025-10-13 ═══════════════════**
+
+## [2025-10-13] — CSS variables resolved when inlining
+
+**Type:** feat
+
+### Changes
+
+- juice now runs with `resolveCSSVariables: true`: `var(--x)` references are replaced by their values in the inlined
+  styles, since most email clients do not support custom properties.
+
+**═══════════════════ v1.0.7 — released 2025-10-13 ═══════════════════**
+
+## [2025-10-13] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed, no functional change.
+
+**═══════════════════ v1.0.6 — released 2025-09-25 ═══════════════════**
+
+## [2025-09-25] — README: full Keycloakify example
+
+**Type:** docs
+
+### Changes
+
+- README links the Keycloakify Angular email proof of concept and shows the `i18nSourceFile`,
+  `environmentVariables` and `assetsDirPath` options of the Keycloakify plugin.
+
+**═══════════════════ v1.0.5 — released 2025-09-18 ═══════════════════**
+
+## [2025-09-18] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Dependencies refreshed, no functional change.
+
+**═══════════════════ v1.0.4 — released 2025-09-11 ═══════════════════**
+
+## [2025-09-11] — Angular 20.3 bootstrap context
+
+**Type:** bugfix
+
+### Changes
+
+- Angular 20.3 server rendering passes a `BootstrapContext` to the bootstrap function: `render` now forwards it to
+  `bootstrapApplication`.
+
+**═══════════════════ v1.0.3 — released 2025-08-27 ═══════════════════**
+
+## [2025-08-27] — CSS normalized before the cssProcessor
+
+**Type:** bugfix
+
+### Changes
+
+- The `cssProcessor` received the raw extracted CSS: it now gets the normalized one again.
+
+**═══════════════════ v1.0.2 — released 2025-08-27 ═══════════════════**
+
+## [2025-08-27] — cssProcessor type
+
+**Type:** bugfix
+
+### Changes
+
+- `RenderOptions.cssProcessor` type updated to the `(css, html)` signature introduced in 1.0.1.
+
+**═══════════════════ v1.0.1 — released 2025-08-27 ═══════════════════**
+
+## [2025-08-27] — Tailwind classes detected from the rendered HTML
+
+**Type:** bugfix
+
+### Changes
+
+- **`cssProcessor(css, html)`**: the hook also receives the rendered HTML. The Tailwind processor collects every class
+  used in it and feeds them to Tailwind through `@source inline(...)`, so utilities are generated even though there
+  are no source files to scan.
+- Selector unwrapping regex and cheerio loading fixed, which broke CSS under some markups.
+
+**═══════════════════ v1.0.0 — released 2025-08-26 ═══════════════════**
+
+## [2025-08-26] — Tailwind v4 and pluggable CSS processing
+
+**Type:** feat (breaking)
+**Ref:** https://github.com/keycloakify/angular-email/pull/3
+
+### Changes
+
+- **Tailwind v4 preset** in CSS (`@import '@keycloakify/angular-email/tailwindcss-preset-email'`), inspired by
+  `@maizzle/tailwindcss`: email-safe theme (colors, spacing, text, borders, shadows, filters) and MSO utilities.
+  The Tailwind v3 preset and the `tailwindConfig` option are removed.
+- **`cssProcessor` hook** in the render options replaces the built-in Tailwind handling: any CSS transformation can be
+  plugged in. The ready-made one is exported from `@keycloakify/angular-email/tailwindcss-preset-email/css-processor`
+  (Tailwind v4 + postcss calc, custom properties, logical, preset-env).
+- Tailwind and the postcss plugins become optional peer dependencies.
+- **Externals**: the CLI takes `-o` (output dir) and `-e` (comma-separated packages to keep external in esbuild);
+  `toHTML` takes `externals`. Only `juice` is external by default.
+- `toHTML` and the CLI locate the bundled entry by its entry point instead of taking the first output.
+- Compatibility: 1.x → Angular 20 + Tailwind 4; 0.x stays on Tailwind 3 with bugfixes only.
+
+**═══════════════════ v0.0.8 — released 2025-08-25 ═══════════════════**
+
+## [2025-08-25] — Build script reworked
+
+**Type:** chore
+
+### Changes
+
+- The CLI is compiled by its own esbuild config; the `node` entry is emitted straight into `dist/angular-email/node`
+  and declared in the package `exports` (`./node`, ESM + CJS + types).
+- README: `tsconfig.json` example for the emails folder.
+
+**═══════════════════ v0.0.7 — released 2025-07-24 ═══════════════════**
+
+## [2025-07-24] — @angular/router allowed dependency
+
+**Type:** bugfix
+
+### Changes
+
+- `@angular/router` added to ng-packagr's `allowedNonPeerDependencies`.
+
+**═══════════════════ v0.0.6 — released 2025-07-24 ═══════════════════**
+
+## [2025-07-24] — Missing @angular/router dependency
+
+**Type:** bugfix
+
+### Changes
+
+- `@angular/router` added to the dependencies (required by `@angular/ssr`).
+
+**═══════════════════ v0.0.5 — released 2025-07-24 ═══════════════════**
+
+## [2025-07-24] — CLI renders templates sequentially
+
+**Type:** bugfix
+
+### Changes
+
+- The CLI fired every template render from a `forEach(async …)` without awaiting them: templates are now rendered one
+  after the other, so the command waits for all of them.
+
+**═══════════════════ v0.0.4 — released 2025-07-14 ═══════════════════**
+
+## [2025-07-14] — Angular 20
+
+**Type:** chore
+
+### Changes
+
+- Peer and runtime dependencies moved to Angular 20; `@angular/ssr` added (`provideServerRendering` moved there),
+  stable `provideZonelessChangeDetection`, `DOCUMENT` from `@angular/core`.
+- README: Tailwind v4 not supported yet.
+
+**═══════════════════ v0.0.3 — released 2025-04-03 ═══════════════════**
+
+## [2025-04-03] — Tailwind v3 through an npm alias
+
+**Type:** feat
+
+### Changes
+
+- Tailwind v3 is installed as `tailwindcss-v3` (`npm:tailwindcss@^3.4.17`), so it no longer clashes with a project
+  that uses Tailwind v4.
+- Container: no `max-width: undefinedpx` when `width` is not set.
+
+**═══════════════════ v0.0.2 — released 2025-03-31 ═══════════════════**
+
+## [2025-03-31] — ESM bundles and in-house Tailwind preset
+
+**Type:** bugfix
+
+### Changes
+
+- `toHTML` and the CLI bundle templates as ESM (with code splitting) instead of CJS.
+- Tailwind v3 email preset shipped by the library (`@keycloakify/angular-email/tailwindcss-preset-email`, based on
+  `tailwindcss-preset-email`) instead of depending on the external package; `tailwindcss` becomes a peer dependency.
+
+**═══════════════════ v0.0.1 — released 2025-03-31 ═══════════════════**
+
+## [2025-03-31] — First release
+
+**Type:** feat
+
+### Changes
+
+- First stable release, after 20 release candidates (`0.0.1-rc.1` → `rc.20`, February–March 2025).
+- **Components**: `html`, `head`, `body`, `preview`, `container`, `section`, `row`, `column`, `heading`, `text`,
+  `link`, `button` (with Outlook VML), `img`, `hr`, `background`, `color-scheme`, `conditional` (MSO comments) and
+  `raw` (literal markup that survives Angular escaping).
+- **Render pipeline**: Angular SSR (zoneless) with props passed through `setInput`, removal of non-HTML tags, CSS
+  inlining with juice, optional pretty print, plain text version with html-to-text.
+- **Tailwind v3** support through `tailwindcss-preset-email`.
+- **Standalone rendering**: `toHTML` (`/node` entry) and the `keycloakify-angular-email build` CLI bundle templates
+  with esbuild and the `angularEsbuildPlugin` (`/esbuild` entry).

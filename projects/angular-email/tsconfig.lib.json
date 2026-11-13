@@ -7,11 +7,7 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": [],
+    "types": []
   },
-  "exclude": [
-    "**/*.spec.ts",
-    "bin/build.ts",
-    "bin/tsconfig.json",
-  ]
+  "exclude": ["**/*.spec.ts", "bin/build.ts", "bin/tsconfig.json"]
 }

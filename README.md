@@ -4,10 +4,12 @@ Angular Email is a library that enables email template development using Angular
 
 ## Installation
 
-To install Angular Email, use npm or yarn:
+To install Angular Email, use npm, pnpm or yarn:
 
 ```sh
 npm install @keycloakify/angular-email
+# or
+pnpm add @keycloakify/angular-email
 # or
 yarn add @keycloakify/angular-email
 ```

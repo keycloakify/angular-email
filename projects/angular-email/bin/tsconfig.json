@@ -1,16 +1,14 @@
 {
-    "extends": "../../../tsconfig.json",
-    "compilerOptions": {
-        "module": "nodenext",
-        "target": "es2017",
-        "esModuleInterop": true,
-        "moduleResolution": "nodenext",
-        "outDir": "../../../dist/angular-email/bin",
-        "rootDir": ".",
-        "types": ["node"]
-    },
-    "include": [
-        "*.ts",
-    ],
-    "exclude": []
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "es2017",
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "outDir": "../../../dist/angular-email/bin",
+    "rootDir": ".",
+    "types": ["node"]
+  },
+  "include": ["*.ts"],
+  "exclude": []
 }

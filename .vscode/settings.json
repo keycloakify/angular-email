@@ -44,10 +44,5 @@
     "**/node_modules/**": true,
     "**/node_modules/*/**": true
   },
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className",
-    ".*Class",
-    ".*Styles"
-  ]
+  "tailwindCSS.classAttributes": ["class", "className", ".*Class", ".*Styles"]
 }

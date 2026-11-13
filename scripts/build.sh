@@ -6,9 +6,9 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 cp ./README.md projects/angular-email/README.md
-npx ng build angular-email
+pnpm exec ng build angular-email
 node projects/angular-email/bin/esbuild.config.js
 node projects/angular-email/node/esbuild.config.js
-npx tsc -p projects/angular-email/node/tsconfig.json
+pnpm exec tsc -p projects/angular-email/node/tsconfig.json
 
 echo "${GREEN}Build Complete!${NC}"

@@ -4,12 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@keycloakify/angular-email": [
-        "./dist/angular-email"
-      ],
-      "@keycloakify/angular-email/*": [
-        "./dist/angular-email/*"
-      ]
+      "@keycloakify/angular-email": ["./dist/angular-email"],
+      "@keycloakify/angular-email/*": ["./dist/angular-email/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
@@ -24,7 +20,7 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022",
+    "module": "ES2022"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -32,8 +28,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": [
-    "projects/angular-email/bin/build.ts",
-    "projects/angular-email/bin/tsconfig.json",
-  ]
+  "exclude": ["projects/angular-email/bin/build.ts", "projects/angular-email/bin/tsconfig.json"]
 }

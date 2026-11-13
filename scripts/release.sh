@@ -88,16 +88,16 @@ version="$(jq -r '.version' "$(dirname "$0")/../package.json")"
 # changelog from tags only on release
 if [ "$versionType" != "none" ] && [ "$releaseType" != "rc" ]; then
   rm CHANGELOG.md
-  npm run changelog
-  git add package.json package-lock.json projects/angular-email/package.json CHANGELOG.md
+  pnpm changelog
+  git add package.json pnpm-lock.yaml projects/angular-email/package.json CHANGELOG.md
   git commit -m "chore(version): 💯 bump version to $version"
 fi
 
 # release candidate version commit
 if [ "$releaseType" = "rc" ]; then
   rm CHANGELOG.md
-  npm run changelog
-  git add package.json package-lock.json projects/angular-email/package.json CHANGELOG.md
+  pnpm changelog
+  git add package.json pnpm-lock.yaml projects/angular-email/package.json CHANGELOG.md
   git commit -m "chore(version): 🔜 release candidate version $version"
 fi
 

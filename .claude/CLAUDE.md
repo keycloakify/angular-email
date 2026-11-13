@@ -14,17 +14,17 @@ The repo is an Angular CLI **workspace** containing two projects:
 ## Commands
 
 ```sh
-npm run build          # full library build → dist/angular-email (see scripts/build.sh)
-npm run watch          # ng build --watch of the library only
-npm run lint           # ng lint --fix (angular-eslint, scoped to the library project)
-npm run format         # prettier --write across **/*.{ts,html,json,md}
-npm run render:test    # render showcase/emails → dist/emails using the local CLI
-npm run release        # version bump + changelog + tag (main branch only; see scripts/release.sh)
+pnpm build             # full library build → dist/angular-email (see scripts/build.sh)
+pnpm watch             # ng build --watch of the library only
+pnpm lint              # ng lint --fix (angular-eslint, scoped to the library project)
+pnpm format            # prettier --write across **/*.{ts,html,json,md}
+pnpm render:test       # render showcase/emails → dist/emails using the local CLI
+pnpm release           # version bump + changelog + tag (main branch only; see scripts/release.sh)
 ```
 
-There is **no unit-test setup** in this repo. "Testing" a change means rendering email components and inspecting the HTML output (`npm run render:test`, or the `toHTML`/`render` APIs).
+There is **no unit-test setup** in this repo. "Testing" a change means rendering email components and inspecting the HTML output (`pnpm render:test`, or the `toHTML`/`render` APIs).
 
-`scripts/refresh-lib.sh` rebuilds the library and reinstalls it as a local `file:` dependency — use it to iterate on the library while consuming it from the workspace root.
+`scripts/refresh-lib.sh` rebuilds the library and re-links it as a local `link:` dependency (pnpm) — use it to iterate on the library while consuming it from the workspace root.
 
 ## Build Pipeline (why `build` is a shell script, not one command)
 
@@ -36,6 +36,7 @@ There is **no unit-test setup** in this repo. "Testing" a change means rendering
 4. `tsc` over `node/tsconfig.json` — emits `.d.ts` types for the `node` entry.
 
 The published package's subpath exports are declared in `projects/angular-email/package.json` `exports`/`bin`:
+
 - main entry → the component library
 - `/node` → `toHTML` standalone renderer
 - `/esbuild` → `angularEsbuildPlugin` (separate ng-packagr secondary entry under `esbuild/`)
