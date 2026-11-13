@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+**═══════════════════ v1.6.1 — released 2026-11-13 ═══════════════════**
+
 ## [2026-11-13] — Hand-written changelog
 
 **Type:** chore
