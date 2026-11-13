@@ -9,7 +9,6 @@
     "watch": "ng build angular-email --watch",
     "render:test": "keycloakify-angular-email build -p projects/showcase/emails -o dist/emails -e tailwindcss,@tailwindcss/postcss,postcss,postcss-calc,postcss-custom-properties,postcss-preset-env,postcss-logical",
     "release": "sh scripts/release.sh",
-    "changelog": "conventional-changelog -t -p angular -i CHANGELOG.md -s -r 0",
     "_format": "prettier '**/*.{ts,html,json,md}'",
     "format": "pnpm _format --write",
     "lint": "ng lint --fix"
@@ -42,8 +41,6 @@
     "@types/pretty": "^2.0.3",
     "angular-eslint": "22.6.0",
     "cheerio": "^1.2.0",
-    "conventional-changelog": "^8.1.3",
-    "conventional-changelog-angular": "^9.4.0",
     "dom-serializer": "^3.1.1",
     "domhandler": "^6.0.1",
     "domutils": "^4.0.2",

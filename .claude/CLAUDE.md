@@ -19,8 +19,10 @@ pnpm watch             # ng build --watch of the library only
 pnpm lint              # ng lint --fix (angular-eslint, scoped to the library project)
 pnpm format            # prettier --write across **/*.{ts,html,json,md}
 pnpm render:test       # render showcase/emails → dist/emails using the local CLI
-pnpm release           # version bump + changelog + tag (main branch only; see scripts/release.sh)
+pnpm release           # version bump + changelog delimiter stamp (main branch only; see scripts/release.sh)
 ```
+
+`CHANGELOG.md` is written by hand, newest entry on top: follow the `changelog-update` skill (`.claude/skills/changelog-update/SKILL.md`) whenever a change is worth an entry.
 
 There is **no unit-test setup** in this repo. "Testing" a change means rendering email components and inspecting the HTML output (`pnpm render:test`, or the `toHTML`/`render` APIs).
 

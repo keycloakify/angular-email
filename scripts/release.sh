@@ -85,19 +85,16 @@ fi
 # Using the package.json version
 version="$(jq -r '.version' "$(dirname "$0")/../package.json")"
 
-# changelog from tags only on release
+# stable release: stamp the changelog version delimiter (entries are written by hand)
 if [ "$versionType" != "none" ] && [ "$releaseType" != "rc" ]; then
-  rm CHANGELOG.md
-  pnpm changelog
-  git add package.json pnpm-lock.yaml projects/angular-email/package.json CHANGELOG.md
+  sh "$(dirname "$0")/stamp-changelog.sh" "$version" || exit 1
+  git add package.json projects/angular-email/package.json CHANGELOG.md
   git commit -m "chore(version): 💯 bump version to $version"
 fi
 
-# release candidate version commit
+# release candidate version commit (changelog not stamped)
 if [ "$releaseType" = "rc" ]; then
-  rm CHANGELOG.md
-  pnpm changelog
-  git add package.json pnpm-lock.yaml projects/angular-email/package.json CHANGELOG.md
+  git add package.json projects/angular-email/package.json
   git commit -m "chore(version): 🔜 release candidate version $version"
 fi
 
