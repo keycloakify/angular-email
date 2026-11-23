@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+**═══════════════════ v1.6.2 — released 2026-11-23 ═══════════════════**
+
 ## [2026-11-23] — Library build moves to `@angular/build:library`
 
 **Type:** chore
