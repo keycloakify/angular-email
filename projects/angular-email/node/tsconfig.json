@@ -6,7 +6,10 @@
     "noCheck": true,
     "emitDeclarationOnly": true,
     "outDir": "../../../dist/angular-email/node",
-    "rootDir": "."
+    "rootDir": ".",
+    "paths": {
+      "@keycloakify/angular-email/*": ["../../../dist/angular-email/*"]
+    }
   },
   "include": ["*"]
 }

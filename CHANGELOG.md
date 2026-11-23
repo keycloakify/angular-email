@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2026-11-23] — Library build moves to `@angular/build:library`
+
+**Type:** chore
+
+### Changes
+
+- **Same published bundles**: the `fesm2022/*.mjs` bundles of the three Angular entry points (`.`, `/esbuild`,
+  `/tailwindcss-preset-email/css-processor`) and the `bin/` and `node/` outputs are byte-identical to the
+  ng-packagr build. The generated `package.json` now also declares `main` and `types`, with `./`-prefixed paths.
+- **No stray sources in the package**: `tailwindcss-preset-email/css-processor/*.ts` and its `ng-package.json` were
+  copied into `dist` as assets and published; they are no longer.
+- **Builder switch**: Angular 22.3 deprecates `@angular/build:ng-packagr`. The library now builds with
+  `@angular/build:library`, which reads entry points from the `.ts` targets in the library `package.json` `exports`
+  instead of `ng-package.json` files. Output path, `allowedNonPeerDependencies` and the `tailwindcss-preset-email`
+  assets move to `angular.json`. The three `ng-package.json` files and the `ng-packagr` dev dependency are removed.
+- **`node` types**: with the new `exports`, `tsc` resolved `@keycloakify/angular-email/esbuild` to the library
+  sources and emitted `.d.ts` files next to them; a `paths` mapping to `dist` restores the previous resolution.
+- Verified: `pnpm build` (no deprecation warning), output diffed against the previous build, `pnpm render:test`,
+  `ng lint`.
+
+### Files modified
+
+- `angular.json` — `@angular/build:library` builder, options moved from `ng-package.json`
+- `projects/angular-email/package.json` — `exports` for the `.`, `./esbuild` and
+  `./tailwindcss-preset-email/css-processor` entry points
+- `projects/angular-email/ng-package.json`, `esbuild/ng-package.json`,
+  `tailwindcss-preset-email/css-processor/ng-package.json` — removed
+- `projects/angular-email/node/tsconfig.json` — `paths` mapping to `dist`
+- `package.json`, `pnpm-lock.yaml` — `ng-packagr` removed
+- `.claude/CLAUDE.md` — build pipeline description
+
+## [2026-11-23] — Dependency update
+
+**Type:** chore
+
+### Changes
+
+- Angular 22.3, `juice` 12.2.6, Tailwind 4.3.5; peer dependency ranges raised to `@angular/common`/`@angular/core`
+  `^22.3.0`, `tailwindcss`/`@tailwindcss/postcss` `^4.3.5` and the matching `postcss*` releases. pnpm 12.21.
+
+### Files modified
+
+- `package.json`, `projects/angular-email/package.json`, `pnpm-lock.yaml`
+
 **═══════════════════ v1.6.1 — released 2026-11-13 ═══════════════════**
 
 ## [2026-11-13] — Hand-written changelog

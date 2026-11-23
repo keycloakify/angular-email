@@ -10,9 +10,29 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular/build:ng-packagr",
+          "builder": "@angular/build:library",
           "options": {
-            "project": "projects/angular-email/ng-package.json"
+            "tsConfig": "projects/angular-email/tsconfig.lib.json",
+            "outputPath": "dist/angular-email",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/angular-email/tailwindcss-preset-email",
+                "output": "tailwindcss-preset-email",
+                "ignore": ["css-processor/**"]
+              }
+            ],
+            "allowedNonPeerDependencies": [
+              "html-to-text",
+              "cheerio",
+              "@angular/build",
+              "@angular/platform-server",
+              "@angular/ssr",
+              "@angular/router",
+              "juice",
+              "pretty",
+              "termost"
+            ]
           },
           "configurations": {
             "production": {

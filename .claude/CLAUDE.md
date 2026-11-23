@@ -32,7 +32,7 @@ There is **no unit-test setup** in this repo. "Testing" a change means rendering
 
 `scripts/build.sh` runs four steps because the package has several distinct entry shapes that need different bundlers:
 
-1. `ng build angular-email` — ng-packagr builds the Angular component library (`src/index.ts`) into `dist/angular-email`. CSS assets under `tailwindcss-preset-email/` and the `LICENSE.md`/`README.md` are copied as assets (see `ng-package.json`).
+1. `ng build angular-email` — the `@angular/build:library` builder builds the Angular entry points into `dist/angular-email`. Entry points come from the `.ts` targets in `projects/angular-email/package.json` `exports` (`.`, `./esbuild`, `./tailwindcss-preset-email/css-processor`); there is no `ng-package.json`. Output path, `allowedNonPeerDependencies` and the `tailwindcss-preset-email/` CSS assets are configured in `angular.json` (`LICENSE*`/`README.md` are copied by default).
 2. `bin/esbuild.config.js` — esbuild-transpiles the CLI (`bin/*.ts`) → `dist/angular-email/bin`.
 3. `node/esbuild.config.js` — bundles the standalone `node` entry (`node/index.ts`) to **both** ESM (`index.js`) and CJS (`index.cjs`).
 4. `tsc` over `node/tsconfig.json` — emits `.d.ts` types for the `node` entry.
@@ -41,7 +41,7 @@ The published package's subpath exports are declared in `projects/angular-email/
 
 - main entry → the component library
 - `/node` → `toHTML` standalone renderer
-- `/esbuild` → `angularEsbuildPlugin` (separate ng-packagr secondary entry under `esbuild/`)
+- `/esbuild` → `angularEsbuildPlugin` (secondary entry point under `esbuild/`)
 - `/tailwindcss-preset-email` and `/tailwindcss-preset-email/css-processor` → Tailwind v4 email preset CSS + a PostCSS processor
 
 ## Rendering Architecture
